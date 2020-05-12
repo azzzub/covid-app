@@ -19,30 +19,58 @@
             android:layout_marginBottom="20dp">
 
             <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginLeft="30dp"
                     android:layout_weight="1"
                     android:text="Covid-19"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp"
                     android:textStyle="bold"
-                    android:gravity="left"/>
+                    android:gravity="left|center"/>
 
-                <TextView
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="1"
-                    android:text="Indonesia"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:gravity="right"/>
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:background="@drawable/rounded_country"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/icon_indonesia"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="INA"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        />
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/icon_arrow_down"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
 
             </TableRow>
 
@@ -54,8 +82,8 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_span="2"
                     android:layout_weight="1"
                     android:text="Apakah kamu merasa sakit?"
@@ -76,8 +104,8 @@
                     android:layout_height="fill_parent"
                     android:layout_span="2"
                     android:layout_weight="1"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:text="Jika kamu merasa sakit dengan gejala covid-19, segera hubungi layanan darurat agar segera ditangani."
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
@@ -88,28 +116,59 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp">
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-                <Button
+                <LinearLayout
                     android:background="@drawable/rounded_callnow_button"
                     android:layout_height="40dp"
                     android:layout_width="0dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:layout_marginRight="20dp"
-                    android:textAllCaps="false"
-                    android:text="Telepon"
-                    android:textColor="#FFFFFF" />
+                    android:gravity="center"
+                    android:clickable="true">
 
-                <Button
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/icon_phone"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Telepon"
+                        android:textColor="#FFFFFF"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:background="@drawable/rounded_website_button"
                     android:layout_height="40dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:textAllCaps="false"
-                    android:text="Website"
-                    android:textColor="#FFFFFF" />
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/icon_web"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Website"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
 
             </TableRow>
 
@@ -125,13 +184,14 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_span="3"
+                android:layout_gravity="left"
                 android:text="Pencegahan"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -142,19 +202,23 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <LinearLayout
                 android:layout_height="130dp"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
                 android:orientation="vertical"
-                android:layout_width="wrap_content">
+                android:layout_width="wrap_content"
+                android:background="@drawable/rounded_preventive"
+                android:clickable="true"
+                tools:targetApi="lollipop">
 
                 <ImageView
                     android:layout_height="90dp"
+                    android:paddingTop="4dp"
                     android:src="@drawable/social_distancing"
                     android:gravity="center"
                     android:layout_width="wrap_content" />
@@ -176,11 +240,15 @@
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
                 android:orientation="vertical"
-                android:layout_width="wrap_content">
+                android:layout_width="wrap_content"
+                android:background="@drawable/rounded_preventive"
+                android:clickable="true"
+                tools:targetApi="lollipop">
 
                 <ImageView
                     android:layout_height="90dp"
                     android:src="@drawable/wash_hand"
+                    android:paddingTop="4dp"
                     android:gravity="center"
                     android:layout_width="wrap_content" />
 
@@ -200,11 +268,15 @@
                 android:layout_height="130dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_width="wrap_content">
+                android:layout_width="wrap_content"
+                android:background="@drawable/rounded_preventive"
+                android:clickable="true"
+                tools:targetApi="lollipop">
 
                 <ImageView
                     android:layout_height="90dp"
                     android:src="@drawable/wear_mask"
+                    android:paddingTop="4dp"
                     android:gravity="center"
                     android:layout_width="wrap_content" />
 
@@ -219,6 +291,76 @@
                     android:gravity="center"/>
 
             </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="110dp"
+                android:layout_span="3"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:background="@drawable/rounded_gradient_test"/>
+
+                <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+
+                        <ImageView
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/do_your_test"/>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="3dp"
+                                android:text="Tes sekarang!"
+                                android:textStyle="bold"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18sp"/>
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:text="Ikuti langkah-langkah sesuai dengan instruksi"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+                </TableLayout>
+
+             </RelativeLayout>
 
         </TableRow>
 

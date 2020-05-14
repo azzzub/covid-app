@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new InfoFragment();
                     break;
             }
-
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
             return true;

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Covid-19</string>
+    <string name="about">
+        Aplikasi ini tidak ditujukan kepada siapapun yang menjadikan aplikasi ini sebagai patokan terhadap
+        informasi covid-19 walaupun segala informasi di aplikasi ini diunduh dari situs resmi covid-19 pemerintah
+        Indonesia (covid19.go.id). Namun aplikasi ini ditujukan kepada para penggiat software developer guna menggali
+        potensinya dalam mengembangkan sebuah aplikasi yang dalam hal ini adalah ditujukan guna portofolio pribadi.
+        Apabila pengguna merasa dirugikan ketika menggunakan aplikasi ini, segala tanggung jawab penuh diserahkan kepada
+        pengguna. Namun apabila pengguna merasa diuntungkan, kiranya pengguna dapat memberikan umpan balik positif terhadap
+        saya secara pribadi melalui kontak yang disediakan. Surakarta, 2020
+    </string>
 </resources>

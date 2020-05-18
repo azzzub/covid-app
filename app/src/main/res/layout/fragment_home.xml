@@ -162,8 +162,8 @@
                             android:clickable="true">
 
                             <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="6dp"
                                 android:src="@drawable/icon_web"/>

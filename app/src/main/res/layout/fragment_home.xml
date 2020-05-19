@@ -206,74 +206,11 @@
 
                 </TableRow>
 
-                <HorizontalScrollView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="fill_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="120dp"
-                        android:paddingLeft="10dp">
-
-                        <RelativeLayout
-                            android:layout_width="200dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_height="120dp"
-                            android:clickable="true"
-                            android:background="@drawable/rounded_gradient_test">
-
-                            <TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:text="Berita 1"
-                                android:gravity="center"
-                                android:textStyle="bold"
-                                android:textColor="#FFFFFF"
-                                android:textSize="20sp"/>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:clickable="true"
-                            android:layout_marginRight="10dp"
-                            android:layout_width="200dp"
-                            android:layout_height="120dp"
-                            android:background="@drawable/rounded_gradient_test">
-
-                            <TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:text="Berita 2"
-                                android:gravity="center"
-                                android:textStyle="bold"
-                                android:textColor="#FFFFFF"
-                                android:textSize="20sp"/>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_marginRight="10dp"
-                            android:layout_width="200dp"
-                            android:clickable="true"
-                            android:layout_height="120dp"
-                            android:background="@drawable/rounded_gradient_test">
-
-                            <TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:text="Berita 3"
-                                android:gravity="center"
-                                android:textStyle="bold"
-                                android:textColor="#FFFFFF"
-                                android:textSize="20sp"/>
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                    android:id="@+id/news_recycleview" />
 
                 <TableRow
                     android:layout_width="fill_parent"

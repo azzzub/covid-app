@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -25,6 +27,10 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         Log.d(TAG, "onCreateView: preparing the home");
+
+//        ShimmerFrameLayout shimmerFrameLayout =
+//                container.findViewById(R.id.shimmer_layout);
+//        shimmerFrameLayout.startShimmer(); // If auto-start is set to false
 
         mNewsTitle.add("Berita 1");
         mNewsTitle.add("Berita 2");

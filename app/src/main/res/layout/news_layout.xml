@@ -7,18 +7,32 @@
     android:id="@+id/news_layout_rl"
     android:clickable="true">
 
-        <TextView
+        <ImageView
+            android:id="@+id/news_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="title"
-            android:gravity="center"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textStyle="bold"
-            android:textColor="#FFF"
-            android:textSize="20sp"
-            android:id="@+id/news_title"/>
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="#55000000"
+            >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="title"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#FFF"
+                    android:textSize="13sp"
+                    android:id="@+id/news_title"/>
+
+        </RelativeLayout>
 
 </RelativeLayout>

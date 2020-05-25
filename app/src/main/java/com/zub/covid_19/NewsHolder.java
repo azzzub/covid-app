@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 
 public interface NewsHolder {
 
-    @GET("posts")
-    Call<List<News>> getNews();
+    @GET("v2/top-headlines?country=id&q=covid&apiKey=699fa5b4ab4d49aab02a36bc88eb6cde")
+    Call<News> getNews();
 
 }

@@ -5,12 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -22,8 +26,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private ArrayList<String> mNewsTitle = new ArrayList<>();
     private Context context;
 
-    public NewsAdapter(ArrayList<String> mNewsTitle, Context context) {
-//        this.mNewsImage = mNewsImage;
+    public NewsAdapter(ArrayList<String> mNewsImage, ArrayList<String> mNewsTitle, Context context) {
+        this.mNewsImage = mNewsImage;
         this.mNewsTitle = mNewsTitle;
         this.context = context;
     }
@@ -41,8 +45,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         Log.d(TAG, "onBindViewHolder: called");
 
         holder.textView.setText(mNewsTitle.get(position));
-
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        Glide.with(context).load(mNewsImage.get(position)).centerCrop().into(holder.newsImage);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: click on " + mNewsTitle.get(position));
@@ -59,15 +63,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        RelativeLayout relativeLayout;
+        CardView cardView;
         TextView textView;
+        ImageView newsImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            relativeLayout = itemView.findViewById(R.id.news_layout_rl);
+            cardView = itemView.findViewById(R.id.news_card_view);
             textView = itemView.findViewById(R.id.news_title);
-
+            newsImage = itemView.findViewById(R.id.news_image);
         }
     }
 }

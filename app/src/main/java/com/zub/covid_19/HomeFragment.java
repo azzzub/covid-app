@@ -1,5 +1,6 @@
 package com.zub.covid_19;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +11,12 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,10 @@ public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
+    private ArrayList<String> mNewsImage = new ArrayList<>();
     private ArrayList<String> mNewsTitle = new ArrayList<>();
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_layout);
         RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
-        ImageView mNewsImage = view.findViewById(R.id.news_image);
 
         recyclerView.setVisibility(View.GONE);
 
@@ -71,11 +73,12 @@ public class HomeFragment extends Fragment {
                 List<Articles> articles = response.body().getArticles();
                 for(Articles theArticels : articles) {
                     mNewsTitle.add(theArticels.getTitle());
+                    mNewsImage.add(theArticels.getUrlToImage());
 //                    Picasso.get().load(theArticels.getUrlToImage()).into(mNewsImage);
                     Log.d(TAG, "initRecycleView: preparing recycle view");
 
                     RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
-                    NewsAdapter newsAdapter = new NewsAdapter(mNewsTitle, view.getContext());
+                    NewsAdapter newsAdapter = new NewsAdapter(mNewsImage, mNewsTitle, view.getContext());
                     recyclerView.setAdapter(newsAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL,false));
 

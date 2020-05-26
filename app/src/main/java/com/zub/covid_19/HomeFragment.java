@@ -1,17 +1,13 @@
 package com.zub.covid_19;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +30,6 @@ public class HomeFragment extends Fragment {
     private ArrayList<String> mNewsImage = new ArrayList<>();
     private ArrayList<String> mNewsTitle = new ArrayList<>();
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,8 +41,6 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
 
         recyclerView.setVisibility(View.GONE);
-
-        getDummy(view, shimmerFrameLayout, recyclerView);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/")
@@ -74,14 +67,14 @@ public class HomeFragment extends Fragment {
                 for(Articles theArticels : articles) {
                     mNewsTitle.add(theArticels.getTitle());
                     mNewsImage.add(theArticels.getUrlToImage());
-//                    Picasso.get().load(theArticels.getUrlToImage()).into(mNewsImage);
                     Log.d(TAG, "initRecycleView: preparing recycle view");
 
                     RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
                     NewsAdapter newsAdapter = new NewsAdapter(mNewsImage, mNewsTitle, view.getContext());
                     recyclerView.setAdapter(newsAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL,false));
-
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL,false);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.addItemDecoration(new SpacesItemDecoration(3));
                     Log.d(TAG, "onResponse: "+ theArticels.getTitle());
                 }
             }
@@ -92,45 +85,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        call.enqueue(new Callback<List<News>>() {
-//            @Override
-//            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
-//                Log.d(TAG, "respon body: " + response.body());
-//                if(!response.isSuccessful()) {
-//                    Log.e(TAG, "onResponse: code = " + response.code());
-//                    Log.d(TAG, "onResponse: " + response.body());
-//                    return;
-//                }
-//
-//                shimmerFrameLayout.stopShimmer();
-//                shimmerFrameLayout.setVisibility(View.GONE);
-//                recyclerView.setVisibility(View.VISIBLE);
-//
-//                List<News> news = response.body();
-//
-//                for(News theNews : news) {
-//                    mNewsTitle.add(theNews.getStatus());
-//
-//                    Log.d(TAG, "initRecycleView: preparing recycle view");
-//
-//                    RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
-//                    NewsAdapter newsAdapter = new NewsAdapter(mNewsTitle, view.getContext());
-//                    recyclerView.setAdapter(newsAdapter);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL,false));
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<News>> call, Throwable t) {
-//                Log.e(TAG, "onFailure: " + t.getMessage());
-//            }
-//        });
-
         return view;
     }
-
-    private void getDummy(View view, ShimmerFrameLayout shimmerFrameLayout, RecyclerView recyclerView) {
-
-    }
-
 }

@@ -10,7 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -74,7 +77,12 @@ public class HomeFragment extends Fragment {
                     recyclerView.setAdapter(newsAdapter);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL,false);
                     recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.addItemDecoration(new SpacesItemDecoration(3));
+                    recyclerView.addItemDecoration(new SpacesItemDecoration(4));
+                    SnapHelper snapHelper = new PagerSnapHelper();
+                    if (recyclerView.getOnFlingListener() == null)
+                        snapHelper.attachToRecyclerView(recyclerView);
+
+
                     Log.d(TAG, "onResponse: "+ theArticels.getTitle());
                 }
             }

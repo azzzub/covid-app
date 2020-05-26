@@ -6,8 +6,7 @@
     android:id="@+id/news_card_view"
     android:clickable="true"
     card_view:cardCornerRadius="32dp"
-    card_view:cardElevation="0dp"
-    android:focusable="true">
+    card_view:cardElevation="0dp">
 
         <RelativeLayout
             android:layout_width="fill_parent"

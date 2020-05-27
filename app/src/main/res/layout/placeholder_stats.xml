@@ -1,63 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-    android:background="#473f97"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="Statistik"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"/>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:text="Total     Hari Ini    Kemarin"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"/>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/stats_shimmer"
-            >
-
-            <include layout="@layout/placeholder_stats"/>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-    </RelativeLayout>
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        shimmer:shimmer_duration="1000">
-
-        <include
-            layout="@layout/placeholder_stats"
-            android:layout_width="fill_parent"
-            android:layout_height="91dp" />
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TableLayout
         android:layout_width="fill_parent"
@@ -76,14 +20,14 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#ffb259">
+                android:backgroundTint="#dddddd">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Kasus"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
@@ -93,7 +37,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
-                    android:text="null"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:textSize="26sp" />
@@ -107,14 +51,14 @@
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#ff5959">
+                android:backgroundTint="#dddddd">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Meninggal"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
@@ -124,7 +68,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
-                    android:text="null"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:textSize="26sp" />
@@ -146,14 +90,14 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#4cd97b">
+                android:backgroundTint="#dddddd">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Sembuh"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
@@ -163,7 +107,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
-                    android:text="null"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:textSize="26sp" />
@@ -177,14 +121,14 @@
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#4cb5ff">
+                android:backgroundTint="#dddddd">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
-                    android:text="ODP"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
@@ -194,7 +138,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
-                    android:text="null"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:textSize="26sp" />
@@ -208,14 +152,14 @@
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#9059ff">
+                android:backgroundTint="#dddddd">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
-                    android:text="PDP"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
@@ -225,7 +169,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
-                    android:text="null"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:textSize="26sp" />
@@ -236,37 +180,4 @@
 
     </TableLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/rounded_stats_daily">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                android:text="Kasus Baru Harian"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="#000000"/>
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/graph"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -62,7 +62,8 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/stats_box_layout">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -83,11 +84,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Kasus"
+                    android:text="Kasus Positif"
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/stat_kasus_aktif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -119,6 +121,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/stat_kasus_meninggal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -158,6 +161,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/stat_kasus_sumbuh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -166,7 +170,7 @@
                     android:text="null"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -189,6 +193,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/stat_kasus_odp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -197,7 +202,7 @@
                     android:text="null"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -220,6 +225,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/stat_kasus_pdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -228,7 +234,7 @@
                     android:text="null"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textSize="23sp" />
 
             </LinearLayout>
 

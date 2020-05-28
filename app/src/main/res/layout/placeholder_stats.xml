@@ -110,7 +110,7 @@
                     android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -141,7 +141,7 @@
                     android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -172,7 +172,7 @@
                     android:text=""
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textSize="23sp" />
 
             </LinearLayout>
 

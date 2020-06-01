@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.zub.covid_19.stats.Features;
@@ -18,6 +20,7 @@ import com.zub.covid_19.stats.Stats;
 import com.zub.covid_19.stats.StatsHolder;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,6 +32,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class StatsFragment extends Fragment {
     private static final String TAG = "StatsFragment";
+
+    private ArrayList<String> provinsi = new ArrayList<>();
+    private ArrayList<String> positif = new ArrayList<>();
+    private ArrayList<String> sembuh = new ArrayList<>();
+    private ArrayList<String> meninggal = new ArrayList<>();
 
     @Nullable
     @Override
@@ -42,6 +50,7 @@ public class StatsFragment extends Fragment {
         TextView mStatKasusPDP = view.findViewById(R.id.stat_kasus_pdp);
         ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.stats_shimmer);
         TableLayout tableLayout = view.findViewById(R.id.stats_box_layout);
+        RecyclerView recyclerView = view.findViewById(R.id.stats_recyclerView);
 
         tableLayout.setVisibility(View.GONE);
 
@@ -88,6 +97,37 @@ public class StatsFragment extends Fragment {
                 Log.e(TAG, "onFailure: "  + t.getMessage());
             }
         });
+
+
+        provinsi.add("Jawa Tengah");
+        positif.add(String.valueOf(1));
+        sembuh.add(String.valueOf(1));
+        meninggal.add(String.valueOf(1));
+
+        provinsi.add("Jawa Timur");
+        positif.add(String.valueOf(1));
+        sembuh.add(String.valueOf(1));
+        meninggal.add(String.valueOf(1));
+
+        provinsi.add("Jawa Barat");
+        positif.add(String.valueOf(1));
+        sembuh.add(String.valueOf(1));
+        meninggal.add(String.valueOf(1));
+        provinsi.add("Jawa Barat");
+        positif.add(String.valueOf(1));
+        sembuh.add(String.valueOf(1));
+        meninggal.add(String.valueOf(1));
+        provinsi.add("Jawa Barat");
+        positif.add(String.valueOf(1));
+        sembuh.add(String.valueOf(1));
+        meninggal.add(String.valueOf(1));
+
+        StatsAdapter statsAdapter = new StatsAdapter(provinsi, positif, sembuh, meninggal, view.getContext());
+
+        recyclerView.setAdapter(statsAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         return view;
     }

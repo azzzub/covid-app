@@ -2,277 +2,267 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:background="#473f97"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="Statistik"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"/>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:text="Total     Hari Ini    Kemarin"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"/>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_height="wrap_content"
+        <TextView
             android:layout_width="wrap_content"
-            android:id="@+id/stats_shimmer"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Statistik"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="Total Kasus Sampai Hari Ini"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"/>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
 
-            <include layout="@layout/placeholder_stats"/>
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/stats_shimmer"
+                >
 
-        </com.facebook.shimmer.ShimmerFrameLayout>
+                <include layout="@layout/placeholder_stats"/>
 
-    </RelativeLayout>
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        shimmer:shimmer_duration="1000">
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <include
-            layout="@layout/placeholder_stats"
+        </RelativeLayout>
+
+        <TableLayout
             android:layout_width="fill_parent"
-            android:layout_height="91dp" />
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/stats_box_layout">
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/stats_box_layout">
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <TableRow
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_stats"
-                android:backgroundTint="#ffb259">
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_stats"
+                    android:backgroundTint="#ffb259">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Positif"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/stat_kasus_aktif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="26sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:text="Kasus Positif"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_stats"
+                    android:backgroundTint="#ff5959">
 
-                <TextView
-                    android:id="@+id/stat_kasus_aktif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="null"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Meninggal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/stat_kasus_meninggal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="26sp" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_stats"
-                android:backgroundTint="#ff5959">
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_stats"
+                    android:backgroundTint="#4cd97b">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Sembuh"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/stat_kasus_sumbuh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="23sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:text="Meninggal"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_stats"
+                    android:backgroundTint="#4cb5ff">
 
-                <TextView
-                    android:id="@+id/stat_kasus_meninggal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="ODP"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/stat_kasus_odp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="23sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="null"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_stats"
+                    android:backgroundTint="#9059ff">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="PDP"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
 
-        </TableRow>
+                    <TextView
+                        android:id="@+id/stat_kasus_pdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="23sp" />
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp">
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_stats"
-                android:backgroundTint="#4cd97b">
+            </TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Sembuh"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/stat_kasus_sumbuh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="null"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="23sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_stats"
-                android:backgroundTint="#4cb5ff">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="ODP"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/stat_kasus_odp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="null"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="23sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_stats"
-                android:backgroundTint="#9059ff">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="PDP"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/stat_kasus_pdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="null"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="23sp" />
-
-            </LinearLayout>
-
-        </TableRow>
-
-    </TableLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/rounded_stats_daily">
+        </TableLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_stats_daily">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
-                android:text="Kasus Baru Harian"
+                android:layout_marginBottom="20dp"
+                android:text="Kasus Per Provinsi"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"/>
 
-            <ImageView
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/graph"/>
+                android:id="@+id/stats_shimmer_prov"
+                >
+
+                <include layout="@layout/placeholder_stats_prov"/>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:id="@+id/stats_recyclerView">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
-
-    </RelativeLayout>
 
 </LinearLayout>

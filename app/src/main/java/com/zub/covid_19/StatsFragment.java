@@ -18,6 +18,9 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.zub.covid_19.stats.Features;
 import com.zub.covid_19.stats.Stats;
 import com.zub.covid_19.stats.StatsHolder;
+import com.zub.covid_19.stats.perStateAPI.FeaturesPerState;
+import com.zub.covid_19.stats.perStateAPI.StatsPerState;
+import com.zub.covid_19.stats.perStateAPI.StatsPerStateHolder;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -51,7 +54,10 @@ public class StatsFragment extends Fragment {
         ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.stats_shimmer);
         TableLayout tableLayout = view.findViewById(R.id.stats_box_layout);
         RecyclerView recyclerView = view.findViewById(R.id.stats_recyclerView);
+        ShimmerFrameLayout mPerStateShimmer = view.findViewById(R.id.stats_shimmer_prov);
 
+        recyclerView.setVisibility(View.GONE);
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
         tableLayout.setVisibility(View.GONE);
 
         String baseURL = "https://services5.arcgis.com/";
@@ -99,35 +105,46 @@ public class StatsFragment extends Fragment {
         });
 
 
-        provinsi.add("Jawa Tengah");
-        positif.add(String.valueOf(1));
-        sembuh.add(String.valueOf(1));
-        meninggal.add(String.valueOf(1));
+        Retrofit retrofitPerState = new Retrofit.Builder()
+                .baseUrl(baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        provinsi.add("Jawa Timur");
-        positif.add(String.valueOf(1));
-        sembuh.add(String.valueOf(1));
-        meninggal.add(String.valueOf(1));
+        StatsPerStateHolder statsPerStateHolder = retrofitPerState.create(StatsPerStateHolder.class);
 
-        provinsi.add("Jawa Barat");
-        positif.add(String.valueOf(1));
-        sembuh.add(String.valueOf(1));
-        meninggal.add(String.valueOf(1));
-        provinsi.add("Jawa Barat");
-        positif.add(String.valueOf(1));
-        sembuh.add(String.valueOf(1));
-        meninggal.add(String.valueOf(1));
-        provinsi.add("Jawa Barat");
-        positif.add(String.valueOf(1));
-        sembuh.add(String.valueOf(1));
-        meninggal.add(String.valueOf(1));
+        Call<StatsPerState> statsPerStateCall = statsPerStateHolder.getStatsPerState();
 
-        StatsAdapter statsAdapter = new StatsAdapter(provinsi, positif, sembuh, meninggal, view.getContext());
+        statsPerStateCall.enqueue(new Callback<StatsPerState>() {
+            @Override
+            public void onResponse(Call<StatsPerState> call, Response<StatsPerState> response) {
 
-        recyclerView.setAdapter(statsAdapter);
+                recyclerView.setVisibility(View.VISIBLE);
+                mPerStateShimmer.setVisibility(View.GONE);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+                List<FeaturesPerState> featuresPerStates = response.body().getFeaturesPerStates();
+
+                for(FeaturesPerState theFeature : featuresPerStates){
+                    provinsi.add(theFeature.getAttributesDataPerState().getProvinsi());
+                    positif.add(theFeature.getAttributesDataPerState().getPositif());
+                    sembuh.add(theFeature.getAttributesDataPerState().getSembuh());
+                    meninggal.add(theFeature.getAttributesDataPerState().getMeninggal());
+                }
+
+                StatsAdapter statsAdapter = new StatsAdapter(provinsi, positif, sembuh, meninggal, view.getContext());
+
+                recyclerView.setAdapter(statsAdapter);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL,false);
+                recyclerView.setLayoutManager(linearLayoutManager);
+
+            }
+
+            @Override
+            public void onFailure(Call<StatsPerState> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
 
         return view;
     }

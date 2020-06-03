@@ -1,6 +1,8 @@
 package com.zub.covid_19;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private ArrayList<String> mNewsImage = new ArrayList<>();
     private ArrayList<String> mNewsTitle = new ArrayList<>();
+    private ArrayList<String> mNewsURL = new ArrayList<>();
+
     private Context context;
+
+    public NewsAdapter(ArrayList<String> mNewsImage, ArrayList<String> mNewsTitle, ArrayList<String> mNewsURL, Context context) {
+        this.mNewsImage = mNewsImage;
+        this.mNewsTitle = mNewsTitle;
+        this.mNewsURL = mNewsURL;
+        this.context = context;
+    }
+
 
     public NewsAdapter(ArrayList<String> mNewsImage, ArrayList<String> mNewsTitle, Context context) {
         this.mNewsImage = mNewsImage;
@@ -50,8 +62,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: click on " + mNewsTitle.get(position));
-
-                Toast.makeText(context, mNewsTitle.get(position), Toast.LENGTH_SHORT).show();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("passingUrl", mNewsURL.get(position));
+                Intent intent = new Intent(view.getContext(), NewsActivity.class);
+                intent.putExtra("passingUrl", mNewsURL.get(position));
+                view.getContext().startActivity(intent);
+//                Toast.makeText(context, mNewsURL.get(position), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<String> mNewsImage = new ArrayList<>();
     private ArrayList<String> mNewsTitle = new ArrayList<>();
+    private ArrayList<String> mNewsURL = new ArrayList<>();
 
     @Nullable
     @Override
@@ -70,18 +71,18 @@ public class HomeFragment extends Fragment {
                 for(Articles theArticels : articles) {
                     mNewsTitle.add(theArticels.getTitle());
                     mNewsImage.add(theArticels.getUrlToImage());
+                    mNewsURL.add(theArticels.getUrl());
                     Log.d(TAG, "initRecycleView: preparing recycle view");
 
                     RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
-                    NewsAdapter newsAdapter = new NewsAdapter(mNewsImage, mNewsTitle, view.getContext());
+                    NewsAdapter newsAdapter = new NewsAdapter(mNewsImage, mNewsTitle, mNewsURL, view.getContext());
                     recyclerView.setAdapter(newsAdapter);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL,false);
                     recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.addItemDecoration(new SpacesItemDecoration(5));
+                    recyclerView.addItemDecoration(new SpacesItemDecoration(6));
                     SnapHelper snapHelper = new PagerSnapHelper();
                     if (recyclerView.getOnFlingListener() == null)
                         snapHelper.attachToRecyclerView(recyclerView);
-
 
                     Log.d(TAG, "onResponse: "+ theArticels.getTitle());
                 }

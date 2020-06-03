@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#473f97"
     android:orientation="vertical">
 
@@ -15,7 +16,7 @@
             android:textSize="20sp"
             android:textColor="#FFFFFF"/>
 
-        <TextView
+    <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -28,7 +29,7 @@
             android:textColor="#FFFFFF"/>
 
 
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
@@ -236,12 +237,30 @@
             android:orientation="vertical"
             android:background="@drawable/rounded_stats_daily">
 
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginRight="20dp">-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Daftar Data" />-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Data Bar" />-->
+
+<!--            </com.google.android.material.tabs.TabLayout>-->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="18dp"
                 android:text="Kasus Per Provinsi"
                 android:textStyle="bold"
                 android:textSize="20sp"

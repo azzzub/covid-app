@@ -17,8 +17,8 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        int dp = Math.round(mSpace * (view.getResources().getDisplayMetrics().xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        Log.d(TAG, "getItemOffsets: "+dp);
+        int dp = (int) Math.ceil(mSpace / view.getResources().getDisplayMetrics().density);
+        Log.d(TAG, "getItemOffsets: " + dp);
         outRect.right = dp;
 
         if (parent.getChildAdapterPosition(view) == 0)

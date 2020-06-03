@@ -57,7 +57,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         Log.d(TAG, "onBindViewHolder: called");
 
         holder.textView.setText(mNewsTitle.get(position));
-        Glide.with(context).load(mNewsImage.get(position)).centerCrop().into(holder.newsImage);
+
+        Glide.with(context).
+                load(mNewsImage.get(position)).
+                centerCrop().
+                placeholder(R.drawable.news_placeholder).
+                into(holder.newsImage);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

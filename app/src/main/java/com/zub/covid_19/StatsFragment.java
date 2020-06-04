@@ -1,6 +1,7 @@
 package com.zub.covid_19;
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.zub.covid_19.stats.Features;
 import com.zub.covid_19.stats.Stats;
 import com.zub.covid_19.stats.StatsHolder;
@@ -25,6 +42,8 @@ import com.zub.covid_19.stats.perStateAPI.StatsPerStateHolder;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -53,10 +72,16 @@ public class StatsFragment extends Fragment {
         TextView mStatKasusSembuh = view.findViewById(R.id.stat_kasus_sumbuh);
         TextView mStatKasusODP = view.findViewById(R.id.stat_kasus_odp);
         TextView mStatKasusPDP = view.findViewById(R.id.stat_kasus_pdp);
+        TextView mKeterangan = view.findViewById(R.id.stats_keterangan);
         ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.stats_shimmer);
         TableLayout tableLayout = view.findViewById(R.id.stats_box_layout);
         RecyclerView recyclerView = view.findViewById(R.id.stats_recyclerView);
         ShimmerFrameLayout mPerStateShimmer = view.findViewById(R.id.stats_shimmer_prov);
+
+
+        LineChart lineChart = view.findViewById(R.id.linechart);
+
+        ArrayList statsData = new ArrayList();
 
         recyclerView.setVisibility(View.GONE);
         shimmerFrameLayout.setVisibility(View.VISIBLE);
@@ -80,6 +105,16 @@ public class StatsFragment extends Fragment {
                 tableLayout.setVisibility(View.VISIBLE);
 
                 List<Features> features = response.body().getFeatures();
+
+                for(Features theFeatures : features){
+                    if(theFeatures.getAttributes().getJumlah_Kasus_Kumulatif() == 0){
+                        break;
+                    }
+                    int dataX = theFeatures.getAttributes().getHari_ke();
+                    int dataY = theFeatures.getAttributes().getJumlah_Kasus_Kumulatif();
+                    statsData.add(new Entry(dataX, dataY));
+                }
+
                 Log.d(TAG, "onResponse: list size " + features.size());
                 Log.d(TAG, "onResponse: the latest data " + features.get(features.size() - 1).getAttributes().getHari_ke());
                 int findTheFilledOne = 1;
@@ -92,12 +127,35 @@ public class StatsFragment extends Fragment {
                 int jumlahSembuh = features.get(features.size() - findTheFilledOne).getAttributes().getJumlah_Pasien_Sembuh();
                 int jumlahODP = features.get(features.size() - findTheFilledOne).getAttributes().getODP();
                 int jumlahPDP = features.get(features.size() - findTheFilledOne).getAttributes().getPDP();
+                long tanggal = features.get(features.size() - findTheFilledOne).getAttributes().getTanggal();
                 Log.d(TAG, "onResponse: jumlah kumulatif " + jumlahKumulatif);
                 mStatKasusPositif.setText(numberSeparator(jumlahKumulatif));
                 mStatKasusSembuh.setText(numberSeparator(jumlahSembuh));
                 mStatKasusMeninggal.setText(numberSeparator(jumlahMeninggal));
                 mStatKasusODP.setText(numberSeparator(jumlahODP));
                 mStatKasusPDP.setText(numberSeparator(jumlahPDP));
+                mKeterangan.setText("Diperbarui pada: " + getDate(tanggal));
+
+                //CHART LOGIC
+                LineDataSet lineDataSet = new LineDataSet(statsData,"Data");
+                lineDataSet.setDrawCircles(false);
+                lineDataSet.setDrawFilled(true);
+                lineDataSet.setColor(ColorTemplate.rgb("#ff5959"));
+                lineDataSet.setFillColor(ColorTemplate.rgb("#ff5959"));
+                lineDataSet.setDrawValues(false);
+                LineData data = new LineData(lineDataSet);
+                lineChart.animateY(1000);
+                lineChart.setData(data);
+                lineChart.getXAxis().setEnabled(false);
+                lineChart.getAxisRight().setEnabled(false);
+                Description desc = new Description();
+                desc.setText("");
+                lineChart.setDescription(desc);
+                lineChart.getLegend().setEnabled(false);
+                lineChart.setClickable(false);
+                lineChart.setDoubleTapToZoomEnabled(false);
+                lineChart.setScaleEnabled(false);
+
             }
 
             @Override
@@ -154,4 +212,10 @@ public class StatsFragment extends Fragment {
     private String numberSeparator(int jumlahKumulatif) {
         return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(jumlahKumulatif));
     }
+
+    private String getDate(long time) {
+        Date date = new Date(time);
+        return date.toString();
+    }
+
 }

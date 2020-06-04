@@ -23,10 +23,24 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:text="Total Kasus Sampai Hari Ini"
+            android:text="Total Kasus Hingga Hari Ini"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/stats_keterangan"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="Diperbarui pada: ..."
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:textColor="#FFFFFF"/>
+
 
 
     <RelativeLayout
@@ -258,9 +272,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginBottom="18dp"
+                android:layout_marginBottom="15dp"
+                android:text="Grafik Kasus Positif"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/linechart"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="15dp"
                 android:text="Kasus Per Provinsi"
                 android:textStyle="bold"
                 android:textSize="20sp"

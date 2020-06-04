@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.zub.covid_19.api.regulerData.RegulerData;
+import com.zub.covid_19.api.regulerData.RegulerDataHolder;
+import com.zub.covid_19.vm.RegulerDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,4 +98,6 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+
 }

@@ -274,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="5dp"
                 android:text="Grafik Kasus Positif"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -282,17 +282,17 @@
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/linechart"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="fill_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="160dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="18dp"
                 android:text="Kasus Per Provinsi"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -318,7 +318,7 @@
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:id="@+id/stats_recyclerView">
 

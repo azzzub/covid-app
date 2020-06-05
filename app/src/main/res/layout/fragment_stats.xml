@@ -77,14 +77,33 @@
                 android:background="@drawable/rounded_stats"
                 android:backgroundTint="#ffb259">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Positif"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Positif"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/stat_added_pos"
+                        android:layout_width="fill_parent"
+                        android:gravity="right"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="10dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/stat_kasus_aktif"
@@ -109,14 +128,32 @@
                 android:background="@drawable/rounded_stats"
                 android:backgroundTint="#ff5959">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Meninggal"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Meninggal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/stat_added_men"
+                        android:layout_width="fill_parent"
+                        android:gravity="right"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="10dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/stat_kasus_meninggal"
@@ -149,14 +186,32 @@
                 android:background="@drawable/rounded_stats"
                 android:backgroundTint="#4cd97b">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Sembuh"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Sembuh"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/stat_added_sem"
+                        android:layout_width="fill_parent"
+                        android:gravity="right"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="10dp"
+                        android:text="null"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/stat_kasus_sumbuh"
@@ -247,34 +302,37 @@
         android:orientation="vertical"
         android:background="@drawable/rounded_stats_daily">
 
-<!--            <com.google.android.material.tabs.TabLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                android:layout_marginRight="20dp">-->
-
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Daftar Data" />-->
-
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Data Bar" />-->
-
-<!--            </com.google.android.material.tabs.TabLayout>-->
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="5dp"
-            android:text="Grafik Kasus Positif"
+            android:text="Grafik Kasus Kumulatif"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#000000"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="160dp"
+            android:layout_width="fill_parent"
+            android:id="@+id/stat_shimmer_graph"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center">
+
+                <include layout="@layout/placeholder_graph"/>
+                <include layout="@layout/placeholder_graph"/>
+                <include layout="@layout/placeholder_graph"/>
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/stat_linechart"

@@ -48,7 +48,7 @@ public class RegulerDataRepository {
             @Override
             public void onFailure(Call<RegulerData> call, Throwable t) {
                 isLoading.setValue(false);
-                regulerData.setValue(null);
+//                regulerData.setValue(null);
             }
         });
 

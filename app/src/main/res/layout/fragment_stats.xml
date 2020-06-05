@@ -209,7 +209,7 @@
                         android:text="null"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 
@@ -317,14 +317,14 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Grafik Kasus Kumulatif"
+                    android:text="Kasus Kumulatif"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textColor="#000000"/>
 
                 <com.facebook.shimmer.ShimmerFrameLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_height="180dp"
                     android:layout_width="fill_parent"
                     android:id="@+id/stat_shimmer_cumulative_case_graph"
@@ -356,14 +356,14 @@
                     android:layout_marginTop="18dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Grafik Penambahan Kasus"
+                    android:text="Penambahan Kasus"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textColor="#000000"/>
 
                 <com.facebook.shimmer.ShimmerFrameLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_height="180dp"
                     android:layout_width="fill_parent"
                     android:id="@+id/stat_shimmer_new_case_graph"
@@ -389,32 +389,44 @@
                     android:layout_width="fill_parent"
                     android:layout_height="180dp"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Kondisi Penyerta"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#000000"/>
+
                 <com.facebook.shimmer.ShimmerFrameLayout
-                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="180dp"
                     android:layout_width="fill_parent"
-                    android:id="@+id/stat_shimmer_prov"
-                    android:visibility="gone"
-                    >
+                    android:id="@+id/stat_shimmer_codition_graph"
+                    android:visibility="gone">
+
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:orientation="vertical">
+                        android:gravity="center">
 
-                        <include layout="@layout/placeholder_stats_prov"/>
-                        <include layout="@layout/placeholder_stats_prov"/>
-                        <include layout="@layout/placeholder_stats_prov"/>
-                        <include layout="@layout/placeholder_stats_prov"/>
+                        <include layout="@layout/placeholder_graph"/>
+                        <include layout="@layout/placeholder_graph"/>
+                        <include layout="@layout/placeholder_graph"/>
 
                     </LinearLayout>
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_height="wrap_content"
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/stat_condition_graph"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_width="fill_parent"
-                    android:id="@+id/stat_rv_per_provinsi">
-
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="180dp"/>
 
             </LinearLayout>
 

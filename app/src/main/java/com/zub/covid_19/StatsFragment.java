@@ -1,5 +1,7 @@
 package com.zub.covid_19;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -35,6 +38,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -42,6 +46,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.zub.covid_19.api.regulerData.RegulerData;
 import com.zub.covid_19.api.regulerData.RegulerDataFetch;
 import com.zub.covid_19.api.regulerData.RegulerDataHolder;
+import com.zub.covid_19.api.specData.SpecData;
+import com.zub.covid_19.repo.SpecDataRepository;
 import com.zub.covid_19.stats.Features;
 import com.zub.covid_19.stats.Stats;
 import com.zub.covid_19.stats.StatsHolder;
@@ -49,6 +55,7 @@ import com.zub.covid_19.stats.perStateAPI.FeaturesPerState;
 import com.zub.covid_19.stats.perStateAPI.StatsPerState;
 import com.zub.covid_19.stats.perStateAPI.StatsPerStateHolder;
 import com.zub.covid_19.vm.RegulerDataViewModel;
+import com.zub.covid_19.vm.SpecDataViewModel;
 
 import org.w3c.dom.Text;
 
@@ -69,6 +76,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
+
 public class StatsFragment extends Fragment {
     private static final String TAG = "StatsFragment";
 
@@ -77,6 +86,8 @@ public class StatsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
+
+        // ========= REGULER DATA WIDGER
 
         TextView mStatKasusPositif = view.findViewById(R.id.stat_kasus_aktif);
         TextView mStatKasusMeninggal = view.findViewById(R.id.stat_kasus_meninggal);
@@ -96,6 +107,8 @@ public class StatsFragment extends Fragment {
 
         LineChart mCumulativeCaseGraph = view.findViewById(R.id.stat_cumulative_case_graph);
         LineChart mNewCaseGraph = view.findViewById(R.id.stat_new_case_graph);
+
+        // ========= REGULER DATA FETCHING
 
         RegulerDataViewModel regulerDataViewModel;
 
@@ -126,7 +139,87 @@ public class StatsFragment extends Fragment {
 
         });
 
+        // ========= SPESIFIC DATA WIDGET
+
+        ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_codition_graph);
+
+        BarChart mConditionGraph = view.findViewById(R.id.stat_condition_graph);
+
+        // ========= SPESIFIC DATA FETCHING
+
+        SpecDataViewModel specDataViewModel;
+
+        specDataViewModel = ViewModelProviders.of(this).get(SpecDataViewModel.class);
+        specDataViewModel.init();
+
+        specDataViewModel.getLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    showLoading1(mConditionGraphShimmer, mConditionGraph);
+                } else {
+                    hideLoading1(mConditionGraphShimmer, mConditionGraph);
+                }
+            }
+        });
+
+        specDataViewModel.getSpecData().observe(this, new Observer<SpecData>() {
+            @Override
+            public void onChanged(SpecData specData) {
+                showConditionGraph(mConditionGraph, specData);
+            }
+        });
+
         return view;
+    }
+
+    private void showConditionGraph(BarChart mConditionGraph, SpecData specData) {
+
+        List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> detailedSpecLists =
+                specData.getmKasus().getmKondisiPenyerta().getmDetailedSpecLists();
+
+        List<IBarDataSet> iBarDataSets = new ArrayList<>();
+
+        for (int i = 0; i < detailedSpecLists.size(); i++) {
+            ArrayList<BarEntry> key = new ArrayList<>();
+            key.add(new BarEntry(i, (float) detailedSpecLists.get(i).getValue()));
+            BarDataSet barDataSet = new BarDataSet(key, detailedSpecLists.get(i).getKey());
+            barDataSet.setColor(COLOR_SCHEME[i]);
+            iBarDataSets.add(barDataSet);
+        }
+        BarData barData = new BarData(iBarDataSets);
+        barData.setValueFormatter(new ValueFormatter() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public String getFormattedValue(float value) {
+                return String.format("%.1f", value) + "%";
+            }
+        });
+        barData.setValueTextSize(12);
+        mConditionGraph.setData(barData);
+        mConditionGraph.setMinimumHeight(180);
+        mConditionGraph.getXAxis().setDrawLabels(false);
+        mConditionGraph.getXAxis().setDrawAxisLine(false);
+        mConditionGraph.getXAxis().setDrawGridLines(false);
+        mConditionGraph.getAxisRight().setEnabled(false);
+        mConditionGraph.setGridBackgroundColor(rgb("#dddddd"));
+        mConditionGraph.getLegend().setWordWrapEnabled(true);
+        mConditionGraph.invalidate();
+
+    }
+
+    private void hideLoading1(ShimmerFrameLayout mConditionGraphShimmer, BarChart mConditionGraph) {
+
+        mConditionGraphShimmer.setVisibility(View.GONE);
+        mConditionGraph.setVisibility(View.VISIBLE);
+
+    }
+
+    private void showLoading1(ShimmerFrameLayout mConditionGraphShimmer, BarChart mConditionGraph) {
+
+        mConditionGraphShimmer.setVisibility(View.VISIBLE);
+        mConditionGraph.setVisibility(View.GONE);
+
     }
 
     private void showNewCaseGraph(LineChart mNewCaseGraph, RegulerData regulerData) {
@@ -163,7 +256,7 @@ public class StatsFragment extends Fragment {
 
         mNewCaseGraph.animateY(1000);
         mNewCaseGraph.getAxisRight().setEnabled(false);
-        mNewCaseGraph.getLegend().setTextSize(14);
+        mNewCaseGraph.getLegend().setTextSize(12);
         mNewCaseGraph.setClickable(false);
         mNewCaseGraph.setDoubleTapToZoomEnabled(false);
         mNewCaseGraph.setScaleEnabled(false);
@@ -228,7 +321,7 @@ public class StatsFragment extends Fragment {
 
         mLineChart.animateY(1000);
         mLineChart.getAxisRight().setEnabled(false);
-        mLineChart.getLegend().setTextSize(14);
+        mLineChart.getLegend().setTextSize(12);
         mLineChart.setClickable(false);
         mLineChart.setDoubleTapToZoomEnabled(false);
         mLineChart.setScaleEnabled(false);
@@ -262,8 +355,8 @@ public class StatsFragment extends Fragment {
     private void setupLineChart(LineDataSet lineDataSet, String s) {
         lineDataSet.setDrawCircles(false);
         lineDataSet.setDrawFilled(true);
-        lineDataSet.setColor(ColorTemplate.rgb(s));
-        lineDataSet.setFillColor(ColorTemplate.rgb(s));
+        lineDataSet.setColor(rgb(s));
+        lineDataSet.setFillColor(rgb(s));
         lineDataSet.setDrawValues(false);
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
     }
@@ -321,5 +414,11 @@ public class StatsFragment extends Fragment {
     private String numberSeparator(int jumlahKumulatif) {
         return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(jumlahKumulatif));
     }
+
+    public static final int[] COLOR_SCHEME = {
+            rgb("#ffb259"), rgb("#ff5959"), rgb("4cd97b"), rgb("4cb5ff"), rgb("9059ff"),
+            rgb("#ff3434"), rgb("#ffeeee"), rgb("4c9a9a"), rgb("4c5b5b"), rgb("90ff75"),
+            rgb("#900407")
+    };
 
 }

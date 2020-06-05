@@ -302,83 +302,125 @@
         android:orientation="vertical"
         android:background="@drawable/rounded_stats_daily">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="5dp"
-            android:text="Grafik Kasus Kumulatif"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="160dp"
+        <ScrollView
             android:layout_width="fill_parent"
-            android:id="@+id/stat_shimmer_graph"
-            android:visibility="gone">
+            android:layout_height="fill_parent">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center">
-
-                <include layout="@layout/placeholder_graph"/>
-                <include layout="@layout/placeholder_graph"/>
-                <include layout="@layout/placeholder_graph"/>
-
-            </LinearLayout>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/stat_linechart"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="fill_parent"
-            android:layout_height="160dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="18dp"
-            android:text="Kasus Per Provinsi"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:id="@+id/stat_shimmer_prov"
-            android:visibility="gone"
-            >
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
 
-                <include layout="@layout/placeholder_stats_prov"/>
-                <include layout="@layout/placeholder_stats_prov"/>
-                <include layout="@layout/placeholder_stats_prov"/>
-                <include layout="@layout/placeholder_stats_prov"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Grafik Kasus Kumulatif"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#000000"/>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="180dp"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/stat_shimmer_cumulative_case_graph"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center">
+
+                        <include layout="@layout/placeholder_graph"/>
+                        <include layout="@layout/placeholder_graph"/>
+                        <include layout="@layout/placeholder_graph"/>
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/stat_cumulative_case_graph"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="180dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Grafik Penambahan Kasus"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#000000"/>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="180dp"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/stat_shimmer_new_case_graph"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center">
+
+                        <include layout="@layout/placeholder_graph"/>
+                        <include layout="@layout/placeholder_graph"/>
+                        <include layout="@layout/placeholder_graph"/>
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/stat_new_case_graph"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="180dp"/>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/stat_shimmer_prov"
+                    android:visibility="gone"
+                    >
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/placeholder_stats_prov"/>
+                        <include layout="@layout/placeholder_stats_prov"/>
+                        <include layout="@layout/placeholder_stats_prov"/>
+                        <include layout="@layout/placeholder_stats_prov"/>
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/stat_rv_per_provinsi">
+
+                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/stat_rv_per_provinsi">
-
-        </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
 
     </LinearLayout>
+
 
 </LinearLayout>

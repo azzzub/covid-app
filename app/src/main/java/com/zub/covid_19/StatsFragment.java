@@ -89,14 +89,13 @@ public class StatsFragment extends Fragment {
         TextView mUpdatedDate = view.findViewById(R.id.stat_updated_date);
 
         ShimmerFrameLayout mBoxShimmer = view.findViewById(R.id.stat_box_shimmer);
-        ShimmerFrameLayout mGraphShimmer = view.findViewById(R.id.stat_shimmer_graph);
-        ShimmerFrameLayout mPerStateShimmer = view.findViewById(R.id.stat_shimmer_prov);
+        ShimmerFrameLayout mCumulativeGraphShimmer = view.findViewById(R.id.stat_shimmer_cumulative_case_graph);
+        ShimmerFrameLayout mNewCaseGraphShimmer = view.findViewById(R.id.stat_shimmer_new_case_graph);
 
         TableLayout mBoxLayout = view.findViewById(R.id.stat_box_layout);
 
-        RecyclerView mRvPerProvinsi = view.findViewById(R.id.stat_rv_per_provinsi);
-
-        LineChart mLineChart = view.findViewById(R.id.stat_linechart);
+        LineChart mCumulativeCaseGraph = view.findViewById(R.id.stat_cumulative_case_graph);
+        LineChart mNewCaseGraph = view.findViewById(R.id.stat_new_case_graph);
 
         RegulerDataViewModel regulerDataViewModel;
 
@@ -107,9 +106,11 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    showLoading(mBoxShimmer, mGraphShimmer, mLineChart, mBoxLayout);
+                    showLoading(mBoxShimmer, mCumulativeGraphShimmer, mNewCaseGraphShimmer,
+                            mCumulativeCaseGraph, mNewCaseGraph, mBoxLayout);
                 } else {
-                    hideLoading(mBoxShimmer, mGraphShimmer, mLineChart, mBoxLayout);
+                    hideLoading(mBoxShimmer, mCumulativeGraphShimmer, mNewCaseGraphShimmer,
+                            mCumulativeCaseGraph, mNewCaseGraph, mBoxLayout);
                 }
             }
         });
@@ -119,18 +120,86 @@ public class StatsFragment extends Fragment {
             public void onChanged(RegulerData regulerData) {
                 showRegulerData(mStatKasusPositif, mStatKasusMeninggal, mStatKasusSembuh, mStatKasusODP,
                         mStatKasusPDP, mStatAddedPos, mStatAddedMen, mStatAddedSem, mUpdatedDate, regulerData);
-                showGraphData(mLineChart, regulerData);
+                showCumulativeCaseGraph(mCumulativeCaseGraph, regulerData);
+                showNewCaseGraph(mNewCaseGraph, regulerData);
             }
+
         });
 
         return view;
     }
 
-    private void showGraphData(LineChart mLineChart, RegulerData regulerData) {
+    private void showNewCaseGraph(LineChart mNewCaseGraph, RegulerData regulerData) {
 
         ArrayList lineDataPositif = new ArrayList();
         ArrayList lineDataMeninggal = new ArrayList();
         ArrayList lineDataSembuh = new ArrayList();
+        ArrayList lineDataDirawat = new ArrayList();
+
+        List<RegulerData.UpdatedData.DailyData> dailyDataList = regulerData.getUpdatedData().getDailyData();
+
+        for (RegulerData.UpdatedData.DailyData theDailyData : dailyDataList) {
+
+            int dataPositif = theDailyData.getmPositif();
+            int dataMeninggal = theDailyData.getmMeninggal();
+            int dataSembuh = theDailyData.getmSembuh();
+            int dataDirawat = theDailyData.getmDirawat();
+            long dataTanggal = theDailyData.getmEpochDate();
+            lineDataPositif.add(new Entry(dataTanggal, dataPositif));
+            lineDataMeninggal.add(new Entry(dataTanggal, dataMeninggal));
+            lineDataSembuh.add(new Entry(dataTanggal, dataSembuh));
+            lineDataDirawat.add(new Entry(dataTanggal, dataDirawat));
+        }
+
+        LineDataSet lineDataSetPositif = new LineDataSet(lineDataPositif,"Positif");
+        LineDataSet lineDataSetMeninggal = new LineDataSet(lineDataMeninggal,"Meninggal");
+        LineDataSet lineDataSetSembuh = new LineDataSet(lineDataSembuh,"Sembuh");
+        LineDataSet lineDataSetDirawat = new LineDataSet(lineDataDirawat,"Dirawat");
+
+        setupLineChart(lineDataSetPositif, "#ffb259");
+        setupLineChart(lineDataSetMeninggal, "ff5959");
+        setupLineChart(lineDataSetSembuh, "4cd97b");
+        setupLineChart(lineDataSetDirawat, "9059ff");
+
+        mNewCaseGraph.animateY(1000);
+        mNewCaseGraph.getAxisRight().setEnabled(false);
+        mNewCaseGraph.getLegend().setTextSize(14);
+        mNewCaseGraph.setClickable(false);
+        mNewCaseGraph.setDoubleTapToZoomEnabled(false);
+        mNewCaseGraph.setScaleEnabled(false);
+        mNewCaseGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        mNewCaseGraph.getXAxis().setValueFormatter(new ValueFormatter() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public String getFormattedValue(float value) {
+                long millisecond = (long) value;
+                String dateString = DateFormat.format("dd MMM", new Date(millisecond)).toString();
+                return dateString;
+            }
+        });
+
+        Description desc = new Description();
+        desc.setText("");
+        mNewCaseGraph.setDescription(desc);
+
+        List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        dataSets.add(lineDataSetPositif);
+        dataSets.add(lineDataSetMeninggal);
+        dataSets.add(lineDataSetSembuh);
+        dataSets.add(lineDataSetDirawat);
+
+        LineData data = new LineData(dataSets);
+        mNewCaseGraph.setData(data);
+        mNewCaseGraph.invalidate();
+
+    }
+
+    private void showCumulativeCaseGraph(LineChart mLineChart, RegulerData regulerData) {
+
+        ArrayList lineDataPositif = new ArrayList();
+        ArrayList lineDataMeninggal = new ArrayList();
+        ArrayList lineDataSembuh = new ArrayList();
+        ArrayList lineDataDirawat = new ArrayList();
 
         List<RegulerData.UpdatedData.DailyData> dailyDataList = regulerData.getUpdatedData().getDailyData();
 
@@ -139,35 +208,23 @@ public class StatsFragment extends Fragment {
             int dataPositif = theDailyData.getmPositifKum();
             int dataMeninggal = theDailyData.getmMeninggalKum();
             int dataSembuh = theDailyData.getmSembuhKum();
+            int dataDirawat = theDailyData.getmDirawatKum();
             long dataTanggal = theDailyData.getmEpochDate();
             lineDataPositif.add(new Entry(dataTanggal, dataPositif));
             lineDataMeninggal.add(new Entry(dataTanggal, dataMeninggal));
             lineDataSembuh.add(new Entry(dataTanggal, dataSembuh));
+            lineDataDirawat.add(new Entry(dataTanggal, dataDirawat));
         }
 
         LineDataSet lineDataSetPositif = new LineDataSet(lineDataPositif,"Positif");
-        lineDataSetPositif.setDrawCircles(false);
-        lineDataSetPositif.setDrawFilled(true);
-        lineDataSetPositif.setColor(ColorTemplate.rgb("#ffb259"));
-        lineDataSetPositif.setFillColor(ColorTemplate.rgb("#ffb259"));
-        lineDataSetPositif.setDrawValues(false);
-        lineDataSetPositif.setAxisDependency(YAxis.AxisDependency.LEFT);
-
         LineDataSet lineDataSetMeninggal = new LineDataSet(lineDataMeninggal,"Meninggal");
-        lineDataSetMeninggal.setDrawCircles(false);
-        lineDataSetMeninggal.setDrawFilled(true);
-        lineDataSetMeninggal.setColor(ColorTemplate.rgb("#ff5959"));
-        lineDataSetMeninggal.setFillColor(ColorTemplate.rgb("#ff5959"));
-        lineDataSetMeninggal.setDrawValues(false);
-        lineDataSetMeninggal.setAxisDependency(YAxis.AxisDependency.LEFT);
-
         LineDataSet lineDataSetSembuh = new LineDataSet(lineDataSembuh,"Sembuh");
-        lineDataSetSembuh.setDrawCircles(false);
-        lineDataSetSembuh.setDrawFilled(true);
-        lineDataSetSembuh.setColor(ColorTemplate.rgb("#4cd97b"));
-        lineDataSetSembuh.setFillColor(ColorTemplate.rgb("#4cd97b"));
-        lineDataSetSembuh.setDrawValues(false);
-        lineDataSetSembuh.setAxisDependency(YAxis.AxisDependency.LEFT);
+        LineDataSet lineDataSetDirawat = new LineDataSet(lineDataDirawat,"Dirawat");
+
+        setupLineChart(lineDataSetPositif, "#ffb259");
+        setupLineChart(lineDataSetMeninggal, "ff5959");
+        setupLineChart(lineDataSetSembuh, "4cd97b");
+        setupLineChart(lineDataSetDirawat, "9059ff");
 
         mLineChart.animateY(1000);
         mLineChart.getAxisRight().setEnabled(false);
@@ -194,11 +251,21 @@ public class StatsFragment extends Fragment {
         dataSets.add(lineDataSetPositif);
         dataSets.add(lineDataSetMeninggal);
         dataSets.add(lineDataSetSembuh);
+        dataSets.add(lineDataSetDirawat);
 
         LineData data = new LineData(dataSets);
         mLineChart.setData(data);
         mLineChart.invalidate();
 
+    }
+
+    private void setupLineChart(LineDataSet lineDataSet, String s) {
+        lineDataSet.setDrawCircles(false);
+        lineDataSet.setDrawFilled(true);
+        lineDataSet.setColor(ColorTemplate.rgb(s));
+        lineDataSet.setFillColor(ColorTemplate.rgb(s));
+        lineDataSet.setDrawValues(false);
+        lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
     }
 
     private void showRegulerData(TextView mStatKasusPositif, TextView mStatKasusMeninggal,
@@ -229,20 +296,26 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private void hideLoading(ShimmerFrameLayout mBoxShimmer, ShimmerFrameLayout mGraphShimmer,
-                             LineChart mLineChart, TableLayout mBoxLayout) {
+    private void hideLoading(ShimmerFrameLayout mBoxShimmer, ShimmerFrameLayout mCummulativeGraphShimmer,
+                             ShimmerFrameLayout mNewCaseGraphSimmer, LineChart mCumulativeCaseGraph,
+                             LineChart mNewCaseGraph, TableLayout mBoxLayout) {
         mBoxShimmer.setVisibility(View.GONE);
-        mGraphShimmer.setVisibility(View.GONE);
+        mCummulativeGraphShimmer.setVisibility(View.GONE);
+        mNewCaseGraphSimmer.setVisibility(View.GONE);
         mBoxLayout.setVisibility(View.VISIBLE);
-        mLineChart.setVisibility(View.VISIBLE);
+        mCumulativeCaseGraph.setVisibility(View.VISIBLE);
+        mNewCaseGraph.setVisibility(View.VISIBLE);
     }
 
-    private void showLoading(ShimmerFrameLayout mBoxShimmer, ShimmerFrameLayout mGraphShimmer,
-                             LineChart mLineChart, TableLayout mBoxLayout) {
+    private void showLoading(ShimmerFrameLayout mBoxShimmer, ShimmerFrameLayout mCummulativeGraphShimmer,
+                             ShimmerFrameLayout mNewCaseGraphSimmer, LineChart mCumulativeCaseGraph,
+                             LineChart mNewCaseGraph, TableLayout mBoxLayout) {
         mBoxShimmer.setVisibility(View.VISIBLE);
-        mGraphShimmer.setVisibility(View.VISIBLE);
+        mCummulativeGraphShimmer.setVisibility(View.VISIBLE);
+        mNewCaseGraphSimmer.setVisibility(View.VISIBLE);
         mBoxLayout.setVisibility(View.GONE);
-        mLineChart.setVisibility(View.GONE);
+        mCumulativeCaseGraph.setVisibility(View.GONE);
+        mNewCaseGraph.setVisibility(View.GONE);
     }
 
     private String numberSeparator(int jumlahKumulatif) {

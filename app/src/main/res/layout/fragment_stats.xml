@@ -400,6 +400,16 @@
                     android:textSize="20sp"
                     android:textColor="#000000"/>
 
+                <TextView
+                    android:id="@+id/stat_condition_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Data dihimpun: ... (0%)"
+                    android:textSize="14sp"
+                    android:textColor="#000000"/>
+
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -437,6 +447,16 @@
                     android:text="Gejala Positif"
                     android:textStyle="bold"
                     android:textSize="20sp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/stat_symptom_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Data dihimpun: ... (0%)"
+                    android:textSize="14sp"
                     android:textColor="#000000"/>
 
                 <com.facebook.shimmer.ShimmerFrameLayout
@@ -478,6 +498,16 @@
                     android:textSize="20sp"
                     android:textColor="#000000"/>
 
+                <TextView
+                    android:id="@+id/stat_age_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Data dihimpun: ... (0%)"
+                    android:textSize="14sp"
+                    android:textColor="#000000"/>
+
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -517,6 +547,16 @@
                     android:textSize="20sp"
                     android:textColor="#000000"/>
 
+                <TextView
+                    android:id="@+id/stat_sex_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Data dihimpun: ... (0%)"
+                    android:textSize="14sp"
+                    android:textColor="#000000"/>
+
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -544,6 +584,11 @@
                     android:layout_marginRight="10dp"
                     android:layout_width="fill_parent"
                     android:layout_height="250dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp">
+                </LinearLayout>
 
             </LinearLayout>
 

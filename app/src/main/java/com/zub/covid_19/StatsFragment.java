@@ -1,11 +1,8 @@
 package com.zub.covid_19;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,22 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -38,45 +30,19 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.zub.covid_19.api.regulerData.RegulerData;
-import com.zub.covid_19.api.regulerData.RegulerDataFetch;
-import com.zub.covid_19.api.regulerData.RegulerDataHolder;
 import com.zub.covid_19.api.specData.SpecData;
-import com.zub.covid_19.repo.SpecDataRepository;
-import com.zub.covid_19.stats.Features;
-import com.zub.covid_19.stats.Stats;
-import com.zub.covid_19.stats.StatsHolder;
-import com.zub.covid_19.stats.perStateAPI.FeaturesPerState;
-import com.zub.covid_19.stats.perStateAPI.StatsPerState;
-import com.zub.covid_19.stats.perStateAPI.StatsPerStateHolder;
 import com.zub.covid_19.vm.RegulerDataViewModel;
 import com.zub.covid_19.vm.SpecDataViewModel;
 
-import org.w3c.dom.Text;
-
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import lib.kingja.switchbutton.SwitchMultiButton;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
 
@@ -143,6 +109,11 @@ public class StatsFragment extends Fragment {
 
         // ========= SPECIFIC DATA WIDGET
 
+        TextView mConditionUpdate = view.findViewById(R.id.stat_condition_update);
+        TextView mSymptomUpdate = view.findViewById(R.id.stat_symptom_update);
+        TextView mAgeUpdate = view.findViewById(R.id.stat_age_update);
+        TextView mSexUpdate = view.findViewById(R.id.stat_sex_update);
+
         ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_codition_graph);
         ShimmerFrameLayout mAgeGraphShimmer = view.findViewById(R.id.stat_shimmer_age_graph);
         ShimmerFrameLayout mSexGraphShimmer = view.findViewById(R.id.stat_shimmer_sex_graph);
@@ -180,10 +151,42 @@ public class StatsFragment extends Fragment {
                 showSymptomGraph(mSymptomGraph, specData);
                 showAgeGraph(mAgeGraph, specData);
                 showSexGraph(mSexGraph, specData);
+                showUpdatedDate(mConditionUpdate, mSymptomUpdate, mAgeUpdate, mSexUpdate, specData);
             }
         });
 
         return view;
+    }
+
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    private void showUpdatedDate(TextView mConditionUpdate, TextView mSymptomUpdate, TextView mAgeUpdate,
+                                 TextView mSexUpdate, SpecData specData) {
+
+        final String TEMPLATE = "Data dihimpun: ";
+
+        String date = specData.getmUpdatedDate();
+
+        int amountCond = specData.getmKasus().getmKondisiPenyerta().getmTotalData();
+        double percCondition = 100.0 - specData.getmKasus().getmKondisiPenyerta().getmMissingData();
+
+        int amountSymp = specData.getmKasus().getmGejala().getmTotalData();
+        double percSymp = 100.0 - specData.getmKasus().getmGejala().getmMissingData();
+
+        int amountAge = specData.getmKasus().getmKelompokUmur().getmTotalData();
+        double percAge = 100.0 - specData.getmKasus().getmKelompokUmur().getmMissingData();
+
+        int amountSex = specData.getmKasus().getmJenisKelamin().getmTotalData();
+        double percSex = 100.0 - specData.getmKasus().getmJenisKelamin().getmMissingData();
+
+        mConditionUpdate.setText(TEMPLATE + amountCond + " (" +
+                String.format("%.1f", percCondition) + "%) pada " + date + isUsable(percCondition));
+        mSymptomUpdate.setText(TEMPLATE + amountSymp + " (" +
+                String.format("%.1f", percSymp) + "%) pada " + date + isUsable(percSymp));
+        mAgeUpdate.setText(TEMPLATE + amountAge + " (" +
+                String.format("%.1f", percAge) + "%) pada " + date + isUsable(percAge));
+        mSexUpdate.setText(TEMPLATE + amountSex + " (" +
+                String.format("%.1f", percSex) + "%) pada " + date + isUsable(percSex));
+
     }
 
     private void showSymptomGraph(BarChart mSymptomGraph, SpecData specData) {
@@ -223,6 +226,7 @@ public class StatsFragment extends Fragment {
         mSymptomGraph.getDescription().setEnabled(false);
         mSymptomGraph.setDoubleTapToZoomEnabled(false);
         mSymptomGraph.setPinchZoom(false);
+        mSymptomGraph.animateXY(1000, 1000);
         mSymptomGraph.invalidate();
 
     }
@@ -288,6 +292,7 @@ public class StatsFragment extends Fragment {
         mSexGraph.getAxisRight().setEnabled(false);
         mSexGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         mSexGraph.getDescription().setEnabled(false);
+        mSexGraph.animateXY(1000, 1000);
         mSexGraph.invalidate();
 
     }
@@ -372,6 +377,7 @@ public class StatsFragment extends Fragment {
         Description description = new Description();
         description.setText("");
         mAgeGraph.setDescription(description);
+        mAgeGraph.animateXY(1000, 1000);
         mAgeGraph.invalidate();
 
     }
@@ -415,6 +421,7 @@ public class StatsFragment extends Fragment {
         mConditionGraph.setDescription(description);
         mConditionGraph.setDoubleTapToZoomEnabled(false);
         mConditionGraph.setPinchZoom(false);
+        mConditionGraph.animateXY(1000, 1000);
         mConditionGraph.invalidate();
     }
 
@@ -644,10 +651,15 @@ public class StatsFragment extends Fragment {
         return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(jumlahKumulatif));
     }
 
+    private String isUsable(double value) {
+        if (value < 50) return "\nDATA TIDAK LENGKAP";
+        return "";
+    }
+
     private static final int[] COLOR_SCHEME = {
             rgb("#ffb259"), rgb("#ff5959"), rgb("4cd97b"), rgb("4cb5ff"), rgb("9059ff"),
             rgb("#ff3434"), rgb("#ffeeee"), rgb("4c9a9a"), rgb("4c5b5b"), rgb("90ff75"),
-            rgb("#900407"), rgb("#ddddee"), rgb("4f9f9f"), rgb("fcfbfb"), rgb("000f05"),
+            rgb("#900407"), rgb("#ddddee"), rgb("fcfbfb"), rgb("000f05"),
     };
 
 }

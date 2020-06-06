@@ -12,6 +12,27 @@ public class SpecData {
     @SerializedName("kasus")
     private DetailedData mKasus;
 
+    @SerializedName("sembuh")
+    private DetailedData mSembuh;
+
+    @SerializedName("meninggal")
+    private DetailedData mMeninggal;
+
+    @SerializedName("perawatan")
+    private DetailedData mPerawatan;
+
+    public DetailedData getmSembuh() {
+        return mSembuh;
+    }
+
+    public DetailedData getmMeninggal() {
+        return mMeninggal;
+    }
+
+    public DetailedData getmPerawatan() {
+        return mPerawatan;
+    }
+
     public String getmUpdatedDate() {
         return mUpdatedDate;
     }
@@ -24,6 +45,27 @@ public class SpecData {
 
         @SerializedName("kondisi_penyerta")
         private DerivativeDetailedData mKondisiPenyerta;
+
+        @SerializedName("jenis_kelamin")
+        private DerivativeDetailedData mJenisKelamin;
+
+        @SerializedName("kelompok_umur")
+        private DerivativeDetailedData mKelompokUmur;
+
+        @SerializedName("gejala")
+        private DerivativeDetailedData mGejala;
+
+        public DerivativeDetailedData getmJenisKelamin() {
+            return mJenisKelamin;
+        }
+
+        public DerivativeDetailedData getmKelompokUmur() {
+            return mKelompokUmur;
+        }
+
+        public DerivativeDetailedData getmGejala() {
+            return mGejala;
+        }
 
         public DerivativeDetailedData getmKondisiPenyerta() {
             return mKondisiPenyerta;

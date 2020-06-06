@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="Versi 1.0.0 © 2020\nContant: info@azzzub.com"
+                    android:text="Versi 1.0.0 © 2020\nContant: 40.ayub@gmail.com"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
@@ -83,7 +83,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="azzzub.com"
+                        android:text="ayub.dev"
                         android:textColor="#000000"
                         android:textSize="15sp"
                         android:textStyle="bold"

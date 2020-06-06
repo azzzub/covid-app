@@ -2,8 +2,10 @@ package com.zub.covid_19;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,7 +89,7 @@ public class StatsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
 
-        // ========= REGULER DATA WIDGER
+        // ========= REGULER DATA WIDGET
 
         TextView mStatKasusPositif = view.findViewById(R.id.stat_kasus_aktif);
         TextView mStatKasusMeninggal = view.findViewById(R.id.stat_kasus_meninggal);
@@ -139,13 +141,15 @@ public class StatsFragment extends Fragment {
 
         });
 
-        // ========= SPESIFIC DATA WIDGET
+        // ========= SPECIFIC DATA WIDGET
 
         ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_codition_graph);
+        ShimmerFrameLayout mAgeGraphShimmer = view.findViewById(R.id.stat_shimmer_age_graph);
 
         BarChart mConditionGraph = view.findViewById(R.id.stat_condition_graph);
+        BarChart mAgeGraph = view.findViewById(R.id.stat_age_graph);
 
-        // ========= SPESIFIC DATA FETCHING
+        // ========= SPECIFIC DATA FETCHING
 
         SpecDataViewModel specDataViewModel;
 
@@ -156,9 +160,9 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    showLoading1(mConditionGraphShimmer, mConditionGraph);
+                    showLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mConditionGraph, mAgeGraph);
                 } else {
-                    hideLoading1(mConditionGraphShimmer, mConditionGraph);
+                    hideLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mConditionGraph, mAgeGraph);
                 }
             }
         });
@@ -167,10 +171,95 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(SpecData specData) {
                 showConditionGraph(mConditionGraph, specData);
+                showAgeGraph(mAgeGraph, specData);
             }
         });
 
         return view;
+    }
+
+    private void showAgeGraph(BarChart mAgeGraph, SpecData specData) {
+
+        List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> kelompokUmurPos =
+                specData.getmKasus().getmKelompokUmur().getmDetailedSpecLists();
+        List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> kelompokUmurMen =
+                specData.getmMeninggal().getmKelompokUmur().getmDetailedSpecLists();
+        List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> kelompokUmurSem =
+                specData.getmSembuh().getmKelompokUmur().getmDetailedSpecLists();
+        List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> kelompokUmurPer =
+                specData.getmPerawatan().getmKelompokUmur().getmDetailedSpecLists();
+
+        List<IBarDataSet> kelompokUmurDS = new ArrayList<>();
+
+        ArrayList<BarEntry> key = new ArrayList<>();
+        ArrayList<BarEntry> key2 = new ArrayList<>();
+        ArrayList<BarEntry> key3 = new ArrayList<>();
+        ArrayList<BarEntry> key4 = new ArrayList<>();
+
+        for (int i = 0; i < kelompokUmurPos.size(); i++) {
+            key.add(new BarEntry(i, (float) kelompokUmurPos.get(i).getValue()));
+            key2.add(new BarEntry(i, (float) kelompokUmurMen.get(i).getValue()));
+            key3.add(new BarEntry(i, (float) kelompokUmurSem.get(i).getValue()));
+            key4.add(new BarEntry(i, (float) kelompokUmurPer.get(i).getValue()));
+        }
+
+        BarDataSet barDataSet = new BarDataSet(key, "Positif");
+        barDataSet.setColor(COLOR_SCHEME[0]);
+        barDataSet.setValueTextSize(8);
+        kelompokUmurDS.add(barDataSet);
+
+        BarDataSet barDataSet2 = new BarDataSet(key2, "Meninggal");
+        barDataSet2.setColor(COLOR_SCHEME[1]);
+        barDataSet2.setValueTextSize(8);
+        kelompokUmurDS.add(barDataSet2);
+
+        BarDataSet barDataSet3 = new BarDataSet(key3, "Sembuh");
+        barDataSet3.setColor(COLOR_SCHEME[2]);
+        barDataSet3.setValueTextSize(8);
+        kelompokUmurDS.add(barDataSet3);
+
+        BarDataSet barDataSet4 = new BarDataSet(key4, "Perawatan");
+        barDataSet4.setValueTextSize(8);
+        barDataSet4.setColor(COLOR_SCHEME[3]);
+        kelompokUmurDS.add(barDataSet4);
+
+        BarData kelompokUmurBD = new BarData(barDataSet, barDataSet2, barDataSet3, barDataSet4);
+        mAgeGraph.setData(kelompokUmurBD);
+        mAgeGraph.getXAxis().setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                int formated = Math.round(value);
+                // rejecting the unused data that case error on getting the list
+                if (formated > 5 || formated < 0) {
+                    formated = 0;
+                }
+                return specData.getmKasus().getmKelompokUmur().getmDetailedSpecLists().get(formated).getKey();
+            }
+        });
+
+        mAgeGraph.getXAxis().setCenterAxisLabels(true);
+
+        final float BAR_WIDTH = 0.15f;
+        final float GROUP_SPACE = 0.10f;
+        final float BAR_SPACE = 0.05f;
+        final float GROUP_COUNT = 6;
+
+        mAgeGraph.getBarData().setBarWidth(BAR_WIDTH);
+
+        // restrict the x-axis range
+        mAgeGraph.getXAxis().setAxisMinimum(0);
+        mAgeGraph.getLegend().setTextSize(12);
+
+        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
+        mAgeGraph.getXAxis().setAxisMaximum(0 + mAgeGraph.getBarData().getGroupWidth(GROUP_SPACE, BAR_SPACE) * GROUP_COUNT);
+        mAgeGraph.groupBars(0, GROUP_SPACE, BAR_SPACE);
+        mAgeGraph.getAxisRight().setEnabled(false);
+        mAgeGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        Description description = new Description();
+        description.setText("");
+        mAgeGraph.setDescription(description);
+        mAgeGraph.invalidate();
+
     }
 
     private void showConditionGraph(BarChart mConditionGraph, SpecData specData) {
@@ -183,7 +272,9 @@ public class StatsFragment extends Fragment {
         for (int i = 0; i < detailedSpecLists.size(); i++) {
             ArrayList<BarEntry> key = new ArrayList<>();
             key.add(new BarEntry(i, (float) detailedSpecLists.get(i).getValue()));
-            BarDataSet barDataSet = new BarDataSet(key, detailedSpecLists.get(i).getKey());
+            // Manipulating first letter to be capitalized
+            String theDataSet = detailedSpecLists.get(i).getKey();
+            BarDataSet barDataSet = new BarDataSet(key, theDataSet.substring(0, 1).toUpperCase() + theDataSet.substring(1).toLowerCase());
             barDataSet.setColor(COLOR_SCHEME[i]);
             iBarDataSets.add(barDataSet);
         }
@@ -195,30 +286,41 @@ public class StatsFragment extends Fragment {
                 return String.format("%.1f", value) + "%";
             }
         });
-        barData.setValueTextSize(12);
+
+        barData.setValueTextSize(10);
         mConditionGraph.setData(barData);
         mConditionGraph.setMinimumHeight(180);
         mConditionGraph.getXAxis().setDrawLabels(false);
         mConditionGraph.getXAxis().setDrawAxisLine(false);
         mConditionGraph.getXAxis().setDrawGridLines(false);
         mConditionGraph.getAxisRight().setEnabled(false);
-        mConditionGraph.setGridBackgroundColor(rgb("#dddddd"));
         mConditionGraph.getLegend().setWordWrapEnabled(true);
+        mConditionGraph.getLegend().setTextSize(10);
+        Description description = new Description();
+        description.setText("");
+        mConditionGraph.setDescription(description);
+        mConditionGraph.setDoubleTapToZoomEnabled(false);
+        mConditionGraph.setPinchZoom(false);
         mConditionGraph.invalidate();
-
     }
 
-    private void hideLoading1(ShimmerFrameLayout mConditionGraphShimmer, BarChart mConditionGraph) {
+    private void hideLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mAgeGraphShimmer,
+                              BarChart mConditionGraph, BarChart mAgeGraph) {
 
         mConditionGraphShimmer.setVisibility(View.GONE);
+        mAgeGraphShimmer.setVisibility(View.GONE);
         mConditionGraph.setVisibility(View.VISIBLE);
+        mAgeGraph.setVisibility(View.VISIBLE);
 
     }
 
-    private void showLoading1(ShimmerFrameLayout mConditionGraphShimmer, BarChart mConditionGraph) {
+    private void showLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mAgeGraphShimmer,
+                              BarChart mConditionGraph, BarChart mAgeGraph) {
 
         mConditionGraphShimmer.setVisibility(View.VISIBLE);
+        mAgeGraphShimmer.setVisibility(View.VISIBLE);
         mConditionGraph.setVisibility(View.GONE);
+        mAgeGraph.setVisibility(View.GONE);
 
     }
 
@@ -256,7 +358,7 @@ public class StatsFragment extends Fragment {
 
         mNewCaseGraph.animateY(1000);
         mNewCaseGraph.getAxisRight().setEnabled(false);
-        mNewCaseGraph.getLegend().setTextSize(12);
+//        mNewCaseGraph.getLegend().setTextSize(12);
         mNewCaseGraph.setClickable(false);
         mNewCaseGraph.setDoubleTapToZoomEnabled(false);
         mNewCaseGraph.setScaleEnabled(false);
@@ -321,7 +423,7 @@ public class StatsFragment extends Fragment {
 
         mLineChart.animateY(1000);
         mLineChart.getAxisRight().setEnabled(false);
-        mLineChart.getLegend().setTextSize(12);
+//        mLineChart.getLegend().setTextSize(12);
         mLineChart.setClickable(false);
         mLineChart.setDoubleTapToZoomEnabled(false);
         mLineChart.setScaleEnabled(false);
@@ -415,7 +517,7 @@ public class StatsFragment extends Fragment {
         return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(jumlahKumulatif));
     }
 
-    public static final int[] COLOR_SCHEME = {
+    private static final int[] COLOR_SCHEME = {
             rgb("#ffb259"), rgb("#ff5959"), rgb("4cd97b"), rgb("4cb5ff"), rgb("9059ff"),
             rgb("#ff3434"), rgb("#ffeeee"), rgb("4c9a9a"), rgb("4c5b5b"), rgb("90ff75"),
             rgb("#900407")

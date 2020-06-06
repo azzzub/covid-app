@@ -68,4 +68,6 @@ dependencies {
     annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
     //parallax
     implementation 'com.github.nirhart:ParallaxScroll:dd53d1f9d1'
+    //google maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

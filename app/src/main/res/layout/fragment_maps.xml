@@ -2,8 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#473f97"
     android:orientation="vertical">
 
     <LinearLayout
@@ -11,15 +9,11 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:paddingBottom="30dp"
-            android:orientation="vertical">
-
-
-
-        </LinearLayout>
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
 
         <LinearLayout
             android:layout_width="fill_parent"

@@ -146,10 +146,12 @@ public class StatsFragment extends Fragment {
         ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_codition_graph);
         ShimmerFrameLayout mAgeGraphShimmer = view.findViewById(R.id.stat_shimmer_age_graph);
         ShimmerFrameLayout mSexGraphShimmer = view.findViewById(R.id.stat_shimmer_sex_graph);
+        ShimmerFrameLayout mSymptomGraphShimmer = view.findViewById(R.id.stat_shimmer_symptom_graph);
 
         BarChart mConditionGraph = view.findViewById(R.id.stat_condition_graph);
         BarChart mAgeGraph = view.findViewById(R.id.stat_age_graph);
         BarChart mSexGraph = view.findViewById(R.id.stat_sex_graph);
+        BarChart mSymptomGraph = view.findViewById(R.id.stat_symptom_graph);
 
         // ========= SPECIFIC DATA FETCHING
 
@@ -162,9 +164,11 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    showLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer, mConditionGraph, mAgeGraph, mSexGraph);
+                    showLoading1(mConditionGraphShimmer, mSymptomGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer,
+                            mConditionGraph, mSymptomGraph, mAgeGraph, mSexGraph);
                 } else {
-                    hideLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer, mConditionGraph, mAgeGraph, mSexGraph);
+                    hideLoading1(mConditionGraphShimmer, mSymptomGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer,
+                            mConditionGraph, mSymptomGraph, mAgeGraph, mSexGraph);
                 }
             }
         });
@@ -173,12 +177,54 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(SpecData specData) {
                 showConditionGraph(mConditionGraph, specData);
+                showSymptomGraph(mSymptomGraph, specData);
                 showAgeGraph(mAgeGraph, specData);
                 showSexGraph(mSexGraph, specData);
             }
         });
 
         return view;
+    }
+
+    private void showSymptomGraph(BarChart mSymptomGraph, SpecData specData) {
+
+        List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> detailedSpecLists =
+                specData.getmKasus().getmGejala().getmDetailedSpecLists();
+
+        List<IBarDataSet> iBarDataSets = new ArrayList<>();
+
+        for (int i = 0; i < detailedSpecLists.size(); i++) {
+            ArrayList<BarEntry> key = new ArrayList<>();
+            key.add(new BarEntry(i, (float) detailedSpecLists.get(i).getValue()));
+            // Manipulating first letter to be capitalized
+            String theDataSet = detailedSpecLists.get(i).getKey();
+            BarDataSet barDataSet = new BarDataSet(key, theDataSet.substring(0, 1).toUpperCase() + theDataSet.substring(1).toLowerCase());
+            barDataSet.setColor(COLOR_SCHEME[i]);
+            iBarDataSets.add(barDataSet);
+        }
+        BarData barData = new BarData(iBarDataSets);
+        barData.setValueFormatter(new ValueFormatter() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public String getFormattedValue(float value) {
+                return String.format("%.1f", value) + "%";
+            }
+        });
+
+        barData.setValueTextSize(10);
+        mSymptomGraph.setData(barData);
+        mSymptomGraph.setMinimumHeight(180);
+        mSymptomGraph.getXAxis().setDrawLabels(false);
+        mSymptomGraph.getXAxis().setDrawAxisLine(false);
+        mSymptomGraph.getXAxis().setDrawGridLines(false);
+        mSymptomGraph.getAxisRight().setEnabled(false);
+        mSymptomGraph.getLegend().setWordWrapEnabled(true);
+        mSymptomGraph.getLegend().setTextSize(10);
+        mSymptomGraph.getDescription().setEnabled(false);
+        mSymptomGraph.setDoubleTapToZoomEnabled(false);
+        mSymptomGraph.setPinchZoom(false);
+        mSymptomGraph.invalidate();
+
     }
 
     private void showSexGraph(BarChart mSexGraph, SpecData specData) {
@@ -372,29 +418,35 @@ public class StatsFragment extends Fragment {
         mConditionGraph.invalidate();
     }
 
-    private void hideLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mAgeGraphShimmer,
-                              ShimmerFrameLayout mSexGraphShimmer, BarChart mConditionGraph, BarChart mAgeGraph,
+    private void hideLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mSymptomGraphShimmer,
+                              ShimmerFrameLayout mAgeGraphShimmer, ShimmerFrameLayout mSexGraphShimmer,
+                              BarChart mConditionGraph, BarChart mSymptomGraph, BarChart mAgeGraph,
                               BarChart mSexGraph) {
 
         mConditionGraphShimmer.setVisibility(View.GONE);
         mAgeGraphShimmer.setVisibility(View.GONE);
         mSexGraphShimmer.setVisibility(View.GONE);
+        mSymptomGraphShimmer.setVisibility(View.GONE);
         mConditionGraph.setVisibility(View.VISIBLE);
         mAgeGraph.setVisibility(View.VISIBLE);
         mSexGraph.setVisibility(View.VISIBLE);
+        mSymptomGraph.setVisibility(View.VISIBLE);
 
     }
 
-    private void showLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mAgeGraphShimmer,
-                              ShimmerFrameLayout mSexGraphShimmer, BarChart mConditionGraph, BarChart mAgeGraph,
+    private void showLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mSymptomGraphShimmer,
+                              ShimmerFrameLayout mAgeGraphShimmer, ShimmerFrameLayout mSexGraphShimmer,
+                              BarChart mConditionGraph, BarChart mSymptomGraph, BarChart mAgeGraph,
                               BarChart mSexGraph) {
 
         mConditionGraphShimmer.setVisibility(View.VISIBLE);
         mAgeGraphShimmer.setVisibility(View.VISIBLE);
         mSexGraphShimmer.setVisibility(View.VISIBLE);
+        mSymptomGraphShimmer.setVisibility(View.VISIBLE);
         mConditionGraph.setVisibility(View.GONE);
         mAgeGraph.setVisibility(View.GONE);
         mSexGraph.setVisibility(View.GONE);
+        mSymptomGraph.setVisibility(View.GONE);
 
     }
 
@@ -595,7 +647,7 @@ public class StatsFragment extends Fragment {
     private static final int[] COLOR_SCHEME = {
             rgb("#ffb259"), rgb("#ff5959"), rgb("4cd97b"), rgb("4cb5ff"), rgb("9059ff"),
             rgb("#ff3434"), rgb("#ffeeee"), rgb("4c9a9a"), rgb("4c5b5b"), rgb("90ff75"),
-            rgb("#900407")
+            rgb("#900407"), rgb("#ddddee"), rgb("4f9f9f"), rgb("fcfbfb"), rgb("000f05"),
     };
 
 }

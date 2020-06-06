@@ -145,9 +145,11 @@ public class StatsFragment extends Fragment {
 
         ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_codition_graph);
         ShimmerFrameLayout mAgeGraphShimmer = view.findViewById(R.id.stat_shimmer_age_graph);
+        ShimmerFrameLayout mSexGraphShimmer = view.findViewById(R.id.stat_shimmer_sex_graph);
 
         BarChart mConditionGraph = view.findViewById(R.id.stat_condition_graph);
         BarChart mAgeGraph = view.findViewById(R.id.stat_age_graph);
+        BarChart mSexGraph = view.findViewById(R.id.stat_sex_graph);
 
         // ========= SPECIFIC DATA FETCHING
 
@@ -160,9 +162,9 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    showLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mConditionGraph, mAgeGraph);
+                    showLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer, mConditionGraph, mAgeGraph, mSexGraph);
                 } else {
-                    hideLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mConditionGraph, mAgeGraph);
+                    hideLoading1(mConditionGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer, mConditionGraph, mAgeGraph, mSexGraph);
                 }
             }
         });
@@ -172,10 +174,76 @@ public class StatsFragment extends Fragment {
             public void onChanged(SpecData specData) {
                 showConditionGraph(mConditionGraph, specData);
                 showAgeGraph(mAgeGraph, specData);
+                showSexGraph(mSexGraph, specData);
             }
         });
 
         return view;
+    }
+
+    private void showSexGraph(BarChart mSexGraph, SpecData specData) {
+
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+
+        float posLaki = (float) specData.getmKasus().getmJenisKelamin().getmDetailedSpecLists().get(0).getValue();
+        float posPerempuan = (float) specData.getmKasus().getmJenisKelamin().getmDetailedSpecLists().get(1).getValue();
+
+        float menLaki = (float) specData.getmMeninggal().getmJenisKelamin().getmDetailedSpecLists().get(0).getValue();
+        float menPerempuan = (float) specData.getmMeninggal().getmJenisKelamin().getmDetailedSpecLists().get(1).getValue();
+
+        float semLaki = (float) specData.getmSembuh().getmJenisKelamin().getmDetailedSpecLists().get(0).getValue();
+        float semPerempuan = (float) specData.getmSembuh().getmJenisKelamin().getmDetailedSpecLists().get(1).getValue();
+
+        float perLaki = (float) specData.getmSembuh().getmJenisKelamin().getmDetailedSpecLists().get(0).getValue();
+        float perPerempuan = (float) specData.getmSembuh().getmJenisKelamin().getmDetailedSpecLists().get(1).getValue();
+
+        barEntries.add(new BarEntry(0.5f, new float[] {posLaki, posPerempuan}));
+        barEntries.add(new BarEntry(1.5f, new float[] {menLaki, menPerempuan}));
+        barEntries.add(new BarEntry(2.5f, new float[] {semLaki, semPerempuan}));
+        barEntries.add(new BarEntry(3.5f, new float[] {perLaki, perPerempuan}));
+
+        BarDataSet barDataSet = new BarDataSet(barEntries,"");
+
+        barDataSet.setValueTextSize(12);
+
+        barDataSet.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.format("%.1f", value) + "%";
+            }
+        });
+
+        barDataSet.setColors(COLOR_SCHEME[3], COLOR_SCHEME[0]);
+
+        final String[] dataSet = {"Positif", "Meninggal", "Sembuh", "Perawatan"};
+
+        barDataSet.setStackLabels(new String[]{"Laki-laki", "Perempuan"});
+
+        BarData barData = new BarData(barDataSet);
+
+        mSexGraph.getXAxis().setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                Log.d(TAG, "getFormattedValue: " + value);
+//                return String.valueOf(value);
+                int formated = (int) Math.round(value);
+                if(formated < 0 || formated > 3) {
+                    formated = 0;
+                }
+                return dataSet[formated];
+            }
+        });
+        mSexGraph.getXAxis().setAxisMinimum(0);
+        mSexGraph.getXAxis().setAxisMaximum(4);
+        mSexGraph.getXAxis().setGranularity(1f);
+        mSexGraph.setData(barData);
+        mSexGraph.getXAxis().setCenterAxisLabels(true);
+        mSexGraph.getXAxis().setLabelCount(5, true);
+        mSexGraph.getAxisRight().setEnabled(false);
+        mSexGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        mSexGraph.getDescription().setEnabled(false);
+        mSexGraph.invalidate();
+
     }
 
     private void showAgeGraph(BarChart mAgeGraph, SpecData specData) {
@@ -248,7 +316,7 @@ public class StatsFragment extends Fragment {
 
         // restrict the x-axis range
         mAgeGraph.getXAxis().setAxisMinimum(0);
-        mAgeGraph.getLegend().setTextSize(12);
+//        mAgeGraph.getLegend().setTextSize(12);
 
         // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
         mAgeGraph.getXAxis().setAxisMaximum(0 + mAgeGraph.getBarData().getGroupWidth(GROUP_SPACE, BAR_SPACE) * GROUP_COUNT);
@@ -305,22 +373,28 @@ public class StatsFragment extends Fragment {
     }
 
     private void hideLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mAgeGraphShimmer,
-                              BarChart mConditionGraph, BarChart mAgeGraph) {
+                              ShimmerFrameLayout mSexGraphShimmer, BarChart mConditionGraph, BarChart mAgeGraph,
+                              BarChart mSexGraph) {
 
         mConditionGraphShimmer.setVisibility(View.GONE);
         mAgeGraphShimmer.setVisibility(View.GONE);
+        mSexGraphShimmer.setVisibility(View.GONE);
         mConditionGraph.setVisibility(View.VISIBLE);
         mAgeGraph.setVisibility(View.VISIBLE);
+        mSexGraph.setVisibility(View.VISIBLE);
 
     }
 
     private void showLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mAgeGraphShimmer,
-                              BarChart mConditionGraph, BarChart mAgeGraph) {
+                              ShimmerFrameLayout mSexGraphShimmer, BarChart mConditionGraph, BarChart mAgeGraph,
+                              BarChart mSexGraph) {
 
         mConditionGraphShimmer.setVisibility(View.VISIBLE);
         mAgeGraphShimmer.setVisibility(View.VISIBLE);
+        mSexGraphShimmer.setVisibility(View.VISIBLE);
         mConditionGraph.setVisibility(View.GONE);
         mAgeGraph.setVisibility(View.GONE);
+        mSexGraph.setVisibility(View.GONE);
 
     }
 
@@ -490,6 +564,7 @@ public class StatsFragment extends Fragment {
         mUpdatedDate.setText("Diperbarui pada: " + mUpdate);
 
     }
+
 
     private void hideLoading(ShimmerFrameLayout mBoxShimmer, ShimmerFrameLayout mCummulativeGraphShimmer,
                              ShimmerFrameLayout mNewCaseGraphSimmer, LineChart mCumulativeCaseGraph,

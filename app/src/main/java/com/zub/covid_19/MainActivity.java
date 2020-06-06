@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     final Fragment homeFragment = new HomeFragment();
     final Fragment statsFragment = new StatsFragment();
+    final Fragment mapsFragment = new MapsFragment();
     final Fragment infoFragment = new InfoFragment();
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case R.id.nav_stats:
                             fragment = new StatsFragment();
+                            break;
+                        case R.id.nav_maps:
+                            fragment = new MapsFragment();
                             break;
                         case R.id.nav_info:
                             fragment = new InfoFragment();

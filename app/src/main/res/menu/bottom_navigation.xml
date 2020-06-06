@@ -12,6 +12,11 @@
         android:icon="@drawable/icon_stats" />
 
     <item
+        android:id="@+id/nav_maps"
+        android:title="Peta"
+        android:icon="@drawable/icon_maps" />
+
+    <item
         android:id="@+id/nav_info"
         android:title="Informasi"
         android:icon="@drawable/icon_info" />

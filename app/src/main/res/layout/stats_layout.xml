@@ -49,7 +49,6 @@
                     android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:textColor="#999999"
-                    android:textStyle="bold"
                     android:textSize="14sp" />
 
                 <TextView
@@ -58,10 +57,9 @@
                     android:text="null"
                     android:gravity="left"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="7dp"
                     android:textColor="#999999"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     android:id="@+id/prov_case"/>
 
                 <TextView
@@ -71,7 +69,6 @@
                     android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:textColor="#999999"
-                    android:textStyle="bold"
                     android:textSize="14sp" />
 
                 <TextView
@@ -83,7 +80,6 @@
                     android:layout_marginRight="15dp"
                     android:textColor="#999999"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     android:id="@+id/prov_death"/>
 
             </LinearLayout>
@@ -101,7 +97,6 @@
                     android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:textColor="#999999"
-                    android:textStyle="bold"
                     android:textSize="14sp" />
 
                 <TextView
@@ -110,10 +105,9 @@
                     android:text="null"
                     android:gravity="left"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="7dp"
                     android:textColor="#999999"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     android:id="@+id/prov_healed"/>
 
                 <TextView
@@ -123,7 +117,6 @@
                     android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:textColor="#999999"
-                    android:textStyle="bold"
                     android:textSize="14sp" />
 
                 <TextView
@@ -135,7 +128,6 @@
                     android:layout_marginRight="15dp"
                     android:textColor="#999999"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     android:id="@+id/prov_treated"/>
 
             </LinearLayout>

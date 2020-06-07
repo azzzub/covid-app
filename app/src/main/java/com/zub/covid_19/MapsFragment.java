@@ -1,5 +1,6 @@
 package com.zub.covid_19;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +30,9 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.zub.covid_19.adapter.ProvAdapter;
 import com.zub.covid_19.api.provData.ProvData;
 import com.zub.covid_19.vm.ProvDataViewModel;
@@ -58,10 +61,13 @@ public class MapsFragment extends Fragment implements
 
     private GoogleMap googleMap;
 
+    private SlidingUpPanelLayout mSlideUpLayout;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
+        mSlideUpLayout = view.findViewById(R.id.sliding_layout);
         return view;
     }
 
@@ -130,6 +136,8 @@ public class MapsFragment extends Fragment implements
 
         googleMap.moveCamera(cameraUpdate);
 
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this.getContext(), R.raw.style_json));
+
         //PROV DATA WIDGET
 
         ShimmerFrameLayout mProvCardShimmer = Objects.requireNonNull(this.getView()).findViewById(R.id.prov_shimmer);
@@ -182,5 +190,7 @@ public class MapsFragment extends Fragment implements
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(LAT, LNG), ZOOM);
 
         googleMap.animateCamera(cameraUpdate, 1000, null);
+
+        mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 }

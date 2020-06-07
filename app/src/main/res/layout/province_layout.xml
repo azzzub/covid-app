@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_stats_daily">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="18dp"
+        android:text="Provinsi"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#000000"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:visibility="gone"
+        android:id="@+id/prov_shimmer">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/placeholder_stats_prov"/>
+            <include layout="@layout/placeholder_stats_prov"/>
+            <include layout="@layout/placeholder_stats_prov"/>
+            <include layout="@layout/placeholder_stats_prov"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:id="@+id/prov_rv">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

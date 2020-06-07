@@ -1,46 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="200dp"
+    sothree:umanoShadowHeight="0dp"
+    sothree:umanoOverlay="true"
+    sothree:umanoFadeColor="#00000000">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/prov_map_view"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="400dp" />
+    <include layout="@layout/province_layout"/>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:background="@drawable/rounded_stats_daily">
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Provinsi"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="#000000"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

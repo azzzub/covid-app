@@ -4,8 +4,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,10 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.zub.covid_19.adapter.ProvAdapter;
 import com.zub.covid_19.api.provData.ProvData;
 import com.zub.covid_19.vm.ProvDataViewModel;
@@ -34,6 +40,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
@@ -43,40 +50,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
-
-        //PROV DATA WIDGET
-
-        ShimmerFrameLayout mProvCardShimmer = view.findViewById(R.id.prov_shimmer);
-
-        RecyclerView mProvRecyclerView = view.findViewById(R.id.prov_rv);
-
-        //PROV DATA FETCHING
-
-        ProvDataViewModel provDataViewModel;
-
-        provDataViewModel = ViewModelProviders.of(this).get(ProvDataViewModel.class);
-        provDataViewModel.init();
-
-        provDataViewModel.getLoading().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    showLoading(mProvCardShimmer, mProvRecyclerView);
-                } else {
-                    hideLoading(mProvCardShimmer, mProvRecyclerView);
-                }
-            }
-        });
-
-        provDataViewModel.getRegulerData().observe(this, new Observer<ProvData>() {
-            @Override
-            public void onChanged(ProvData provData) {
-                //TODO
-                Log.d(TAG, "onChanged: " + provData.getCurrentData());
-                setupRecyclerView(mProvRecyclerView, provData);
-            }
-
-        });
         
         return view;
     }
@@ -102,6 +75,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             mProvRecyclerView.setAdapter(provAdapter);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
             mProvRecyclerView.setLayoutManager(linearLayoutManager);
+
         }
 
     }
@@ -133,11 +107,60 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             mapView.onResume();
             mapView.getMapAsync(this);
         }
+
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MapsInitializer.initialize(getContext());
+        MapsInitializer.initialize(Objects.requireNonNull(getContext()));
+
+        final double LAT = -8.0675589d;
+        final double LNG = 120.9046018d;
+        final float ZOOM = 3.17f;
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(LAT, LNG), ZOOM);
+
+        googleMap.moveCamera(cameraUpdate);
+
+        //PROV DATA WIDGET
+
+        ShimmerFrameLayout mProvCardShimmer = Objects.requireNonNull(this.getView()).findViewById(R.id.prov_shimmer);
+
+        RecyclerView mProvRecyclerView = this.getView().findViewById(R.id.prov_rv);
+
+        //PROV DATA FETCHING
+
+        ProvDataViewModel provDataViewModel;
+
+        provDataViewModel = ViewModelProviders.of(this).get(ProvDataViewModel.class);
+        provDataViewModel.init();
+
+        provDataViewModel.getLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    showLoading(mProvCardShimmer, mProvRecyclerView);
+                } else {
+                    hideLoading(mProvCardShimmer, mProvRecyclerView);
+                }
+            }
+        });
+
+        provDataViewModel.getRegulerData().observe(this, new Observer<ProvData>() {
+            @Override
+            public void onChanged(ProvData provData) {
+                List<ProvData.ProvListData> provListData = provData.getProvListDataLists();
+                for (ProvData.ProvListData theProvListData : provListData) {
+                    double lat = theProvListData.getProvDataLocation().getLat();
+                    double lng = theProvListData.getProvDataLocation().getLng();
+                    LatLng latLng = new LatLng(lat, lng);
+                    googleMap.addMarker(new MarkerOptions().position(latLng));
+                }
+                setupRecyclerView(mProvRecyclerView, provData);
+            }
+
+        });
+
     }
 
 }

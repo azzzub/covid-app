@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/prov_card_view"
+    android:id="@+id/prov_list_layout"
     android:clickable="true"
     android:focusable="true"
     android:background="?attr/selectableItemBackground"

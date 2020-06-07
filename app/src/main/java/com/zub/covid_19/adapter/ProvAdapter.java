@@ -21,6 +21,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.zub.covid_19.R;
+import com.zub.covid_19.api.provData.ProvData;
 
 import org.w3c.dom.Text;
 
@@ -32,22 +33,12 @@ import static com.android.volley.VolleyLog.TAG;
 
 public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
 
-    private ArrayList<String> provName = new ArrayList<>();
-    private ArrayList<Integer> provCase = new ArrayList<>();
-    private ArrayList<Integer> provDeath = new ArrayList<>();
-    private ArrayList<Integer> provHealed = new ArrayList<>();
-    private ArrayList<Integer> provTreated = new ArrayList<>();
+    private ArrayList<ProvData.ProvListData> provListData = new ArrayList<>();
 
     private ListClickedListener listClickedListener;
 
-    public ProvAdapter(ArrayList<String> provName, ArrayList<Integer> provCase, ArrayList<Integer> provDeath,
-                       ArrayList<Integer> provHealed, ArrayList<Integer> provTreated,
-                       ListClickedListener listClickedListener) {
-        this.provName = provName;
-        this.provCase = provCase;
-        this.provDeath = provDeath;
-        this.provHealed = provHealed;
-        this.provTreated = provTreated;
+    public ProvAdapter(ArrayList<ProvData.ProvListData> provListData, ListClickedListener listClickedListener) {
+        this.provListData = provListData;
         this.listClickedListener = listClickedListener;
     }
 
@@ -64,16 +55,16 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.mProvName.setText(provName.get(position));
-        holder.mProvCase.setText(numberSeparator(provCase.get(position)));
-        holder.mProvDeath.setText(numberSeparator(provDeath.get(position)));
-        holder.mProvHealed.setText(numberSeparator(provHealed.get(position)));
-        holder.mProvTreated.setText(numberSeparator(provTreated.get(position)));
+        holder.mProvName.setText(provListData.get(position).getProvName());
+        holder.mProvCase.setText(numberSeparator(provListData.get(position).getCaseAmount()));
+        holder.mProvDeath.setText(numberSeparator(provListData.get(position).getDeathAmount()));
+        holder.mProvHealed.setText(numberSeparator(provListData.get(position).getHealedAmount()));
+        holder.mProvTreated.setText(numberSeparator(provListData.get(position).getTreatedAmount()));
 
         holder.mProvListLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), provName.get(position), Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), provListData.get(position).getProvName(), Toast.LENGTH_LONG).show();
                 holder.mListClickedListener.onListClicked(position);
             }
         });
@@ -83,11 +74,18 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
 
-        return provName.size();
+        return provListData.size();
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public void filterList(ArrayList<ProvData.ProvListData> filteredList) {
+
+        provListData = filteredList;
+        notifyDataSetChanged();
+
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout mProvListLayout;
 

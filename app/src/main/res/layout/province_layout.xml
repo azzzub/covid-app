@@ -25,6 +25,15 @@
         android:textSize="13sp"
         android:textColor="#000000"/>
 
+    <EditText
+        android:id="@+id/prov_filter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:inputType="text"/>
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"

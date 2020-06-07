@@ -1,17 +1,29 @@
 package com.zub.covid_19;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -51,43 +63,83 @@ public class MapsFragment extends Fragment implements
 
     private static final String TAG = "MapsFragment";
 
-    private ArrayList<String> provName = new ArrayList<>();
-    private ArrayList<Integer> provCase = new ArrayList<>();
-    private ArrayList<Integer> provDeath = new ArrayList<>();
-    private ArrayList<Integer> provCured = new ArrayList<>();
-    private ArrayList<Integer> provTreated = new ArrayList<>();
-    private ArrayList<Double> provLat = new ArrayList<>();
-    private ArrayList<Double> provLng = new ArrayList<>();
+    private ProvAdapter provAdapter;
+
+    private ArrayList<ProvData.ProvListData> provListData = new ArrayList<>();
+
+    private ArrayList<ProvData.ProvListData> filteredList = new ArrayList<>();;
 
     private GoogleMap googleMap;
 
     private SlidingUpPanelLayout mSlideUpLayout;
 
+    private EditText mFilter;
+
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
         mSlideUpLayout = view.findViewById(R.id.sliding_layout);
+
+        mFilter = view.findViewById(R.id.prov_filter);
+
+        mFilter.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+            }
+        });
+
+        mFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+            }
+        });
+
+        mFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!provListData.isEmpty()) {
+                    filter(editable.toString());
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void filter(String toString) {
+        filteredList.clear();
+        for (ProvData.ProvListData theProvData : provListData) {
+            if (theProvData.getProvName().toLowerCase().contains(toString.toLowerCase())) {
+                filteredList.add(theProvData);
+            }
+        }
+        provAdapter.filterList(filteredList);
     }
 
     private void setupRecyclerView(RecyclerView mProvRecyclerView, ProvData provData) {
 
         List<ProvData.ProvListData> provListData = provData.getProvListDataLists();
-        for(ProvData.ProvListData theProvData : provListData) {
-            provName.add(theProvData.getProvName());
-            provCase.add(theProvData.getCaseAmount());
-            provDeath.add(theProvData.getDeathAmount());
-            provCured.add(theProvData.getHealedAmount());
-            provTreated.add(theProvData.getTreatedAmount());
-            provLat.add(theProvData.getProvDataLocation().getLat());
-            provLng.add(theProvData.getProvDataLocation().getLng());
-            ProvAdapter provAdapter = new ProvAdapter(provName, provCase, provDeath, provCured, provTreated, this);
-            mProvRecyclerView.setAdapter(provAdapter);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
-            mProvRecyclerView.setLayoutManager(linearLayoutManager);
 
-        }
+        this.provListData.addAll(provListData);
+        this.filteredList.addAll(provListData);
+
+        provAdapter = new ProvAdapter(this.provListData, this);
+        mProvRecyclerView.setAdapter(provAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        mProvRecyclerView.setLayoutManager(linearLayoutManager);
 
     }
 
@@ -181,10 +233,8 @@ public class MapsFragment extends Fragment implements
 
     @Override
     public void onListClicked(int position) {
-        Log.d(TAG, "onListClicked: selected list" + position);
-        Log.d(TAG, "onListClicked: the prov name" + provName.get(position));
-        double LAT = provLat.get(position);
-        double LNG = provLng.get(position);
+        double LAT = filteredList.get(position).getProvDataLocation().getLat();
+        double LNG = filteredList.get(position).getProvDataLocation().getLng();
         final float ZOOM = 7;
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(LAT, LNG), ZOOM);
@@ -192,5 +242,6 @@ public class MapsFragment extends Fragment implements
         googleMap.animateCamera(cameraUpdate, 1000, null);
 
         mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+
     }
 }

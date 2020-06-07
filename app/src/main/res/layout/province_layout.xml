@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="10dp"
         android:text="Provinsi"
         android:textStyle="bold"
         android:textSize="20sp"

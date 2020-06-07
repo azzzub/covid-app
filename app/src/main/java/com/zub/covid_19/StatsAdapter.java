@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+
 public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> {
 
     private static final String TAG = "StatsAdapter";

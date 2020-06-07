@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     xmlns:sothree="http://schemas.android.com/apk/res-auto"
     android:gravity="bottom"
+    sothree:umanoScrollableView="@id/prov_rv"
     sothree:umanoPanelHeight="200dp"
     sothree:umanoShadowHeight="0dp"
     sothree:umanoOverlay="true"
+    sothree:umanoParallaxOffset="100dp"
     sothree:umanoFadeColor="#00000000">
 
     <com.google.android.gms.maps.MapView
@@ -16,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include layout="@layout/province_layout"/>
+    <include layout="@layout/province_layout"
+        android:id="@+id/prov_rv_holder"/>
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

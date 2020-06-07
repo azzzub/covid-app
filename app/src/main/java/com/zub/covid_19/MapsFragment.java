@@ -1,5 +1,6 @@
 package com.zub.covid_19;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,19 +9,31 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.zub.covid_19.adapter.ProvAdapter;
 import com.zub.covid_19.api.provData.ProvData;
-import com.zub.covid_19.api.regulerData.RegulerData;
 import com.zub.covid_19.vm.ProvDataViewModel;
+
+import org.xmlpull.v1.XmlPullParser;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
@@ -60,11 +73,37 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             public void onChanged(ProvData provData) {
                 //TODO
                 Log.d(TAG, "onChanged: " + provData.getCurrentData());
+                setupRecyclerView(mProvRecyclerView, provData);
             }
 
         });
         
         return view;
+    }
+
+    private void setupRecyclerView(RecyclerView mProvRecyclerView, ProvData provData) {
+
+        ArrayList<String> provName = new ArrayList<>();
+        ArrayList<Integer> provCase = new ArrayList<>();
+        ArrayList<Integer> provDeath = new ArrayList<>();
+        ArrayList<Integer> provCured = new ArrayList<>();
+        ArrayList<Integer> provTreated = new ArrayList<>();
+
+        List<ProvData.ProvListData> provListData = provData.getProvListDataLists();
+        for(ProvData.ProvListData theProvData : provListData) {
+
+            Log.d(TAG, "setupRecyclerView: " + theProvData.getProvName());
+            provName.add(theProvData.getProvName());
+            provCase.add(theProvData.getCaseAmount());
+            provDeath.add(theProvData.getDeathAmount());
+            provCured.add(theProvData.getHealedAmount());
+            provTreated.add(theProvData.getTreatedAmount());
+            ProvAdapter provAdapter = new ProvAdapter(provName, provCase, provDeath, provCured, provTreated, this.getContext());
+            mProvRecyclerView.setAdapter(provAdapter);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+            mProvRecyclerView.setLayoutManager(linearLayoutManager);
+        }
+
     }
 
     private void hideLoading(ShimmerFrameLayout mProvCardShimmer, RecyclerView mProvRecyclerView) {
@@ -100,4 +139,5 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
     }
+
 }

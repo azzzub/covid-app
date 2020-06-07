@@ -13,7 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.zub.covid_19.R;
 
 import org.w3c.dom.Text;
@@ -22,6 +28,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.android.volley.VolleyLog.TAG;
+
 public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
 
     private ArrayList<String> provName = new ArrayList<>();
@@ -29,16 +37,18 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
     private ArrayList<Integer> provDeath = new ArrayList<>();
     private ArrayList<Integer> provHealed = new ArrayList<>();
     private ArrayList<Integer> provTreated = new ArrayList<>();
-    private Context context;
+
+    private ListClickedListener listClickedListener;
 
     public ProvAdapter(ArrayList<String> provName, ArrayList<Integer> provCase, ArrayList<Integer> provDeath,
-                       ArrayList<Integer> provHealed, ArrayList<Integer> provTreated, Context context) {
+                       ArrayList<Integer> provHealed, ArrayList<Integer> provTreated,
+                       ListClickedListener listClickedListener) {
         this.provName = provName;
         this.provCase = provCase;
         this.provDeath = provDeath;
         this.provHealed = provHealed;
         this.provTreated = provTreated;
-        this.context = context;
+        this.listClickedListener = listClickedListener;
     }
 
     @NonNull
@@ -46,7 +56,7 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.stats_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, listClickedListener);
 
         return viewHolder;
     }
@@ -64,6 +74,7 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), provName.get(position), Toast.LENGTH_LONG).show();
+                holder.mListClickedListener.onListClicked(position);
             }
         });
 
@@ -82,9 +93,9 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
 
         TextView mProvName, mProvCase, mProvDeath, mProvHealed, mProvTreated;
 
-        MapView mapView;
+        ListClickedListener mListClickedListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ListClickedListener listClickedListener) {
             super(itemView);
 
             mProvListLayout = itemView.findViewById(R.id.prov_list_layout);
@@ -95,9 +106,13 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
             mProvHealed = itemView.findViewById(R.id.prov_healed);
             mProvTreated = itemView.findViewById(R.id.prov_treated);
 
-            mapView = itemView.findViewById(R.id.prov_map_view);
+            mListClickedListener = listClickedListener;
 
         }
+    }
+
+    public interface ListClickedListener {
+        void onListClicked(int position);
     }
 
     private String numberSeparator(int value) {

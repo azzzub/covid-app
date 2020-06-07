@@ -42,36 +42,41 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback {
+public class MapsFragment extends Fragment implements
+        OnMapReadyCallback,
+        ProvAdapter.ListClickedListener {
 
     private static final String TAG = "MapsFragment";
+
+    private ArrayList<String> provName = new ArrayList<>();
+    private ArrayList<Integer> provCase = new ArrayList<>();
+    private ArrayList<Integer> provDeath = new ArrayList<>();
+    private ArrayList<Integer> provCured = new ArrayList<>();
+    private ArrayList<Integer> provTreated = new ArrayList<>();
+    private ArrayList<Double> provLat = new ArrayList<>();
+    private ArrayList<Double> provLng = new ArrayList<>();
+
+    private GoogleMap googleMap;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
-        
         return view;
     }
 
     private void setupRecyclerView(RecyclerView mProvRecyclerView, ProvData provData) {
 
-        ArrayList<String> provName = new ArrayList<>();
-        ArrayList<Integer> provCase = new ArrayList<>();
-        ArrayList<Integer> provDeath = new ArrayList<>();
-        ArrayList<Integer> provCured = new ArrayList<>();
-        ArrayList<Integer> provTreated = new ArrayList<>();
-
         List<ProvData.ProvListData> provListData = provData.getProvListDataLists();
         for(ProvData.ProvListData theProvData : provListData) {
-
-            Log.d(TAG, "setupRecyclerView: " + theProvData.getProvName());
             provName.add(theProvData.getProvName());
             provCase.add(theProvData.getCaseAmount());
             provDeath.add(theProvData.getDeathAmount());
             provCured.add(theProvData.getHealedAmount());
             provTreated.add(theProvData.getTreatedAmount());
-            ProvAdapter provAdapter = new ProvAdapter(provName, provCase, provDeath, provCured, provTreated, this.getContext());
+            provLat.add(theProvData.getProvDataLocation().getLat());
+            provLng.add(theProvData.getProvDataLocation().getLng());
+            ProvAdapter provAdapter = new ProvAdapter(provName, provCase, provDeath, provCured, provTreated, this);
             mProvRecyclerView.setAdapter(provAdapter);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
             mProvRecyclerView.setLayoutManager(linearLayoutManager);
@@ -110,9 +115,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(Objects.requireNonNull(getContext()));
+
+        this.googleMap = googleMap;
 
         final double LAT = -8.0675589d;
         final double LNG = 120.9046018d;
@@ -163,4 +171,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    @Override
+    public void onListClicked(int position) {
+        Log.d(TAG, "onListClicked: selected list" + position);
+        Log.d(TAG, "onListClicked: the prov name" + provName.get(position));
+        double LAT = provLat.get(position);
+        double LNG = provLng.get(position);
+        final float ZOOM = 7;
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(LAT, LNG), ZOOM);
+
+        googleMap.animateCamera(cameraUpdate, 1000, null);
+    }
 }

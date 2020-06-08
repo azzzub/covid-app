@@ -64,7 +64,6 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
         holder.mProvListLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), provListData.get(position).getProvName(), Toast.LENGTH_LONG).show();
                 holder.mListClickedListener.onListClicked(position);
             }
         });

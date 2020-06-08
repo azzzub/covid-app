@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -17,8 +18,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -73,7 +77,7 @@ public class MapsFragment extends Fragment implements
 
     private SlidingUpPanelLayout mSlideUpLayout;
 
-    private EditText mFilter;
+    private SearchView mFilter;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -84,35 +88,25 @@ public class MapsFragment extends Fragment implements
 
         mFilter = view.findViewById(R.id.prov_filter);
 
-        mFilter.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mFilter.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
             }
         });
 
-        mFilter.setOnClickListener(new View.OnClickListener() {
+        mFilter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
-                mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-            }
-        });
-
-        mFilter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public boolean onQueryTextSubmit(String s) {
+                return false;
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public boolean onQueryTextChange(String s) {
                 if (!provListData.isEmpty()) {
-                    filter(editable.toString());
+                    filter(s);
                 }
+                return false;
             }
         });
 
@@ -176,7 +170,7 @@ public class MapsFragment extends Fragment implements
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MapsInitializer.initialize(Objects.requireNonNull(getContext()));
+        MapsInitializer.initialize(Objects.requireNonNull(this.getContext()));
 
         this.googleMap = googleMap;
 
@@ -233,15 +227,27 @@ public class MapsFragment extends Fragment implements
 
     @Override
     public void onListClicked(int position) {
+        mFilter.clearFocus();
+
         double LAT = filteredList.get(position).getProvDataLocation().getLat();
         double LNG = filteredList.get(position).getProvDataLocation().getLng();
         final float ZOOM = 7;
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(LAT, LNG), ZOOM);
 
-        googleMap.animateCamera(cameraUpdate, 1000, null);
+        final Handler handler = new Handler();
 
-        mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        //Tricky part that collapse the slide up panel after 200ms (the keyboard already hide)
+        //Can't find another approach to do the same
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                googleMap.animateCamera(cameraUpdate, 1000, null);
+                mSlideUpLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+            }
+        },200);
+
 
     }
 }

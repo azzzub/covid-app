@@ -48,6 +48,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -151,12 +156,10 @@ public class MapsFragment extends Fragment implements
     }
 
     private void filter(String toString) {
-        Log.e(TAG, "onChanged: " + arraySizeBefore);
 
         arraySizeBefore = markerArrayList.size();
 
         filteredList.clear();
-//        markerArrayList.clear();
         googleMap.clear();
         marker.remove();
         for (ProvData.ProvListData theProvData : provListData) {
@@ -169,8 +172,6 @@ public class MapsFragment extends Fragment implements
                 markerArrayList.add(marker);
             }
         }
-
-        Log.e(TAG, "onListClicked: array" + markerArrayList.size());
 
         provAdapter.filterList(filteredList);
     }
@@ -289,9 +290,8 @@ public class MapsFragment extends Fragment implements
     @Override
     public void onListClicked(int position) {
         mFilter.clearFocus();
-        Log.e(TAG, "onListClicked: error sini" + markerArrayList.get(position + arraySizeBefore).getId());
         markerArrayList.get(position + arraySizeBefore).showInfoWindow();
-        double LAT = filteredList.get(position).getProvDataLocation().getLat() - 0.58d;
+        double LAT = filteredList.get(position).getProvDataLocation().getLat() + 0.625d;
         double LNG = filteredList.get(position).getProvDataLocation().getLng();
         final float ZOOM = 7;
 
@@ -323,7 +323,6 @@ public class MapsFragment extends Fragment implements
         @SuppressLint("CutPasteId")
         @Override
         public View getInfoWindow(Marker marker) {
-
             TextView mProvName, mProvCase, mProvDeath, mProvCured, mProvTreaded;
 
             mProvName = view.findViewById(R.id.info_window_prov_name);

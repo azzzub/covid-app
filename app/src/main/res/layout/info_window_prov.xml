@@ -6,12 +6,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="15dp"
-    card_view:cardBackgroundColor="#fff"
+    card_view:cardBackgroundColor="#ffffff"
     card_view:cardElevation="0dp">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="275dp"
+        android:layout_width="300dp"
         android:padding="8dp"
         android:layout_height="wrap_content">
 
@@ -51,6 +51,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="Kasus: "/>
 
                         <TextView
@@ -68,6 +69,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="Meninggal: "/>
 
                         <TextView
@@ -85,6 +87,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="Sembuh: "/>
 
                         <TextView
@@ -102,6 +105,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
+
                             android:text="Dirawat: "/>
 
                         <TextView
@@ -130,7 +135,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="30sp"
+                            android:textSize="35sp"
                             android:textStyle="bold"
                             android:text="0"/>
 
@@ -144,39 +149,6 @@
 
                     </LinearLayout>
 
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginTop="3dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/info_window_prov_data"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="16sp"
-                            android:text="null"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="16sp"
-                            android:text="/"/>
-
-                        <TextView
-                            android:id="@+id/info_window_prov_data_ratio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center"
-                            android:textSize="13sp"
-                            android:text="null"/>
-
-                    </LinearLayout>
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -186,6 +158,7 @@
                 android:layout_height="wrap_content"
                 android:text="Data Kasus Berdasarkan:"
                 android:textStyle="bold"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"/>
 
             <LinearLayout
@@ -260,7 +233,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -287,6 +260,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textSize="13sp"
+
                                     android:text="0-5: " />
 
                                 <TextView
@@ -307,6 +282,7 @@
                                     android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textSize="13sp"
                                     android:text="6-17: " />
 
                                 <TextView
@@ -328,6 +304,7 @@
                                     android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textSize="13sp"
                                     android:text="18-30: " />
 
                                 <TextView
@@ -346,7 +323,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginLeft="5dp">
+                            android:layout_marginLeft="7dp">
 
                             <LinearLayout
                                 android:orientation="horizontal"
@@ -356,6 +333,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textSize="13sp"
                                     android:text="31-45: " />
 
                                 <TextView
@@ -376,6 +354,7 @@
                                     android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textSize="13sp"
                                     android:text="46-59: " />
 
                                 <TextView
@@ -397,6 +376,7 @@
                                     android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textSize="13sp"
                                     android:text="≥60: " />
 
                                 <TextView

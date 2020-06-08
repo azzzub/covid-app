@@ -72,7 +72,7 @@ public class ProvData {
             @SerializedName("key")
             private String age;
 
-            @SerializedName("docCount")
+            @SerializedName("doc_count")
             private int docCount;
 
             public String getAge() {

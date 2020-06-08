@@ -289,9 +289,13 @@ public class MapsFragment extends Fragment implements
 
     @Override
     public void onListClicked(int position) {
+
+
+        int zoom = (int) googleMap.getCameraPosition().zoom;
+
         mFilter.clearFocus();
         markerArrayList.get(position + arraySizeBefore).showInfoWindow();
-        double LAT = filteredList.get(position).getProvDataLocation().getLat() + 0.625d;
+        double LAT = filteredList.get(position).getProvDataLocation().getLat() + 0.655d;
         double LNG = filteredList.get(position).getProvDataLocation().getLng();
         final float ZOOM = 7;
 
@@ -320,27 +324,48 @@ public class MapsFragment extends Fragment implements
 
         View view = getLayoutInflater().inflate(R.layout.info_window_prov, null);
 
-        @SuppressLint("CutPasteId")
+        @SuppressLint({"CutPasteId", "DefaultLocale"})
         @Override
         public View getInfoWindow(Marker marker) {
-            TextView mProvName, mProvCase, mProvDeath, mProvCured, mProvTreaded;
+            TextView mProvName, mProvCase, mProvDeath, mProvCured, mProvTreated, mProvPercentage,
+                    mProvMale, mProvFemale, mProvBaby, mProvTeen, mProvMan, mProvAdult, mProvOld, mProvGrandParents;
 
             mProvName = view.findViewById(R.id.info_window_prov_name);
             mProvCase = view.findViewById(R.id.info_window_prov_case);
             mProvDeath = view.findViewById(R.id.info_window_prov_death);
             mProvCured = view.findViewById(R.id.info_window_prov_cured);
-            mProvTreaded = view.findViewById(R.id.info_window_prov_treated);
+            mProvTreated = view.findViewById(R.id.info_window_prov_treated);
+            mProvPercentage = view.findViewById(R.id.info_window_prov_percentage);
+            mProvMale = view.findViewById(R.id.info_window_prov_male);
+            mProvFemale = view.findViewById(R.id.info_window_prov_female);
+            mProvBaby = view.findViewById(R.id.info_window_prov_age_baby);
+            mProvTeen = view.findViewById(R.id.info_window_prov_age_teen);
+            mProvMan = view.findViewById(R.id.info_window_prov_age_man);
+            mProvAdult = view.findViewById(R.id.info_window_prov_age_adult);
+            mProvOld = view.findViewById(R.id.info_window_prov_age_old);
+            mProvGrandParents = view.findViewById(R.id.info_window_prov_age_grandparent);
 
             //remove the "m" from getId() to returning integer
 
             String id = marker.getId();
             int convId = Integer.parseInt(id.replaceAll("[^\\d.]", "")) - arraySizeBefore;
 
-            mProvName.setText(filteredList.get(convId).getProvName());
-            mProvCase.setText(numberSeparator(filteredList.get(convId).getCaseAmount()));
-            mProvDeath.setText(numberSeparator(filteredList.get(convId).getDeathAmount()));
-            mProvCured.setText(numberSeparator(filteredList.get(convId).getHealedAmount()));
-            mProvTreaded.setText(numberSeparator(filteredList.get(convId).getTreatedAmount()));
+            ProvData.ProvListData provListData = filteredList.get(convId);
+
+            mProvName.setText(provListData.getProvName());
+            mProvCase.setText(numberSeparator(provListData.getCaseAmount()));
+            mProvDeath.setText(numberSeparator(provListData.getDeathAmount()));
+            mProvCured.setText(numberSeparator(provListData.getHealedAmount()));
+            mProvTreated.setText(numberSeparator(provListData.getTreatedAmount()));
+            mProvPercentage.setText(String.format("%.1f", provListData.getDocCount()));
+            mProvMale.setText(numberSeparator(provListData.getProvDataSexLists().get(0).getDocCount()));
+            mProvFemale.setText(numberSeparator(provListData.getProvDataSexLists().get(1).getDocCount()));
+            mProvBaby.setText(numberSeparator(provListData.getProvDataAgeLists().get(0).getDocCount()));
+            mProvTeen.setText(numberSeparator(provListData.getProvDataAgeLists().get(1).getDocCount()));
+            mProvMan.setText(numberSeparator(provListData.getProvDataAgeLists().get(2).getDocCount()));
+            mProvAdult.setText(numberSeparator(provListData.getProvDataAgeLists().get(3).getDocCount()));
+            mProvOld.setText(numberSeparator(provListData.getProvDataAgeLists().get(4).getDocCount()));
+            mProvGrandParents.setText(numberSeparator(provListData.getProvDataAgeLists().get(5).getDocCount()));
 
             return view;
         }

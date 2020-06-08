@@ -3,17 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    card_view:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="4dp"
+    card_view:cardCornerRadius="15dp"
     card_view:cardBackgroundColor="#fff"
-    card_view:cardPreventCornerOverlap="false" >
+    card_view:cardElevation="0dp">
 
-<LinearLayout
-        android:id="@+id/marker_info_window_linear_layout"
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="350dp"
+        android:padding="8dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -22,19 +21,41 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/name_text_view"
+                android:id="@+id/info_window_prov_name"
                 android:textStyle="bold"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="#000"
                 android:text="null"/>
 
             <TextView
-                android:id="@+id/description_text_view"
-                android:layout_width="match_parent"
+                android:id="@+id/info_window_prov_case"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="null"/>
+
+            <TextView
+                android:id="@+id/info_window_prov_death"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="null"/>
+
+            <TextView
+                android:id="@+id/info_window_prov_cured"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="null"/>
+
+            <TextView
+                android:id="@+id/info_window_prov_treated"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="null"/>
 
         </LinearLayout>
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

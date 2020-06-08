@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounded_stats_daily">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:text="Provinsi"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="#000000"/>
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="15dp"
-        android:text="Data dihimpun: 0%"
-        android:textSize="13sp"
-        android:textColor="#000000"/>
+        <LinearLayout
+            android:layout_height="4dp"
+            android:layout_width="25dp"
+            android:background="@drawable/horizontal_divider"/>
+
+        <LinearLayout
+            android:layout_height="4dp"
+            android:layout_width="25dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/horizontal_divider"/>
+
+    </LinearLayout>
+
 
     <SearchView
         android:id="@+id/prov_filter"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="18dp"
         android:layout_marginBottom="10dp"
         android:queryHint="Cari provinsi ... "
-        android:iconifiedByDefault="false"/>
+        android:iconifiedByDefault="false" />
+
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_height="fill_parent"

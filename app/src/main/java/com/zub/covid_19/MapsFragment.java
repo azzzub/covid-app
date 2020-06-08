@@ -1,9 +1,13 @@
 package com.zub.covid_19;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +20,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -79,11 +85,16 @@ public class MapsFragment extends Fragment implements
 
     private SearchView mFilter;
 
+    private TextView mProvCollectedData;
+
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
+
+        mProvCollectedData = view.findViewById(R.id.prov_collected_data);
+
         mSlideUpLayout = view.findViewById(R.id.sliding_layout);
 
         mFilter = view.findViewById(R.id.prov_filter);
@@ -209,6 +220,7 @@ public class MapsFragment extends Fragment implements
         });
 
         provDataViewModel.getRegulerData().observe(this, new Observer<ProvData>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(ProvData provData) {
                 List<ProvData.ProvListData> provListData = provData.getProvListDataLists();
@@ -218,6 +230,9 @@ public class MapsFragment extends Fragment implements
                     LatLng latLng = new LatLng(lat, lng);
                     googleMap.addMarker(new MarkerOptions().position(latLng));
                 }
+                mProvCollectedData.setText("Data dihimpun: " +
+                        String.format("%.1f",provData.getCurrentData()) +
+                        "% pada " + provData.getLastUpdate());
                 setupRecyclerView(mProvRecyclerView, provData);
             }
 
@@ -229,7 +244,7 @@ public class MapsFragment extends Fragment implements
     public void onListClicked(int position) {
         mFilter.clearFocus();
 
-        double LAT = filteredList.get(position).getProvDataLocation().getLat();
+        double LAT = filteredList.get(position).getProvDataLocation().getLat() - 0.58d;
         double LNG = filteredList.get(position).getProvDataLocation().getLng();
         final float ZOOM = 7;
 
@@ -248,6 +263,9 @@ public class MapsFragment extends Fragment implements
             }
         },200);
 
+    }
 
+    private String numberSeparator(int value) {
+        return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(value));
     }
 }

@@ -6,6 +6,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -27,6 +29,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,12 +54,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.zub.covid_19.adapter.ProvAdapter;
 import com.zub.covid_19.api.provData.ProvData;
+import com.zub.covid_19.ui.BottomSheetMapsDialog;
 import com.zub.covid_19.vm.ProvDataViewModel;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -87,6 +94,10 @@ public class MapsFragment extends Fragment implements
 
     private TextView mProvCollectedData;
 
+    private ArrayList<Marker> markerArrayList = new ArrayList<>();
+
+    private LinearLayout mProvDetailedCaseButton;
+
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
@@ -94,6 +105,16 @@ public class MapsFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
 
         mProvCollectedData = view.findViewById(R.id.prov_collected_data);
+
+        mProvDetailedCaseButton = view.findViewById(R.id.prov_detailed_case);
+
+        mProvDetailedCaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BottomSheetMapsDialog bottomSheetMapsDialog = new BottomSheetMapsDialog();
+                bottomSheetMapsDialog.show(getFragmentManager(),"BottomSheet");
+            }
+        });
 
         mSlideUpLayout = view.findViewById(R.id.sliding_layout);
 
@@ -228,11 +249,41 @@ public class MapsFragment extends Fragment implements
                     double lat = theProvListData.getProvDataLocation().getLat();
                     double lng = theProvListData.getProvDataLocation().getLng();
                     LatLng latLng = new LatLng(lat, lng);
-                    googleMap.addMarker(new MarkerOptions().position(latLng));
+                    markerArrayList.add(googleMap.addMarker(new MarkerOptions().position(latLng)));
                 }
                 mProvCollectedData.setText("Data dihimpun: " +
                         String.format("%.1f",provData.getCurrentData()) +
                         "% pada " + provData.getLastUpdate());
+
+                googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+                    View view = getLayoutInflater().inflate(R.layout.info_window_prov, null);
+
+                    @Override
+                    public View getInfoWindow(Marker marker) {
+
+                        TextView mProvName = view.findViewById(R.id.name_text_view);
+                        TextView mProvDesc = view.findViewById(R.id.description_text_view);
+
+                        //remove the "m" from getId() to returning integer
+
+                        String id = marker.getId();
+                        int convId = Integer.parseInt(id.replaceAll("[^\\d.]", ""));
+
+                        Log.d(TAG, "getInfoWindow: marker " + convId);
+
+                        mProvName.setText(provListData.get(convId).getProvName());
+                        mProvDesc.setText(String.valueOf(provListData.get(convId).getCaseAmount()));
+
+                        return view;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+                        return null;
+                    }
+                });
+
                 setupRecyclerView(mProvRecyclerView, provData);
             }
 
@@ -243,7 +294,7 @@ public class MapsFragment extends Fragment implements
     @Override
     public void onListClicked(int position) {
         mFilter.clearFocus();
-
+        markerArrayList.get(position).showInfoWindow();
         double LAT = filteredList.get(position).getProvDataLocation().getLat() - 0.58d;
         double LNG = filteredList.get(position).getProvDataLocation().getLng();
         final float ZOOM = 7;
@@ -268,4 +319,5 @@ public class MapsFragment extends Fragment implements
     private String numberSeparator(int value) {
         return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(value));
     }
+
 }

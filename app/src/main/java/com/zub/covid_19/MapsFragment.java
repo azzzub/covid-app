@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -74,6 +75,7 @@ import com.zub.covid_19.vm.ProvDataViewModel;
 import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,14 +119,6 @@ public class MapsFragment extends Fragment implements
         mProvCollectedData = view.findViewById(R.id.prov_collected_data);
 
         mProvDetailedCaseButton = view.findViewById(R.id.prov_detailed_case);
-
-        mProvDetailedCaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BottomSheetMapsDialog bottomSheetMapsDialog = new BottomSheetMapsDialog();
-                bottomSheetMapsDialog.show(getFragmentManager(),"BottomSheet");
-            }
-        });
 
         mSlideUpLayout = view.findViewById(R.id.sliding_layout);
 
@@ -220,7 +214,6 @@ public class MapsFragment extends Fragment implements
 
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(Objects.requireNonNull(this.getContext()));
@@ -280,9 +273,25 @@ public class MapsFragment extends Fragment implements
 
                 googleMap.setInfoWindowAdapter(new ProvInfoWindowAdapter());
 
+
+                setupBottomSheet(mProvDetailedCaseButton, provData);
+
                 setupRecyclerView(mProvRecyclerView, provData);
             }
 
+        });
+
+    }
+
+    private void setupBottomSheet(LinearLayout mProvDetailedCaseButton, ProvData provData) {
+
+        BottomSheetMapsDialog bottomSheetMapsDialog = new BottomSheetMapsDialog();
+
+        mProvDetailedCaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetMapsDialog.show(getFragmentManager(),"BottomSheet");
+            }
         });
 
     }
@@ -352,6 +361,20 @@ public class MapsFragment extends Fragment implements
 
             ProvData.ProvListData provListData = filteredList.get(convId);
 
+            //HANDLING ERROR CAUSE NULL __ NOT THE EFFECTIVE WAY
+            //BECAUSE WE FORCE TO PUT THE FIRST ageList DATA
+
+            ArrayList<Integer> ageList = new ArrayList<>();
+
+            for (ProvData.ProvListData.ProvDataAgeList theAgeList : provListData.getProvDataAgeLists()) {
+                if (provListData.getProvDataAgeLists().size() < 6) {
+                    if (ageList.size() == 0) {
+                        ageList.add(0);
+                    }
+                }
+                ageList.add(theAgeList.getDocCount());
+            }
+
             mProvName.setText(provListData.getProvName());
             mProvCase.setText(numberSeparator(provListData.getCaseAmount()));
             mProvDeath.setText(numberSeparator(provListData.getDeathAmount()));
@@ -360,12 +383,12 @@ public class MapsFragment extends Fragment implements
             mProvPercentage.setText(String.format("%.1f", provListData.getDocCount()));
             mProvMale.setText(numberSeparator(provListData.getProvDataSexLists().get(0).getDocCount()));
             mProvFemale.setText(numberSeparator(provListData.getProvDataSexLists().get(1).getDocCount()));
-            mProvBaby.setText(numberSeparator(provListData.getProvDataAgeLists().get(0).getDocCount()));
-            mProvTeen.setText(numberSeparator(provListData.getProvDataAgeLists().get(1).getDocCount()));
-            mProvMan.setText(numberSeparator(provListData.getProvDataAgeLists().get(2).getDocCount()));
-            mProvAdult.setText(numberSeparator(provListData.getProvDataAgeLists().get(3).getDocCount()));
-            mProvOld.setText(numberSeparator(provListData.getProvDataAgeLists().get(4).getDocCount()));
-            mProvGrandParents.setText(numberSeparator(provListData.getProvDataAgeLists().get(5).getDocCount()));
+            mProvBaby.setText(numberSeparator(ageList.get(0)));
+            mProvTeen.setText(numberSeparator(ageList.get(1)));
+            mProvMan.setText(numberSeparator(ageList.get(2)));
+            mProvAdult.setText(numberSeparator(ageList.get(3)));
+            mProvOld.setText(numberSeparator(ageList.get(4)));
+            mProvGrandParents.setText(numberSeparator(ageList.get(5)));
 
             return view;
         }
@@ -376,4 +399,5 @@ public class MapsFragment extends Fragment implements
         }
 
     }
+
 }

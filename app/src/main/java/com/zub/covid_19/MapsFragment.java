@@ -260,13 +260,17 @@ public class MapsFragment extends Fragment implements
             public void onChanged(ProvData provData) {
                 List<ProvData.ProvListData> provListData = provData.getProvListDataLists();
                 for (ProvData.ProvListData theProvListData : provListData) {
-                    double lat = theProvListData.getProvDataLocation().getLat();
-                    double lng = theProvListData.getProvDataLocation().getLng();
+                    ProvData.ProvListData.ProvDataLocation provDataLocation = theProvListData.getProvDataLocation();
+                    double lat = -1;
+                    double lng = -1;
+                    if (!(provDataLocation == null)) {
+                        lat = provDataLocation.getLat();
+                        lng = provDataLocation.getLng();
+                    }
                     LatLng latLng = new LatLng(lat, lng);
                     marker = googleMap.addMarker(new MarkerOptions().position(latLng));
                     markerArrayList.add(marker);
                 }
-
                 mProvCollectedData.setText("Data dihimpun: " +
                         String.format("%.1f",provData.getCurrentData()) +
                         "% pada " + provData.getLastUpdate());
@@ -290,6 +294,9 @@ public class MapsFragment extends Fragment implements
         mProvDetailedCaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), bottomSheetMapsDialog.getClass());
+                intent.putExtra("provData", provData);
+//                startActivity(intent);
                 bottomSheetMapsDialog.show(getFragmentManager(),"BottomSheet");
             }
         });

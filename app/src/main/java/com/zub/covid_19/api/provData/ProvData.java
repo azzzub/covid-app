@@ -1,10 +1,16 @@
 package com.zub.covid_19.api.provData;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProvData {
+public class ProvData implements Parcelable {
 
     @SerializedName("last_date")
     private String lastUpdate;
@@ -48,6 +54,7 @@ public class ProvData {
         private List<ProvDataAgeList> provDataAgeLists;
 
         @SerializedName("lokasi")
+        @Nullable
         private ProvDataLocation provDataLocation;
 
         public static class ProvDataSexList {
@@ -85,7 +92,6 @@ public class ProvData {
         }
 
         public static class ProvDataLocation {
-
             @SerializedName("lon")
             private double lng;
 
@@ -157,4 +163,42 @@ public class ProvData {
     public List<ProvListData> getProvListDataLists() {
         return provListDataLists;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.lastUpdate);
+        dest.writeDouble(this.currentData);
+        dest.writeDouble(this.missingData);
+        dest.writeInt(this.unidentifiedProv);
+        dest.writeList(this.provListDataLists);
+    }
+
+    public ProvData() {
+    }
+
+    protected ProvData(Parcel in) {
+        this.lastUpdate = in.readString();
+        this.currentData = in.readDouble();
+        this.missingData = in.readDouble();
+        this.unidentifiedProv = in.readInt();
+        this.provListDataLists = new ArrayList<ProvListData>();
+        in.readList(this.provListDataLists, ProvListData.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<ProvData> CREATOR = new Parcelable.Creator<ProvData>() {
+        @Override
+        public ProvData createFromParcel(Parcel source) {
+            return new ProvData(source);
+        }
+
+        @Override
+        public ProvData[] newArray(int size) {
+            return new ProvData[size];
+        }
+    };
 }

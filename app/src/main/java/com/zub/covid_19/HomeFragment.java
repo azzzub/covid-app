@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
                 mNewsRecyclerView.setAdapter(newsAdapter);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
                 mNewsRecyclerView.setLayoutManager(linearLayoutManager);
-                mNewsRecyclerView.addItemDecoration(new SpacesItemDecoration(20));
+                mNewsRecyclerView.addItemDecoration(new SpacesItemDecoration(30));
                 SnapHelper snapHelper = new PagerSnapHelper();
                 if (mNewsRecyclerView.getOnFlingListener() == null)
                     snapHelper.attachToRecyclerView(mNewsRecyclerView);

@@ -7,13 +7,14 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 public class NewsActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
+    RelativeLayout progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +22,10 @@ public class NewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news);
         Bundle bundle = this.getIntent().getExtras();
         String passingUrl = bundle.getString("passingUrl");
-        TextView text = findViewById(R.id.url);
+//        TextView text = findViewById(R.id.url);
         progressBar = findViewById(R.id.progressBar2);
         WebView webView = findViewById(R.id.web_view);
-        text.setText(passingUrl);
+//        text.setText(passingUrl);
         webView.loadUrl(passingUrl);
         webView.setWebViewClient(new mWebViewClient());
 

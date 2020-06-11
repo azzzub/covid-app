@@ -8,7 +8,6 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-    private static final String TAG = "SpacesItemDecoration";
 
     private final int mSpace;
 
@@ -18,12 +17,10 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        int dp = (int) Math.ceil(mSpace / view.getResources().getDisplayMetrics().density);
-        Log.d(TAG, "getItemOffsets: " + dp);
-        outRect.right = dp;
+        outRect.right = this.mSpace;
 
         if (parent.getChildAdapterPosition(view) == 0)
-            outRect.left = dp;
+            outRect.left = this.mSpace;
     }
 
 }

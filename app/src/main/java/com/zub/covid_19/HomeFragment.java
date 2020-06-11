@@ -1,7 +1,6 @@
 package com.zub.covid_19;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,24 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.zub.covid_19.api.regulerData.RegulerData;
-import com.zub.covid_19.api.regulerData.RegulerDataHolder;
-import com.zub.covid_19.vm.RegulerDataViewModel;
+import com.zub.covid_19.adapter.NewsAdapter;
+import com.zub.covid_19.api.newsData.NewsData;
+import com.zub.covid_19.util.SpacesItemDecoration;
+import com.zub.covid_19.vm.NewsDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
@@ -36,68 +32,68 @@ public class HomeFragment extends Fragment {
     private ArrayList<String> mNewsTitle = new ArrayList<>();
     private ArrayList<String> mNewsURL = new ArrayList<>();
 
+    private ShimmerFrameLayout mNewsShimmer;
+
+    private RecyclerView mNewsRecyclerView;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        Log.d(TAG, "onCreateView: preparing the home");
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ShimmerFrameLayout shimmerFrameLayout = view.findViewById(R.id.shimmer_layout);
-        RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
+        mNewsShimmer = view.findViewById(R.id.shimmer_layout);
+        mNewsRecyclerView = view.findViewById(R.id.news_recycleview);
 
-        recyclerView.setVisibility(View.GONE);
+        NewsDataViewModel newsDataViewModel;
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://newsapi.org/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        newsDataViewModel = ViewModelProviders.of(this).get(NewsDataViewModel.class);
+        newsDataViewModel.init();
 
-        NewsHolder newsHolder = retrofit.create(NewsHolder.class);
-
-        Call<News> call = newsHolder.getNews();
-
-        call.enqueue(new Callback<News>() {
+        newsDataViewModel.getLoading().observe(this, new Observer<Boolean>() {
             @Override
-            public void onResponse(Call<News> call, Response<News> response) {
-                if(!response.isSuccessful()) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                    return;
-                }
-
-                shimmerFrameLayout.stopShimmer();
-                shimmerFrameLayout.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
-
-                List<Articles> articles = response.body().getArticles();
-                for(Articles theArticels : articles) {
-                    mNewsTitle.add(theArticels.getTitle());
-                    mNewsImage.add(theArticels.getUrlToImage());
-                    mNewsURL.add(theArticels.getUrl());
-                    Log.d(TAG, "initRecycleView: preparing recycle view");
-
-                    RecyclerView recyclerView = view.findViewById(R.id.news_recycleview);
-                    NewsAdapter newsAdapter = new NewsAdapter(mNewsImage, mNewsTitle, mNewsURL, view.getContext());
-                    recyclerView.setAdapter(newsAdapter);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL,false);
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.addItemDecoration(new SpacesItemDecoration(14));
-                    SnapHelper snapHelper = new PagerSnapHelper();
-                    if (recyclerView.getOnFlingListener() == null)
-                        snapHelper.attachToRecyclerView(recyclerView);
-
-                    Log.d(TAG, "onResponse: "+ theArticels.getTitle());
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean){
+                    showLoading();
+                } else {
+                    hideLoading();
                 }
             }
+        });
 
+        newsDataViewModel.getNewsData().observe(this, new Observer<NewsData>() {
             @Override
-            public void onFailure(Call<News> call, Throwable t) {
-                Log.e(TAG, "onFailure: " + t.getMessage());
+            public void onChanged(NewsData newsData) {
+                List<NewsData.Articles> articles = newsData.getArticles();
+                for (NewsData.Articles theArticle : articles) {
+                    mNewsTitle.add(theArticle.getTitle());
+                    mNewsImage.add(theArticle.getUrltoimage());
+                    mNewsURL.add(theArticle.getUrl());
+                }
+
+                NewsAdapter newsAdapter = new NewsAdapter(mNewsImage, mNewsTitle, mNewsURL, getContext());
+                mNewsRecyclerView.setAdapter(newsAdapter);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+                mNewsRecyclerView.setLayoutManager(linearLayoutManager);
+                mNewsRecyclerView.addItemDecoration(new SpacesItemDecoration(20));
+                SnapHelper snapHelper = new PagerSnapHelper();
+                if (mNewsRecyclerView.getOnFlingListener() == null)
+                    snapHelper.attachToRecyclerView(mNewsRecyclerView);
             }
         });
 
         return view;
+
     }
 
+    private void hideLoading() {
+        mNewsShimmer.stopShimmer();
+        mNewsShimmer.setVisibility(View.GONE);
+        mNewsRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void showLoading() {
+        mNewsShimmer.setVisibility(View.VISIBLE);
+        mNewsRecyclerView.setVisibility(View.GONE);
+    }
 
 }

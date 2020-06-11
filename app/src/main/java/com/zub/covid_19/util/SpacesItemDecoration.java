@@ -1,4 +1,4 @@
-package com.zub.covid_19;
+package com.zub.covid_19.util;
 
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
@@ -11,6 +11,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
     private static final String TAG = "SpacesItemDecoration";
 
     private final int mSpace;
+
     public SpacesItemDecoration(int space) {
         this.mSpace = space;
     }

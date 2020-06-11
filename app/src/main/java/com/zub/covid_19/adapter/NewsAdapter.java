@@ -1,22 +1,20 @@
-package com.zub.covid_19;
+package com.zub.covid_19.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.zub.covid_19.NewsActivity;
+import com.zub.covid_19.R;
 
 import java.util.ArrayList;
 
@@ -54,8 +52,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: called");
-
         holder.textView.setText(mNewsTitle.get(position));
 
         Glide.with(context).
@@ -67,13 +63,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: click on " + mNewsTitle.get(position));
-//                Bundle bundle = new Bundle();
-//                bundle.putString("passingUrl", mNewsURL.get(position));
                 Intent intent = new Intent(view.getContext(), NewsActivity.class);
                 intent.putExtra("passingUrl", mNewsURL.get(position));
                 view.getContext().startActivity(intent);
-//                Toast.makeText(context, mNewsURL.get(position), Toast.LENGTH_SHORT).show();
             }
         });
     }

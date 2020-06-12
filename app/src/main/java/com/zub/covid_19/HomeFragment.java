@@ -1,12 +1,15 @@
 package com.zub.covid_19;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,27 +26,30 @@ import com.zub.covid_19.vm.NewsDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class HomeFragment extends Fragment {
-
-    private static final String TAG = "HomeFragment";
-
     private ArrayList<String> mNewsImage = new ArrayList<>();
     private ArrayList<String> mNewsTitle = new ArrayList<>();
     private ArrayList<String> mNewsURL = new ArrayList<>();
 
-    private ShimmerFrameLayout mNewsShimmer;
+    @BindView(R.id.shimmer_layout)
+    ShimmerFrameLayout mNewsShimmer;
+    @BindView(R.id.news_recycleview)
+    RecyclerView mNewsRecyclerView;
+//    @BindView(R.id.web_view_toolbar)
+//    Toolbar WebViewToolbar;
 
-    private RecyclerView mNewsRecyclerView;
-
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mNewsShimmer = view.findViewById(R.id.shimmer_layout);
-        mNewsRecyclerView = view.findViewById(R.id.news_recycleview);
-
+        ButterKnife.bind(this, view);
         NewsDataViewModel newsDataViewModel;
 
         newsDataViewModel = ViewModelProviders.of(this).get(NewsDataViewModel.class);

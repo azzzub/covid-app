@@ -16,7 +16,7 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/THE_MAPS_API" />
 
-        <activity android:name=".NewsActivity" />
+        <activity android:name=".WebViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

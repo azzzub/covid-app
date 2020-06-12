@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.zub.covid_19.NewsActivity;
+import com.zub.covid_19.WebViewActivity;
 import com.zub.covid_19.R;
 
 import java.util.ArrayList;
@@ -63,8 +63,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NewsActivity.class);
-                intent.putExtra("passingUrl", mNewsURL.get(position));
+                Intent intent = new Intent(view.getContext(), WebViewActivity.class);
+                intent.putExtra("passingURL", mNewsURL.get(position));
+                intent.putExtra("passingTitle", mNewsTitle.get(position));
                 view.getContext().startActivity(intent);
             }
         });

@@ -70,4 +70,9 @@ dependencies {
     implementation 'com.github.nirhart:ParallaxScroll:dd53d1f9d1'
     //google maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //butter knife
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    //timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

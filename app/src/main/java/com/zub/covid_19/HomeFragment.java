@@ -2,6 +2,7 @@ package com.zub.covid_19;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -55,6 +56,8 @@ public class HomeFragment extends Fragment {
     ShimmerFrameLayout mNewsShimmer;
     @BindView(id.news_recycleview)
     RecyclerView mNewsRecyclerView;
+    @BindView(id.home_call_button)
+    LinearLayout mCallButton;
     @BindView(id.home_website_button)
     LinearLayout mWebsiteButton;
     @BindView(id.home_do_test_button)
@@ -75,6 +78,15 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(layout.fragment_home, container, false);
         Toast mToast = Toast.makeText(getContext(), "", Toast.LENGTH_LONG);
         ButterKnife.bind(this, view);
+
+        mCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:119"));
+                startActivity(intent);
+            }
+        });
 
         mWebsiteButton.setOnClickListener(new View.OnClickListener() {
             @Override

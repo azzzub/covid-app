@@ -1,10 +1,14 @@
 package com.zub.covid_19;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -21,6 +25,8 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.zub.covid_19.adapter.NewsAdapter;
 import com.zub.covid_19.api.newsData.NewsData;
+import com.zub.covid_19.ui.BottomSheetMapsDialog;
+import com.zub.covid_19.ui.BottomSheetPrixaDialog;
 import com.zub.covid_19.util.SpacesItemDecoration;
 import com.zub.covid_19.vm.NewsDataViewModel;
 
@@ -41,8 +47,10 @@ public class HomeFragment extends Fragment {
     ShimmerFrameLayout mNewsShimmer;
     @BindView(R.id.news_recycleview)
     RecyclerView mNewsRecyclerView;
-//    @BindView(R.id.web_view_toolbar)
-//    Toolbar WebViewToolbar;
+    @BindView(R.id.home_website_button)
+    LinearLayout mWebsiteButton;
+    @BindView(R.id.home_do_test_button)
+    RelativeLayout mDoTest;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -50,6 +58,27 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+
+        mWebsiteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), WebViewActivity.class);
+                intent.putExtra("passingURL", "https://covid19.go.id");
+                intent.putExtra("passingTitle", "Portal Resmi Gugus Tugas Covid-19");
+                getContext().startActivity(intent);
+            }
+        });
+
+        mDoTest.setOnClickListener(new View.OnClickListener() {
+            BottomSheetPrixaDialog bottomSheetPrixaDialog = new BottomSheetPrixaDialog();
+
+            @Override
+            public void onClick(View view) {
+                bottomSheetPrixaDialog.show(getFragmentManager(), "BottomSheet");
+            }
+        });
+
+        // THE DATA FETCHING PROCESS
         NewsDataViewModel newsDataViewModel;
 
         newsDataViewModel = ViewModelProviders.of(this).get(NewsDataViewModel.class);

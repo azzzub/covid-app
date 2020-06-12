@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/bottom_prixa_time_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="(5)"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anda akan dialihkan ke"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="#000" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/prixa"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Sistem kecerdasan buatan yang Prixa.ai sediakan akan mendeteksi gejala covid-19 yang mungkin kamu alami."
+        android:textSize="15dp"
+        android:textColor="#000"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Segala hak diserahkan penuh kepada Prixa.ai"
+        android:textSize="10dp"
+        android:textColor="#000"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="© prixa.ai"
+        android:textSize="10dp"
+        android:textColor="#000"
+        android:gravity="center"/>
+
+</LinearLayout>

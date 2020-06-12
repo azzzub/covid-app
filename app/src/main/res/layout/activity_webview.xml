@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
                     android:layout_marginTop="5dp"
-                    android:text="Beritamu sedang dimuat..."
+                    android:text="Laman sedang dimuat..."
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:gravity="center"/>

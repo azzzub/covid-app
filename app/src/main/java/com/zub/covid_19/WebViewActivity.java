@@ -1,5 +1,6 @@
 package com.zub.covid_19;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     String passingURL, passingTitle;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +34,20 @@ public class WebViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
         mWebViewToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.icon_back));
-        mWebViewToolbar.setNavigationOnClickListener(view -> finish());
+        mWebViewToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mWebView.clearCache(true);
+                mWebView.clearHistory();
+                finish();
+            }
+        });
         Bundle bundle = this.getIntent().getExtras();
         assert bundle != null;
         passingURL = bundle.getString("passingURL");
         passingTitle = bundle.getString("passingTitle");
         mWebView.loadUrl(passingURL);
-
+        mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new mWebViewClient());
     }
 

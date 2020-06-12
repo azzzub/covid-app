@@ -1,0 +1,52 @@
+package com.zub.covid_19.ui;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.zub.covid_19.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class BottomSheetPreventionDialog extends BottomSheetDialogFragment {
+
+    @BindView(R.id.bottom_sheet_prevention_title)
+    TextView mTitle;
+    @BindView(R.id.bottom_sheet_prevention_header)
+    ImageView mHeader;
+    @BindView(R.id.bottom_sheet_prevention_content)
+    TextView mContent;
+    @BindView(R.id.bottom_sheet_prevention_citation)
+    TextView mCitation;
+
+    String passingTitle;
+    Integer passingHeader, passingContent, passingCitation;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.bottom_sheet_prevention, container, false);
+        ButterKnife.bind(this, view);
+
+        passingTitle = this.getArguments().getString("passingTitle");
+        passingHeader = this.getArguments().getInt("passingHeader");
+        passingContent = this.getArguments().getInt("passingContent");
+        passingCitation = this.getArguments().getInt("passingCitation");
+
+        mTitle.setText(passingTitle);
+        mHeader.setImageResource(passingHeader);
+        mContent.setText(passingContent);
+        mCitation.setText(passingCitation);
+
+        return view;
+    }
+}

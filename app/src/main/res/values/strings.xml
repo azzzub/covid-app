@@ -9,4 +9,47 @@
         pengguna. Namun apabila pengguna merasa diuntungkan, kiranya pengguna dapat memberikan umpan balik positif terhadap
         saya secara pribadi melalui kontak yang disediakan. Surakarta, 2020
     </string>
+    <string name="social_distancing">
+        Dengan social distancing, maka risiko tertular dari COVID-19 dari orang lain akan berkurang. Sebaliknya, jika kamu ternyata
+        terinfeksi tapi tidak menyadarinya, maka menjauhkan diri dari keramaian akan sangat membantu mencegah penyebaran.\n\n
+        Jadi, jika seseorang yang terinfeksi virus ini kemudian tidak sengaja batuk atau bersin tanpa menutup mulutnya,
+        maka droplet akan jatuh pada permukaan yang ada di dekatnya. Saat ada orang lain yang tidak terinfeksi memegang
+        permukaan tersebut, lalu menyentuh mulut, hidung atau matanya tanpa mencuci tangan terlebih dahulu, maka ia berisiko
+        tinggi ikut tertular.\n\nInilah yang membuat angka penularan penyakit ini naik drastis dalam waktu singkat.
+        Banyak orang yang tidak sadar bahwa dirinya terinfeksi, lalu pergi ke berbagai lokasi untuk memenui teman
+        dan kerabatnya. Akibatnya, penyebaran virus ini semakin luas.
+    </string>
+    <string name="social_distancing_citation">
+        Sumber: https://lifestyle.kompas.com/read/2020/03/16/143303720/social-distancing-efektif-cegah-penyebaran-corona-bagaimana-caranya?page=all
+    </string>
+
+    <string name="wash_hand">
+        Organisasi Kesehatan Dunia (World Health Organization/WHO) menyarankan setiap orang untuk selalu mencuci tangan
+        demi mencegah penyebaran virus corona COVID-19. Bersihkan tangan secara teratur dan menyeluruh dengan sabun
+        dan air atau cairan berbasis alkohol.\n\nMencuci tangan dengan sabun dan air atau menggunakan cairan pembersih
+        berbasis alkohol bisa membunuh virus yang mungkin ada di tangan Anda. Mencuci tangan dapat membuat Anda
+        tetap sehat dan mencegah penyebaran infeksi pernapasan dan diare dari satu orang ke orang lain.\n\nKuman dapat
+        menyebar dari orang lain atau permukaan saat Anda:\n1. Menyentuh mata, hidung, dan mulut Anda dengan tangan yang
+        tidak dicuci.\n2. Makan atau menyiapkan makanan dan minuman dengan tangan yang tidak dicuci.\n3. Menyentuh permukaan
+        atau benda yang terkontaminasi.\n4. Mengesang, batuk, atau bersin ke tangan dan kemudian menyentuh tangan
+        orang lain atau benda-benda.
+    </string>
+    <string name="wash_hand_citation">
+        Sumber: https://tirto.id/cara-cuci-tangan-dengan-7-langkah-menurut-who-untuk-cegah-corona-eLyQ
+    </string>
+
+    <string name="wear_mask">
+        Penelitian dari University of Hong Kong dan University of Maryland menemukan bahwa masker
+        sederhana menghalangi 100 persen tetesan dan aerosol. The Guardian menuliskan, negara-negara yang
+        telah mewajibkan penggunaan masker sejak awal menunjukkan tingkat kematian yang lebih rendah daripada
+        negara-negara yang tidak memberlakukannya.\n\nNamun, tantangan besarnya adalah penggunaan masker hanya
+        akan bekerja jika sebagian besar orang menggunakannya. Analisis dari Food and Drug Administration (FDA)
+        tentang flu memperkirakan, jika 50 persen populasi menggunakan masker, penularan virus dapat dikurangi
+        sebanyak setengahnya. Sementara, jika 80 persen populasi menggunakan masker, virus dapat hilang.\n\nOleh karena
+        itu, berbagai wilayah saat ini mengadopsi hukum yang mewajibkan penggunaan masker di tempat ramai
+        seperti transportasi umum dan toko.
+    </string>
+    <string name="wear_mask_citation">
+        Sumber: https://www.kompas.com/tren/read/2020/04/08/073100465/pandemi-virus-corona-dan-alasan-kenapa-kini-kita-semua-harus-pakai-masker-?page=all#page4
+    </string>
 </resources>

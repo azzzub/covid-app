@@ -1,5 +1,6 @@
 package com.zub.covid_19;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -23,9 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.zub.covid_19.adapter.NewsAdapter;
 import com.zub.covid_19.api.newsData.NewsData;
 import com.zub.covid_19.ui.BottomSheetMapsDialog;
+import com.zub.covid_19.ui.BottomSheetPreventionDialog;
 import com.zub.covid_19.ui.BottomSheetPrixaDialog;
 import com.zub.covid_19.util.SpacesItemDecoration;
 import com.zub.covid_19.vm.NewsDataViewModel;
@@ -38,25 +42,38 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static com.zub.covid_19.R.*;
+
 public class HomeFragment extends Fragment {
     private ArrayList<String> mNewsImage = new ArrayList<>();
     private ArrayList<String> mNewsTitle = new ArrayList<>();
     private ArrayList<String> mNewsURL = new ArrayList<>();
 
-    @BindView(R.id.shimmer_layout)
+    private BottomSheetPreventionDialog bottomSheetPreventionDialog = new BottomSheetPreventionDialog();
+
+    @BindView(id.shimmer_layout)
     ShimmerFrameLayout mNewsShimmer;
-    @BindView(R.id.news_recycleview)
+    @BindView(id.news_recycleview)
     RecyclerView mNewsRecyclerView;
-    @BindView(R.id.home_website_button)
+    @BindView(id.home_website_button)
     LinearLayout mWebsiteButton;
-    @BindView(R.id.home_do_test_button)
+    @BindView(id.home_do_test_button)
     RelativeLayout mDoTest;
+    @BindView(id.home_country_button)
+    LinearLayout mCountry;
+    @BindView(id.home_preventive_1)
+    LinearLayout mPreventive1;
+    @BindView(id.home_preventive_2)
+    LinearLayout mPreventive2;
+    @BindView(id.home_preventive_3)
+    LinearLayout mPreventive3;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(layout.fragment_home, container, false);
+        Toast mToast = Toast.makeText(getContext(), "", Toast.LENGTH_LONG);
         ButterKnife.bind(this, view);
 
         mWebsiteButton.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +95,64 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        mCountry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mToast.setText("Other countries' data coming soon!");
+                mToast.show();
+            }
+        });
+
+        mPreventive1.setOnClickListener(new View.OnClickListener() {
+            Bundle bundle = new Bundle();
+            String passingTitle = "Jaga Jarak Sosial";
+            Integer passingHeader = drawable.social_distancing_header;
+            Integer passingContent = string.social_distancing;
+            Integer passingCitation = string.social_distancing_citation;
+            @Override
+            public void onClick(View view) {
+                bundle.putString("passingTitle", passingTitle);
+                bundle.putInt("passingHeader", passingHeader);
+                bundle.putInt("passingContent", passingContent);
+                bundle.putInt("passingCitation", passingCitation);
+                bottomSheetPreventionDialog.setArguments(bundle);
+                bottomSheetPreventionDialog.show(getFragmentManager(), "BottomSheet");
+            }
+        });
+
+        mPreventive2.setOnClickListener(new View.OnClickListener() {
+            Bundle bundle = new Bundle();
+            String passingTitle = "Sering Cuci Tangan";
+            Integer passingHeader = drawable.wash_hand_header;
+            Integer passingContent = string.wash_hand;
+            Integer passingCitation = string.wash_hand_citation;
+            @Override
+            public void onClick(View view) {
+                bundle.putString("passingTitle", passingTitle);
+                bundle.putInt("passingHeader", passingHeader);
+                bundle.putInt("passingContent", passingContent);
+                bundle.putInt("passingCitation", passingCitation);
+                bottomSheetPreventionDialog.setArguments(bundle);
+                bottomSheetPreventionDialog.show(getFragmentManager(), "BottomSheet");
+            }
+        });
+
+        mPreventive3.setOnClickListener(new View.OnClickListener() {
+            Bundle bundle = new Bundle();
+            String passingTitle = "Pakailah Masker";
+            Integer passingHeader = drawable.wear_mask_header;
+            Integer passingContent = string.wear_mask;
+            Integer passingCitation = string.wear_mask_citation;
+            @Override
+            public void onClick(View view) {
+                bundle.putString("passingTitle", passingTitle);
+                bundle.putInt("passingHeader", passingHeader);
+                bundle.putInt("passingContent", passingContent);
+                bundle.putInt("passingCitation", passingCitation);
+                bottomSheetPreventionDialog.setArguments(bundle);
+                bottomSheetPreventionDialog.show(getFragmentManager(), "BottomSheet");
+            }
+        });
         // THE DATA FETCHING PROCESS
         NewsDataViewModel newsDataViewModel;
 

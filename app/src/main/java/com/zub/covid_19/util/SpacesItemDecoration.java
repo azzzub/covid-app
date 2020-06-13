@@ -1,8 +1,6 @@
 package com.zub.covid_19.util;
 
 import android.graphics.Rect;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;

@@ -1,7 +1,5 @@
 package com.zub.covid_19.repo;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.zub.covid_19.api.specData.SpecData;
@@ -11,6 +9,7 @@ import com.zub.covid_19.api.specData.SpecDataHolder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class SpecDataRepository {
 
@@ -50,7 +49,7 @@ public class SpecDataRepository {
             @Override
             public void onFailure(Call<SpecData> call, Throwable t) {
                 isLoading.setValue(false);
-//                specData.setValue(null);
+                Timber.e(t);
             }
         });
 

@@ -1,11 +1,7 @@
 package com.zub.covid_19.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.zub.covid_19.R;
-import com.zub.covid_19.api.provData.ProvData;
-
-import java.io.Serializable;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-
-import static com.android.volley.VolleyLog.TAG;
 
 public class BottomSheetMapsDialog extends BottomSheetDialogFragment {
 

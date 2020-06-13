@@ -11,8 +11,7 @@ import com.zub.covid_19.api.provData.ProvDataHolder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.android.volley.VolleyLog.TAG;
+import timber.log.Timber;
 
 public class ProvDataRepository {
 
@@ -52,7 +51,7 @@ public class ProvDataRepository {
             @Override
             public void onFailure(Call<ProvData> call, Throwable t) {
                 isLoading.setValue(false);
-                Log.e(TAG, "onFailure: " + t.getMessage());
+                Timber.e(t);
             }
         });
 

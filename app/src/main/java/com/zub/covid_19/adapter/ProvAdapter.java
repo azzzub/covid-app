@@ -29,8 +29,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static com.android.volley.VolleyLog.TAG;
-
 public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
 
     private ArrayList<ProvData.ProvListData> provListData = new ArrayList<>();

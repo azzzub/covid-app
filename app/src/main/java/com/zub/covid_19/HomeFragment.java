@@ -1,6 +1,5 @@
 package com.zub.covid_19;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -10,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableRow;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,10 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.zub.covid_19.adapter.NewsAdapter;
 import com.zub.covid_19.api.newsData.NewsData;
-import com.zub.covid_19.ui.BottomSheetMapsDialog;
 import com.zub.covid_19.ui.BottomSheetPreventionDialog;
 import com.zub.covid_19.ui.BottomSheetPrixaDialog;
 import com.zub.covid_19.util.SpacesItemDecoration;
@@ -37,13 +32,14 @@ import com.zub.covid_19.vm.NewsDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
-import static com.zub.covid_19.R.*;
+import static com.zub.covid_19.R.drawable;
+import static com.zub.covid_19.R.id;
+import static com.zub.covid_19.R.layout;
+import static com.zub.covid_19.R.string;
 
 public class HomeFragment extends Fragment {
     private ArrayList<String> mNewsImage = new ArrayList<>();

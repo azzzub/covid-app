@@ -9,6 +9,7 @@ import com.zub.covid_19.api.regulerData.RegulerDataHolder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class RegulerDataRepository {
 
@@ -48,7 +49,7 @@ public class RegulerDataRepository {
             @Override
             public void onFailure(Call<RegulerData> call, Throwable t) {
                 isLoading.setValue(false);
-//                regulerData.setValue(null);
+                Timber.e(t);
             }
         });
 

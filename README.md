@@ -6,13 +6,13 @@ This app based on Java to provide covid-19 information
 
 ![alt text](https://covid19.ayub.dev/public/covid19_header.png)
 
-## 📚 Getting Started
+## 📚     Getting Started
 
 Right now this app only able to show the Indonesia Covid-19 data. I am working on other countries covid-19 data. Feel free to help me out and contribute, this is just only for fun. 😉
 
 If you like this project, give me some ⭐ and fork this repo 🍴
 
-## 👩‍💻 Tech
+## 👩‍💻     Tech
 
 * [Retrofit](https://github.com/square/retrofit) - Retrofit
 * [Glide](https://github.com/bumptech/glide) - Image Fetching
@@ -23,13 +23,13 @@ If you like this project, give me some ⭐ and fork this repo 🍴
 * [AndroidSlidingUpPanel](https://github.com/umano/AndroidSlidingUpPanel) - Sliding Up Panel
 * [Shimmer](https://github.com/facebook/shimmer-android) - Shimmer Loading Effect
 
-## 💻 Installing
+## 💻     Installing
 
 👇 You can download the version 1.0 application below
 
 > [**Download Version 1.0 Here**](https://github.com/azzzub/covid-app/releases/tag/v1.0)
 
-## 📝 TODOs
+## 📝     TODOs
 
 - Adding donate button,
 - Adding provinces data summary,

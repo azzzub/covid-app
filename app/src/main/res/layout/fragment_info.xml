@@ -33,6 +33,24 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="Versi 1.0 © Covid-19 App 2020"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -40,9 +58,7 @@
                     android:gravity="end"
                     android:text="Dikembangkan oleh"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-
-
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -51,18 +67,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Versi 1.0.0 © 2020\nContant: 40.ayub@gmail.com"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+                android:layout_marginBottom="20dp"
+                android:gravity="center">
 
                 <LinearLayout
+                    android:id="@+id/info_mail_button"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:paddingLeft="8dp"
@@ -70,7 +79,46 @@
                     android:background="@drawable/rounded_country"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_gravity="center"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/icon_mail"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Contact Me"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/info_website_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:background="@drawable/rounded_country"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_gravity="right"
                     android:clickable="true">
 
                     <ImageView
@@ -129,7 +177,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Data informasi oleh covid19.go.id"
+                android:text="Data informasi oleh data.covid19.go.id"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -161,7 +209,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Desain Logo oleh freepik.com (free use)"
+                android:text="Desain gambar ilustrasi oleh freepik.com (free use)"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -170,6 +218,22 @@
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/freepik_logo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Tes kesehatan dengan kecerdasan buatan oleh prixa.ai"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/prixa"/>
 
             <TextView
                 android:layout_width="wrap_content"

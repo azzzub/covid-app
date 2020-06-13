@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.GeolocationPermissions;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
@@ -47,6 +49,9 @@ public class WebViewActivity extends AppCompatActivity {
         passingURL = bundle.getString("passingURL");
         passingTitle = bundle.getString("passingTitle");
         mWebView.loadUrl(passingURL);
+        mWebView.getSettings().setAppCacheEnabled(true);
+        mWebView.getSettings().setDatabaseEnabled(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new mWebViewClient());
     }

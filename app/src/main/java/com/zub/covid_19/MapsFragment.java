@@ -288,16 +288,18 @@ public class MapsFragment extends Fragment implements
     }
 
     private void setupBottomSheet(LinearLayout mProvDetailedCaseButton, ProvData provData) {
-
-        BottomSheetMapsDialog bottomSheetMapsDialog = new BottomSheetMapsDialog();
+        Toast mToast = Toast.makeText(getContext(), "", Toast.LENGTH_LONG);
+//        BottomSheetMapsDialog bottomSheetMapsDialog = new BottomSheetMapsDialog();
 
         mProvDetailedCaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), bottomSheetMapsDialog.getClass());
-                intent.putExtra("provData", provData);
+//                Intent intent = new Intent(view.getContext(), bottomSheetMapsDialog.getClass());
+//                intent.putExtra("provData", provData);
 //                startActivity(intent);
-                bottomSheetMapsDialog.show(getFragmentManager(),"BottomSheet");
+//                bottomSheetMapsDialog.show(getFragmentManager(),"BottomSheet");
+                mToast.setText("Other data coming soon!");
+                mToast.show();
             }
         });
 

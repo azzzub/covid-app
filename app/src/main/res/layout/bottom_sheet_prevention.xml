@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet_prevention_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
@@ -22,6 +24,7 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:gravity="center"
+                android:paddingTop="16dp"
                 android:textColor="#000" />
 
 
@@ -50,10 +53,11 @@
             android:text="null"
             android:textSize="10dp"
             android:textColor="#000"
+            android:paddingBottom="16dp"
             android:gravity="center"/>
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

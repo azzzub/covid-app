@@ -10,12 +10,12 @@
     <Toolbar
         android:id="@+id/web_view_toolbar"
         android:layout_width="fill_parent"
-        tools:targetApi="lollipop"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:title="Memuat..."
-        android:titleTextColor="#fff"/>
+        android:title="@string/loading_text"
+        android:titleTextColor="@color/white"
+        tools:targetApi="lollipop" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -27,12 +27,12 @@
             android:layout_height="match_parent" />
 
         <RelativeLayout
+            android:id="@+id/web_view_progress_bar"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#22000000"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:id="@+id/progressBar2">
+            android:background="#22000000"
+            android:gravity="center">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -45,13 +45,13 @@
                     android:layout_height="60dp" />
 
                 <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Laman sedang dimuat..."
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="@string/web_view_loading_page"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

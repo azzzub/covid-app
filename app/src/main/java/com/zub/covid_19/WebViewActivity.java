@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.GeolocationPermissions;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
@@ -19,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class WebViewActivity extends AppCompatActivity {
 
-    @BindView(R.id.progressBar2)
+    @BindView(R.id.web_view_progress_bar)
     RelativeLayout progressBar;
     @BindView(R.id.web_view_toolbar)
     Toolbar mWebViewToolbar;

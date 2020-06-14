@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
 
     @BindView(id.shimmer_layout)
     ShimmerFrameLayout mNewsShimmer;
-    @BindView(id.news_recycleview)
+    @BindView(id.news_recycler_view)
     RecyclerView mNewsRecyclerView;
     @BindView(id.home_call_button)
     LinearLayout mCallButton;

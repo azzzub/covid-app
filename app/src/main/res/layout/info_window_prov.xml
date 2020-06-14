@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="15dp"
-    card_view:cardBackgroundColor="#ffffff"
     card_view:cardElevation="0dp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="300dp"
-        android:padding="8dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/info_window_prov_name"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:textSize="15sp"
-                android:textColor="#000"
                 android:layout_marginBottom="3dp"
-                android:text="null"/>
+                android:text="@string/null_text"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginLeft="15dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -51,15 +51,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:text="Kasus: "/>
+                            android:text="@string/info_window_prov_cases"
+                            android:textSize="13sp" />
 
                         <TextView
                             android:id="@+id/info_window_prov_case"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="null"/>
+                            android:text="@string/null_text"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -70,15 +70,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:text="Meninggal: "/>
+                            android:text="@string/info_window_prov_death"
+                            android:textSize="13sp" />
 
                         <TextView
                             android:id="@+id/info_window_prov_death"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="null"/>
+                            android:text="@string/null_text"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -89,15 +89,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:text="Sembuh: "/>
+                            android:text="@string/info_window_prov_cured"
+                            android:textSize="13sp" />
 
                         <TextView
                             android:id="@+id/info_window_prov_cured"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="null"/>
+                            android:text="@string/null_text"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -108,16 +108,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
-
-                            android:text="Dirawat: "/>
+                            android:text="@string/info_window_prov_treated"
+                            android:textSize="13sp" />
 
                         <TextView
                             android:id="@+id/info_window_prov_treated"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="null"/>
+                            android:text="@string/null_text"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -139,19 +138,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:text="@string/null_text"
+                            android:textColor="@color/themeRed"
                             android:textSize="40sp"
-                            android:textStyle="bold"
-                            android:textColor="#ff5959"
-                            android:text="0"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
+                            android:text="%"
+                            android:textColor="@color/themeRed"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="#ff5959"
-                            android:text="%"/>
+                            tools:ignore="HardcodedText" />
 
                     </LinearLayout>
 
@@ -159,8 +159,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:text="@string/info_window_prov_subtitle"
                         android:textSize="8sp"
-                        android:text="Dari seluruh kasus di Indonesia"/>
+                        tools:ignore="SmallSp" />
 
                 </LinearLayout>
 
@@ -169,10 +170,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data Kasus Berdasarkan:"
-                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"/>
+                android:text="@string/info_window_prov_subtitle2"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -188,54 +189,56 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jenis Kelamin:"/>
+                        android:text="@string/info_window_prov_sex" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp">
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
 
                             <ImageView
                                 android:layout_width="fill_parent"
                                 android:layout_height="40dp"
                                 android:src="@drawable/icon_male"
-                                />
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:id="@+id/info_window_prov_male"
-                                android:layout_marginTop="3dp"
-                                android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="null" />
+                                android:layout_marginTop="3dp"
+                                android:text="@string/null_text"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp">
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
 
                             <ImageView
                                 android:layout_width="fill_parent"
                                 android:layout_height="40dp"
                                 android:src="@drawable/icon_female"
-                                />
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:id="@+id/info_window_prov_female"
-                                android:layout_marginTop="3dp"
                                 android:layout_width="wrap_content"
-                                android:textStyle="bold"
                                 android:layout_height="wrap_content"
-                                android:text="null" />
+                                android:layout_marginTop="3dp"
+                                android:text="@string/null_text"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -252,7 +255,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Umur:"/>
+                        android:text="@string/info_window_prov_age" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -266,67 +269,69 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:text="0-5: "
                                     android:textSize="13sp"
-
-                                    android:text="0-5: " />
+                                    tools:ignore="HardcodedText" />
 
                                 <TextView
                                     android:id="@+id/info_window_prov_age_baby"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textStyle="bold"
-                                    android:text="null"/>
+                                    android:text="@string/null_text"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:text="6-17: "
                                     android:textSize="13sp"
-                                    android:text="6-17: " />
+                                    tools:ignore="HardcodedText" />
 
                                 <TextView
                                     android:id="@+id/info_window_prov_age_teen"
-                                    android:layout_marginTop="3dp"
-                                    android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="null" />
+                                    android:layout_marginTop="3dp"
+                                    android:text="@string/null_text"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:text="18-30: "
                                     android:textSize="13sp"
-                                    android:text="18-30: " />
+                                    tools:ignore="HardcodedText" />
 
                                 <TextView
                                     android:id="@+id/info_window_prov_age_man"
-                                    android:layout_marginTop="3dp"
-                                    android:textStyle="bold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="null" />
+                                    android:layout_marginTop="3dp"
+                                    android:text="@string/null_text"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
@@ -335,70 +340,73 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="7dp">
+                            android:layout_marginLeft="7dp"
+                            android:orientation="vertical">
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:text="31-45: "
                                     android:textSize="13sp"
-                                    android:text="31-45: " />
+                                    tools:ignore="HardcodedText" />
 
                                 <TextView
                                     android:id="@+id/info_window_prov_age_adult"
                                     android:layout_width="wrap_content"
-                                    android:textStyle="bold"
                                     android:layout_height="wrap_content"
-                                    android:text="null" />
+                                    android:text="@string/null_text"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:text="46-59: "
                                     android:textSize="13sp"
-                                    android:text="46-59: " />
+                                    tools:ignore="HardcodedText" />
 
                                 <TextView
                                     android:id="@+id/info_window_prov_age_old"
-                                    android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
-                                    android:textStyle="bold"
                                     android:layout_height="wrap_content"
-                                    android:text="null" />
+                                    android:layout_marginTop="3dp"
+                                    android:text="@string/null_text"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:text="≥60: "
                                     android:textSize="13sp"
-                                    android:text="≥60: " />
+                                    tools:ignore="HardcodedText" />
 
                                 <TextView
                                     android:id="@+id/info_window_prov_age_grandparent"
-                                    android:layout_marginTop="3dp"
                                     android:layout_width="wrap_content"
-                                    android:textStyle="bold"
                                     android:layout_height="wrap_content"
-                                    android:text="null" />
+                                    android:layout_marginTop="3dp"
+                                    android:text="@string/null_text"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#473f97"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <com.nirhart.parallaxscroll.views.ParallaxScrollView
-        app:parallax_factor="1.5"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        app:parallax_factor="1.5">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -19,52 +20,52 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="30dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="30dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
-                    android:text="Statistik"
-                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/stat_title"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textColor="#FFFFFF"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
-                    android:text="Total Kasus Hingga Hari Ini"
-                    android:textStyle="bold"
+                    android:text="@string/stat_subtitle"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
-                    android:textColor="#FFFFFF"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/stat_updated_date"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
-                    android:text="Diperbarui pada: ..."
-                    android:textStyle="bold"
+                    android:text="@string/loading_text"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
-                    android:textColor="#FFFFFF"/>
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <com.facebook.shimmer.ShimmerFrameLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
                         android:id="@+id/stat_box_shimmer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:visibility="gone">
 
                         <include layout="@layout/placeholder_stats"/>
@@ -74,24 +75,25 @@
                 </RelativeLayout>
 
                 <TableLayout
+                    android:id="@+id/stat_box_layout"
                     android:layout_width="fill_parent"
-                    android:layout_marginTop="20dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/stat_box_layout">
+                    android:layout_marginTop="20dp">
 
                     <TableRow
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp">
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical"
                             android:background="@drawable/rounded_stats"
-                            android:backgroundTint="#ffb259">
+                            android:backgroundTint="@color/themeOrange"
+                            android:orientation="vertical"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -100,26 +102,25 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
                                     android:layout_marginLeft="10dp"
-                                    android:text="Positif"
-                                    android:textColor="#FFFFFF"
+                                    android:layout_marginTop="8dp"
+                                    android:text="@string/stat_positive"
+                                    android:textColor="@color/white"
                                     android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/stat_added_pos"
                                     android:layout_width="fill_parent"
-                                    android:gravity="right"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
                                     android:layout_marginRight="10dp"
-                                    android:text="null"
-                                    android:textStyle="bold"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="14sp" />
+                                    android:gravity="end"
+                                    android:text="@string/null_text"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
-
 
                             <TextView
                                 android:id="@+id/stat_kasus_aktif"
@@ -128,21 +129,22 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="null"
-                                android:textStyle="bold"
+                                android:text="@string/null_text"
                                 android:textColor="#FFFFFF"
-                                android:textSize="26sp" />
+                                android:textSize="26sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
-                            android:layout_weight="1"
                             android:layout_marginLeft="10dp"
-                            android:orientation="vertical"
+                            android:layout_weight="1"
                             android:background="@drawable/rounded_stats"
-                            android:backgroundTint="#ff5959">
+                            android:backgroundTint="@color/themeRed"
+                            android:orientation="vertical"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -151,23 +153,23 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
                                     android:layout_marginLeft="10dp"
-                                    android:text="Meninggal"
-                                    android:textColor="#FFFFFF"
+                                    android:layout_marginTop="8dp"
+                                    android:text="@string/stat_death"
+                                    android:textColor="@color/white"
                                     android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/stat_added_men"
                                     android:layout_width="fill_parent"
-                                    android:gravity="right"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
                                     android:layout_marginRight="10dp"
-                                    android:text="null"
-                                    android:textStyle="bold"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="14sp" />
+                                    android:gravity="right"
+                                    android:text="@string/null_text"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
@@ -178,10 +180,10 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="null"
-                                android:textStyle="bold"
-                                android:textColor="#FFFFFF"
-                                android:textSize="26sp" />
+                                android:text="@string/null_text"
+                                android:textColor="@color/white"
+                                android:textSize="26sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -190,17 +192,18 @@
                     <TableRow
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical"
                             android:background="@drawable/rounded_stats"
-                            android:backgroundTint="#4cd97b">
+                            android:backgroundTint="@color/themeGreen"
+                            android:orientation="vertical"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -209,23 +212,24 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
                                     android:layout_marginLeft="10dp"
-                                    android:text="Sembuh"
-                                    android:textColor="#FFFFFF"
+                                    android:layout_marginTop="8dp"
+                                    android:text="@string/stat_cured"
+                                    android:textColor="@color/white"
                                     android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/stat_added_sem"
                                     android:layout_width="fill_parent"
-                                    android:gravity="right"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
                                     android:layout_marginRight="10dp"
-                                    android:text="null"
+                                    android:gravity="end"
+                                    android:text="@string/null_text"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
                                     android:textStyle="bold"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="10sp" />
+                                    tools:ignore="SmallSp" />
 
                             </LinearLayout>
 
@@ -236,29 +240,30 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="null"
-                                android:textStyle="bold"
-                                android:textColor="#FFFFFF"
-                                android:textSize="23sp" />
+                                android:text="@string/null_text"
+                                android:textColor="@color/white"
+                                android:textSize="23sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
-                            android:layout_weight="1"
                             android:layout_marginLeft="10dp"
-                            android:orientation="vertical"
+                            android:layout_weight="1"
                             android:background="@drawable/rounded_stats"
-                            android:backgroundTint="#4cb5ff">
+                            android:backgroundTint="@color/themeBlue"
+                            android:orientation="vertical"
+                            tools:targetApi="lollipop">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:layout_marginLeft="10dp"
-                                android:text="ODP"
-                                android:textColor="#FFFFFF"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/stat_monitoring"
+                                android:textColor="@color/white"
                                 android:textSize="15sp" />
 
                             <TextView
@@ -268,29 +273,30 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="null"
-                                android:textStyle="bold"
-                                android:textColor="#FFFFFF"
-                                android:textSize="23sp" />
+                                android:text="@string/null_text"
+                                android:textColor="@color/white"
+                                android:textSize="23sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
-                            android:layout_weight="1"
                             android:layout_marginLeft="10dp"
-                            android:orientation="vertical"
+                            android:layout_weight="1"
                             android:background="@drawable/rounded_stats"
-                            android:backgroundTint="#9059ff">
+                            android:backgroundTint="@color/themePurple"
+                            android:orientation="vertical"
+                            tools:targetApi="lollipop">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:layout_marginLeft="10dp"
-                                android:text="PDP"
-                                android:textColor="#FFFFFF"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/stat_patient"
+                                android:textColor="@color/white"
                                 android:textSize="15sp" />
 
                             <TextView
@@ -300,10 +306,10 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="8dp"
-                                android:text="null"
-                                android:textStyle="bold"
-                                android:textColor="#FFFFFF"
-                                android:textSize="23sp" />
+                                android:text="@string/null_text"
+                                android:textColor="@color/white"
+                                android:textSize="23sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -316,8 +322,8 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_stats_daily">
+                android:background="@drawable/rounded_stats_daily"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -327,20 +333,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Kasus Kumulatif"
-                        android:textStyle="bold"
+                        android:text="@string/stat_cumulative_cases"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textColor="#000000"/>
+                        android:textStyle="bold" />
 
                     <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/stat_shimmer_cumulative_case_graph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_height="180dp"
-                        android:layout_width="fill_parent"
-                        android:id="@+id/stat_shimmer_cumulative_case_graph"
                         android:visibility="gone">
 
                         <LinearLayout
@@ -358,28 +364,28 @@
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/stat_cumulative_case_graph"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_width="fill_parent"
-                        android:layout_height="180dp"/>
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginTop="18dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Penambahan Kasus"
-                        android:textStyle="bold"
+                        android:text="@string/stat_updated_cases"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textColor="#000000"/>
+                        android:textStyle="bold" />
 
                     <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/stat_shimmer_new_case_graph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_height="180dp"
-                        android:layout_width="fill_parent"
-                        android:id="@+id/stat_shimmer_new_case_graph"
                         android:visibility="gone">
 
                         <LinearLayout
@@ -397,21 +403,21 @@
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/stat_new_case_graph"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_width="fill_parent"
-                        android:layout_height="180dp"/>
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginTop="18dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Kondisi Penyerta Positif"
-                        android:textStyle="bold"
+                        android:text="@string/stat_condition_positive_cases"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textColor="#000000"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/stat_condition_update"
@@ -419,16 +425,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Data dihimpun: ... (0%)"
-                        android:textSize="14sp"
-                        android:textColor="#000000"/>
+                        android:text="@string/loading_text"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/stat_shimmer_condition_graph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_height="180dp"
-                        android:layout_width="fill_parent"
-                        android:id="@+id/stat_shimmer_codition_graph"
                         android:visibility="gone">
 
                         <LinearLayout
@@ -446,21 +452,21 @@
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/stat_condition_graph"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_width="fill_parent"
-                        android:layout_height="250dp"/>
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginTop="18dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Gejala Positif"
-                        android:textStyle="bold"
+                        android:text="@string/stat_positive_symptom_cases"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textColor="#000000"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/stat_symptom_update"
@@ -468,16 +474,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Data dihimpun: ... (0%)"
-                        android:textSize="14sp"
-                        android:textColor="#000000"/>
+                        android:text="@string/loading_text"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/stat_shimmer_symptom_graph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_height="180dp"
-                        android:layout_width="fill_parent"
-                        android:id="@+id/stat_shimmer_symptom_graph"
                         android:visibility="gone">
 
                         <LinearLayout
@@ -495,21 +501,21 @@
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/stat_symptom_graph"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_width="fill_parent"
-                        android:layout_height="250dp"/>
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginTop="18dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Kelompok Umur"
-                        android:textStyle="bold"
+                        android:text="@string/stat_age_group_cases"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textColor="#000000"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/stat_age_update"
@@ -517,16 +523,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Data dihimpun: ... (0%)"
-                        android:textSize="14sp"
-                        android:textColor="#000000"/>
+                        android:text="@string/loading_text"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/stat_shimmer_age_graph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_height="180dp"
-                        android:layout_width="fill_parent"
-                        android:id="@+id/stat_shimmer_age_graph"
                         android:visibility="gone">
 
                         <LinearLayout
@@ -544,21 +550,21 @@
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/stat_age_graph"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_width="fill_parent"
-                        android:layout_height="250dp"/>
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginTop="18dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Jenis Kelamin"
-                        android:textStyle="bold"
+                        android:text="@string/stat_sex_group_cases"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textColor="#000000"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/stat_sex_update"
@@ -566,16 +572,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Data dihimpun: ... (0%)"
-                        android:textSize="14sp"
-                        android:textColor="#000000"/>
+                        android:text="@string/loading_text"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/stat_shimmer_sex_graph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_height="180dp"
-                        android:layout_width="fill_parent"
-                        android:id="@+id/stat_shimmer_sex_graph"
                         android:visibility="gone">
 
                         <LinearLayout
@@ -584,7 +590,8 @@
                             android:gravity="center">
 
                             <include layout="@layout/placeholder_graph"/>
-                            <include layout="@layout/placeholder_graph"/>
+                            <include layout="@layout/placeholder_graph"
+                                tools:ignore="TooManyViews" />
                             <include layout="@layout/placeholder_graph"/>
 
                         </LinearLayout>
@@ -593,14 +600,15 @@
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/stat_sex_graph"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_width="fill_parent"
-                        android:layout_height="250dp"/>
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="18dp">
+                        android:layout_height="18dp"
+                        tools:ignore="UselessLeaf">
                     </LinearLayout>
 
                 </LinearLayout>

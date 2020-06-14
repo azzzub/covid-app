@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/bottom_prixa_time_countdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:text="(5)"
+            android:text="@string/null_text"
             android:textStyle="bold"
-            android:textSize="17dp"
-            android:textColor="#000" />
+            android:textSize="17sp"
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Anda akan dialihkan ke"
-            android:textStyle="bold"
-            android:textSize="17dp"
-            android:textColor="#000" />
+            android:text="@string/prixa_title"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -35,32 +36,35 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
-        android:src="@drawable/prixa"/>
+        android:src="@drawable/prixa"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="Sistem kecerdasan buatan yang Prixa.ai sediakan akan mendeteksi gejala covid-19 yang mungkin kamu alami."
-        android:textSize="15dp"
-        android:textColor="#000"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="@string/prixa_desc"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Segala hak diserahkan penuh kepada Prixa.ai"
-        android:textSize="10dp"
-        android:textColor="#000"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="@string/prixa_footer1"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="© prixa.ai"
-        android:textSize="10dp"
-        android:textColor="#000"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="@string/prixa_footer2"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
 </LinearLayout>

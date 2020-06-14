@@ -1,10 +1,11 @@
 # Covid-19 App
 
-![Development Stage](https://img.shields.io/badge/developing%20status-trial-green) Some issues might still be open.
+![GitHub All Releases](https://img.shields.io/github/downloads/azzzub/covid-app/total?color=brightgreen)   ![Development Stage](https://img.shields.io/badge/developing%20status-trial-blue) Some issues might still be open.
 
-This app based on Java to provide covid-19 information
+This app based on Java to provide covid-19 information 🌎
 
-![alt text](https://covid19.ayub.dev/public/covid19_header.png)
+The preview of this app *(still on version 1.0)* 🧐
+<img src="https://covid19.ayub.dev/public/covid19_header.png" height="420"/> <img src="https://ayub.dev/assets/portfolio/detail/port4/port4-4.gif" height="420"/> 
 
 ## Getting Started  📚
 

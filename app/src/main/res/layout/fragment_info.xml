@@ -34,6 +34,50 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:id="@+id/info_language_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_country"
+                    android:backgroundTint="@android:color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/icon_language"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="6dp"
+                        android:gravity="center"
+                        android:text="@string/info_lang_title"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/icon_arrow_down"
+                        tools:ignore="ContentDescription" />
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -76,12 +120,12 @@
                     android:id="@+id/info_mail_button"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:background="@drawable/rounded_country"
+                    android:background="@drawable/rounded_website_button"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="8dp"
+                    android:paddingLeft="10dp"
                     android:paddingRight="8dp">
 
                     <ImageView
@@ -98,7 +142,7 @@
                         android:layout_marginRight="10dp"
                         android:gravity="center"
                         android:text="@string/info_contact_me"
-                        android:textColor="@color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -115,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="right"
-                    android:background="@drawable/rounded_country"
+                    android:background="@drawable/rounded_callnow_button"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
@@ -137,7 +181,7 @@
                         android:layout_marginRight="10dp"
                         android:gravity="center"
                         android:text="@string/info_ayub_dev"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 

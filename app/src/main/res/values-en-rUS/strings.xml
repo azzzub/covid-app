@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Covid-19</string>
+    <string name="loading_text" tools:ignore="TypographyEllipsis">Loading...</string>
+    <string name="web_view_loading_page" tools:ignore="TypographyEllipsis">Loading the page...</string>
+    <string name="prixa_title">You\'ll be redirected to</string>
+    <string name="prixa_desc">The artificial intelligence system that Prixa.ai provides will detect COVID-19 symptoms that you may have.</string>
+    <string name="prixa_footer1">All rights are fully delegated to Prixa.ai</string>
+    <string name="home_header">Are you felling sick?</string>
+    <string name="home_desc">If you feel sick with any of covid-19 symptoms, please call immediately for help.</string>
+    <string name="home_call">Call Now</string>
+    <string name="home_news_header">News</string>
+    <string name="home_preventive_header">Prevention</string>
+    <string name="home_preventive1">Avoid Close Contact</string>
+    <string name="home_preventive2">Clean Your Hand Often</string>
+    <string name="home_preventive3">Wear a Face Mask</string>
+    <string name="home_test_header">Do your own test!</string>
+    <string name="home_test_desc">Follow the instruction to do your own test</string>
+    <string name="info_title">Information</string>
+    <string name="info_desc">Version 1.0 © Covid-19 App 2020</string>
+    <string name="info_desc2">Developed by</string>
+    <string name="info_acknowledgement">Acknowledgement</string>
+    <string name="info_ack1">Data Information from data.covid19.go.id</string>
+    <string name="info_ack2">UI design from simantOo for Nickelfox (free use)</string>
+    <string name="info_ack3">Image Illustration from freepik.com (free use)</string>
+    <string name="info_ack4">Health test based on Artificial Intelligent by prixa.ai</string>
+    <string name="info_term">Term and Condition</string>
+    <string name="maps_title">Case per Province</string>
+    <string name="stat_title">Statistic</string>
+    <string name="stat_subtitle">Cases Summary</string>
+    <string name="stat_positive">Positive</string>
+    <string name="stat_death">Death</string>
+    <string name="stat_cured">Cured</string>
+    <string name="stat_monitoring">Monitoring</string>
+    <string name="stat_patient">Patient</string>
+    <string name="stat_cumulative_cases">Cumulative Cases</string>
+    <string name="stat_updated_cases">Updated Cases</string>
+    <string name="stat_condition_positive_cases">Condition Causes Positive Cases</string>
+    <string name="stat_positive_symptom_cases">Positive Cases Symptom</string>
+    <string name="stat_age_group_cases">Age Group</string>
+    <string name="stat_sex_group_cases">Sex Group</string>
+    <string name="info_window_prov_cases">"Cases: "</string>
+    <string name="info_window_prov_death">"Death: "</string>
+    <string name="info_window_prov_cured">"Cured: "</string>
+    <string name="info_window_prov_treated">"Treated: "</string>
+    <string name="info_window_prov_subtitle">All Indonesia cases</string>
+    <string name="info_window_prov_subtitle2">"Cases Based on: "</string>
+    <string name="info_window_prov_sex">"Sex: "</string>
+    <string name="info_window_prov_age">"Age: "</string>
+    <string name="prov_layout_search" tools:ignore="TypographyEllipsis">Search Province...</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_stats">Statistic</string>
+    <string name="menu_maps">Maps</string>
+    <string name="menu_info">Information</string>
+
+    <!--    PREVENTIVE STRING ASSET-->
+    <string name="about">
+        This application is not intended for anyone who makes this application as a benchmark against
+        covid-19 information although all information in this application is downloaded from the Indonesia
+        official covid-19 government website (covid19.go.id). But this application is intended for software developer
+        enthusiast to explore our potential in developing an application which in this case is intended for a personal portfolio.
+        If the user feels disadvantaged when using this application, all full responsibility is yours.
+        But if you feels benefited, you can give some positive feedback on the contact button above. Surakarta, 2020
+    </string>
+    <string name="social_distancing">
+        With social distancing, we reduce contact with each other to prevent COVID-19 spread. Conversely, if you turn out
+        infected but not aware of it, so keeping away from the crowd will really help prevent the spread.\n\n
+        So, if someone infected with this virus then accidentally coughs or sneezes without closing his mouth,
+        then the droplet will fall on a nearby surface. When there are other people who are not infected holding
+        the surface, then touches the mouth, nose or eyes without washing hands first, he has high infected risk.
+        \n\nThis is what makes the transmission of this disease rise dramatically in a short time.
+        Many people are not aware that they are infected, then go to various locations to meet friends
+        and relatives. As a result, the spread of this virus is increasingly widespread.
+    </string>
+    <string name="social_distancing_citation">
+        From: https://lifestyle.kompas.com/read/2020/03/16/143303720/social-distancing-efektif-cegah-penyebaran-corona-bagaimana-caranya?page=all
+    </string>
+
+    <string name="wash_hand">
+        World Health Organization (WHO) recommends that everyone always wash their hands
+        in order to prevent the spread of the corona virus COVID-19. Clean your hands regularly and thoroughly with soap
+        and water or alcohol-based liquids.\n\nWash your hands with soap and water or use cleaning fluid
+        alcohol-based can kill viruses that may be in your hands. Washing hands can get you
+        stay healthy and prevent the spread of respiratory infections and diarrhea from one person to another.\n\nGerms can
+        spread from other people or surfaces when you: \ n1. Touch your eyes, nose and mouth with hands
+        not washed.\n2. Eat or prepare food and drinks with your hands not washed.\n3. Touch the surface
+        or contaminated object.\n4. Flinches, coughs, or sneezes on the hands and then touches the hands
+        other people or objects.
+    </string>
+    <string name="wash_hand_citation">
+        From: https://tirto.id/cara-cuci-tangan-dengan-7-langkah-menurut-who-untuk-cegah-corona-eLyQ
+    </string>
+
+    <string name="wear_mask">
+        Research from the University of Hong Kong and the University of Maryland found that masks
+        simple blocking 100 percent of droplets and aerosols. The Guardian writes, countries that are
+        has required their citizen wearing a face mask from the beginning shows a lower mortality rate than
+        countries that don\'t enforce it.\n\nHowever, the big challenge is using masks only
+        will work if most people use it. Analysis from the Food and Drug Administration (FDA)
+        about the flu estimates, if 50 percent of the population uses masks, transmission of the virus can be reduced
+        by half. Meanwhile, if 80 percent of the population uses masks, the virus can be lost.\n\nBecause
+        that, various regions are currently adopting laws that require the use of masks in crowded places
+        such as public transportation and shops.
+    </string>
+    <string name="wear_mask_citation">
+        From: https://www.kompas.com/tren/read/2020/04/08/073100465/pandemi-virus-corona-dan-alasan-kenapa-kini-kita-semua-harus-pakai-masker-?page=all#page4
+    </string>
+    <string name="info_lang_title">Language</string>
+
+</resources>

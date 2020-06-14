@@ -1,14 +1,28 @@
 package com.zub.covid_19;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Locale;
+import java.util.Objects;
+
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +36,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+            bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
@@ -35,6 +53,20 @@ public class MainActivity extends AppCompatActivity {
 //        fragmentManager.beginTransaction().add(R.id.fragment_container, homeFragment, "1").commit();
 //
 //        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+    }
+
+    public void loadLocale() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = sharedPreferences.getString("language", "");
+        Resources resources = getResources();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Configuration configuration = resources.getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            configuration.setLocale(new Locale(language.toLowerCase()));
+        } else {
+            configuration.locale = new Locale(language.toLowerCase());
+        }
+        resources.updateConfiguration(configuration,displayMetrics);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =

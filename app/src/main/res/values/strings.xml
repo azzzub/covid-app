@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Covid-19</string>
+    <string name="app_name" translatable="false">Covid-19</string>
 
 <!--    GLOBAL STRING ASSET-->
-    <string name="null_text">null</string>
+    <string name="null_text" translatable="false">null</string>
     <string name="loading_text" tools:ignore="TypographyEllipsis">Memuat...</string>
 
 <!--    WEB VIEW STRING ASSET-->
@@ -12,14 +12,14 @@
     <string name="prixa_title">Anda akan dialihkan ke</string>
     <string name="prixa_desc">Sistem kecerdasan buatan yang Prixa.ai sediakan akan mendeteksi gejala covid-19 yang mungkin kamu alami.</string>
     <string name="prixa_footer1">Segala hak diserahkan penuh kepada Prixa.ai</string>
-    <string name="prixa_footer2">© prixa.ai</string>
+    <string name="prixa_footer2" translatable="false">© prixa.ai</string>
 
 <!--    FRAGMENT HOME STRING ASSET-->
-    <string name="home_country_ina">INA</string>
+    <string name="home_country_ina" translatable="false">INA</string>
     <string name="home_header">Apakah kamu merasa sakit?</string>
     <string name="home_desc">Jika kamu merasa sakit dengan gejala covid-19, segera hubungi layanan darurat agar segera ditangani.</string>
     <string name="home_call">Telepon</string>
-    <string name="home_website">Website</string>
+    <string name="home_website" translatable="false">Website</string>
     <string name="home_news_header">Berita</string>
     <string name="home_preventive_header">Pencegahan</string>
     <string name="home_preventive1">Jaga Jarak Sosial</string>
@@ -32,14 +32,15 @@
     <string name="info_title">Informasi</string>
     <string name="info_desc">Versi 1.0 © Covid-19 App 2020</string>
     <string name="info_desc2">Dikembangkan oleh</string>
-    <string name="info_contact_me">Contact Me</string>
-    <string name="info_ayub_dev">ayub.dev</string>
+    <string name="info_contact_me" translatable="false">Contact Me</string>
+    <string name="info_ayub_dev" translatable="false">ayub.dev</string>
     <string name="info_acknowledgement">Ucapan Terima Kasih</string>
     <string name="info_ack1">Data informasi oleh data.covid19.go.id</string>
     <string name="info_ack2">Desain UI oleh simantOo untuk Nickelfox (free use)</string>
     <string name="info_ack3">Desain gambar ilustrasi oleh freepik.com (free use)</string>
     <string name="info_ack4">Tes kesehatan dengan kecerdasan buatan oleh prixa.ai</string>
     <string name="info_term">Pengunaan</string>
+    <string name="info_lang_title">Bahasa</string>
 
 <!--    FRAGMENT MAPS STRING ASSET-->
     <string name="maps_title">Kasus Per Provinsi</string>

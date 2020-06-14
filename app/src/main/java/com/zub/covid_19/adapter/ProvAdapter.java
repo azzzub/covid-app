@@ -1,29 +1,16 @@
 package com.zub.covid_19.adapter;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
 import com.zub.covid_19.R;
 import com.zub.covid_19.api.provData.ProvData;
-
-import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -98,7 +85,7 @@ public class ProvAdapter extends RecyclerView.Adapter<ProvAdapter.ViewHolder> {
             mProvName = itemView.findViewById(R.id.prov_name);
             mProvCase = itemView.findViewById(R.id.prov_case);
             mProvDeath = itemView.findViewById(R.id.prov_death);
-            mProvHealed = itemView.findViewById(R.id.prov_healed);
+            mProvHealed = itemView.findViewById(R.id.prov_cured);
             mProvTreated = itemView.findViewById(R.id.prov_treated);
 
             mListClickedListener = listClickedListener;

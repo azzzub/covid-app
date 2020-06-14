@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,8 +11,8 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_height="0dp"
             android:layout_width="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/rounded_header"
             android:orientation="vertical">
@@ -20,16 +21,16 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Informasi"
-                    android:textColor="#FFFFFF"
+                    android:text="@string/info_title"
+                    android:textColor="@color/white"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -47,8 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="start"
-                    android:text="Versi 1.0 © Covid-19 App 2020"
-                    android:textColor="#FFFFFF"
+                    android:text="@string/info_desc"
+                    android:textColor="@color/white"
                     android:textSize="12sp" />
 
                 <TextView
@@ -56,8 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="Dikembangkan oleh"
-                    android:textColor="#FFFFFF"
+                    android:text="@string/info_desc2"
+                    android:textColor="@color/white"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -68,77 +69,77 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
+                android:baselineAligned="false"
                 android:gravity="center">
 
                 <LinearLayout
                     android:id="@+id/info_mail_button"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
                     android:background="@drawable/rounded_country"
-                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
-                    android:clickable="true">
+                    android:orientation="horizontal"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_gravity="center"
                         android:layout_marginRight="6dp"
-                        android:src="@drawable/icon_mail"
-                        android:layout_gravity="center" />
+                        android:src="@drawable/icon_mail" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Contact Me"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
                         android:gravity="center"
-                        />
+                        android:text="@string/info_contact_me"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_height="wrap_content"
                     android:layout_width="0dp"
-                    android:layout_weight="1">
-
-                </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    tools:ignore="UselessLeaf" />
 
                 <LinearLayout
                     android:id="@+id/info_website_button"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:background="@drawable/rounded_country"
-                    android:orientation="horizontal"
-                    android:gravity="center"
                     android:layout_gravity="right"
-                    android:clickable="true">
+                    android:background="@drawable/rounded_country"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_gravity="center"
                         android:layout_marginRight="6dp"
-                        android:src="@drawable/icon_web_black"
-                        android:layout_gravity="center"/>
+                        android:src="@drawable/icon_web_black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="ayub.dev"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
                         android:gravity="center"
-                        />
+                        android:text="@string/info_ayub_dev"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -150,112 +151,116 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingTop="15dp"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingTop="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Ucapan Terima Kasih"
-                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_acknowledgement"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Data informasi oleh data.covid19.go.id"
-                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_ack1"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/gugus_tugas"/>
+                android:src="@drawable/gugus_tugas"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Desain UI oleh simantOo untuk Nickelfox (free use)"
-                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_ack2"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/dribbble_logo"/>
+                android:src="@drawable/dribbble_logo"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Desain gambar ilustrasi oleh freepik.com (free use)"
-                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_ack3"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/freepik_logo"/>
+                android:src="@drawable/freepik_logo"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Tes kesehatan dengan kecerdasan buatan oleh prixa.ai"
-                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_ack4"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/prixa"/>
+                android:src="@drawable/prixa"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Pengunaan"
-                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_term"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:gravity="center"
                 android:text="@string/about"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:gravity="center"/>
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

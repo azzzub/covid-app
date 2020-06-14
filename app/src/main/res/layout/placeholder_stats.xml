@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#dddddd">
+                android:backgroundTint="@color/gray"
+                android:orientation="vertical"
+                tools:targetApi="lollipop">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
                     android:text=""
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <TextView
@@ -38,28 +40,28 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#dddddd">
+                android:backgroundTint="@color/gray"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
                     android:text=""
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <TextView
@@ -69,9 +71,9 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="26sp" />
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -80,25 +82,25 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#dddddd">
+                android:backgroundTint="@color/gray"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
                     android:text=""
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <TextView
@@ -108,28 +110,29 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="23sp" />
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#dddddd">
+                android:backgroundTint="@color/gray"
+                android:orientation="vertical"
+                tools:targetApi="lollipop">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
                     android:text=""
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <TextView
@@ -139,28 +142,28 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="23sp" />
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_stats"
-                android:backgroundTint="#dddddd">
+                android:backgroundTint="@color/gray"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
                     android:text=""
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <TextView
@@ -170,9 +173,9 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="23sp" />
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

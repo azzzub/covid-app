@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginLeft="14dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
-    android:layout_height="200dp">
+    android:layout_height="200dp"
+    android:layout_marginLeft="14dp">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/rounded_gradient_test"
-        android:backgroundTint="#DDDDDD">
+        android:backgroundTint="@color/gray"
+        tools:targetApi="lollipop">
 
     </RelativeLayout>
 

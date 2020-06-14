@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="@color/white">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -26,7 +25,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="20dp"
+                    tools:ignore="UselessParent">
 
                     <TableRow
                         android:layout_width="wrap_content"
@@ -38,48 +38,50 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_weight="1"
-                            android:text="Covid-19"
-                            android:textColor="#FFFFFF"
+                            android:gravity="start|center"
+                            android:text="@string/app_name"
+                            android:textColor="@color/white"
                             android:textSize="25sp"
-                            android:textStyle="bold"
-                            android:gravity="left|center"/>
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:id="@+id/home_country_button"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:paddingLeft="8dp"
-                            android:paddingRight="8dp"
                             android:background="@drawable/rounded_country"
-                            android:orientation="horizontal"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
-                            android:clickable="true">
+                            android:orientation="horizontal"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
 
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
+                                android:layout_gravity="center"
                                 android:layout_marginRight="6dp"
-                                android:src="@drawable/icon_indonesia"
-                                android:layout_gravity="center"/>
+                                android:contentDescription="@string/null_text"
+                                android:src="@drawable/icon_indonesia" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
-                                android:text="INA"
-                                android:textColor="#000000"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="10dp"
                                 android:gravity="center"
-                                />
+                                android:text="@string/home_country_ina"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                             <ImageView
                                 android:layout_width="14dp"
                                 android:layout_height="14dp"
+                                android:layout_gravity="center"
                                 android:layout_marginRight="6dp"
                                 android:src="@drawable/icon_arrow_down"
-                                android:layout_gravity="center"/>
+                                tools:ignore="ContentDescription" />
 
                         </LinearLayout>
 
@@ -97,11 +99,11 @@
                             android:layout_marginRight="20dp"
                             android:layout_span="2"
                             android:layout_weight="1"
-                            android:text="Apakah kamu merasa sakit?"
-                            android:textColor="#FFFFFF"
+                            android:gravity="start"
+                            android:text="@string/home_header"
+                            android:textColor="@color/white"
                             android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:gravity="left"/>
+                            android:textStyle="bold" />
 
                     </TableRow>
 
@@ -113,12 +115,12 @@
                         <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_span="2"
-                            android:layout_weight="1"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
-                            android:text="Jika kamu merasa sakit dengan gejala covid-19, segera hubungi layanan darurat agar segera ditangani."
-                            android:textColor="#FFFFFF"
+                            android:layout_span="2"
+                            android:layout_weight="1"
+                            android:text="@string/home_desc"
+                            android:textColor="@color/white"
                             android:textSize="14sp" />
 
                     </TableRow>
@@ -126,59 +128,63 @@
                     <TableRow
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_marginTop="20dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginRight="20dp">
 
                         <LinearLayout
                             android:id="@+id/home_call_button"
-                            android:background="@drawable/rounded_callnow_button"
-                            android:layout_height="40dp"
                             android:layout_width="0dp"
+                            android:layout_height="40dp"
                             android:layout_marginRight="10dp"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            android:clickable="true">
+                            android:background="@drawable/rounded_callnow_button"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center">
 
                             <ImageView
                                 android:layout_width="18dp"
                                 android:layout_height="18dp"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="6dp"
-                                android:src="@drawable/icon_phone"/>
+                                android:src="@drawable/icon_phone"
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Telepon"
-                                android:textColor="#FFFFFF" />
+                                android:text="@string/home_call"
+                                android:textColor="@color/white" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/home_website_button"
-                            android:background="@drawable/rounded_website_button"
-                            android:layout_height="40dp"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="40dp"
                             android:layout_marginLeft="10dp"
-                            android:gravity="center"
-                            android:clickable="true">
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_website_button"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center">
 
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="6dp"
-                                android:src="@drawable/icon_web"/>
+                                android:src="@drawable/icon_web"
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Website"
-                                android:textColor="#FFFFFF" />
+                                android:text="@string/home_website"
+                                android:textColor="@color/white" />
 
                         </LinearLayout>
 
@@ -195,19 +201,19 @@
                 <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_span="3"
-                        android:layout_gravity="left"
-                        android:text="Berita"
-                        android:textStyle="bold"
-                        android:textColor="#000000"
-                        android:textSize="20sp"/>
+                        android:text="@string/home_news_header"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                 </TableRow>
 
@@ -216,8 +222,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    shimmer:shimmer_duration="1000"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    shimmer:shimmer_duration="1000">
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -231,123 +237,129 @@
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/news_recycler_view"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/news_recycleview" />
+                    android:layout_marginTop="10dp" />
 
                 <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:layout_span="3"
-                        android:layout_gravity="left"
-                        android:text="Pencegahan"
-                        android:textStyle="bold"
-                        android:textColor="#000000"
-                        android:textSize="20sp"/>
+                        android:text="@string/home_preventive_header"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp">
 
                     <LinearLayout
                         android:id="@+id/home_preventive_1"
-                        android:layout_height="130dp"
-                        android:layout_weight="1"
-                        android:layout_marginRight="5dp"
-                        android:orientation="vertical"
                         android:layout_width="wrap_content"
+                        android:layout_height="130dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
                         android:background="@drawable/rounded_preventive"
                         android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
                         tools:targetApi="lollipop">
 
                         <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="90dp"
+                            android:gravity="center"
                             android:paddingTop="4dp"
                             android:src="@drawable/social_distancing"
-                            android:gravity="center"
-                            android:layout_width="wrap_content" />
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Jaga Jarak Sosial"
-                            android:textSize="14sp"
-                            android:textColor="#000000"
-                            android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="@string/home_preventive1"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/home_preventive_2"
-                        android:layout_height="130dp"
-                        android:layout_weight="1"
-                        android:layout_marginRight="5dp"
-                        android:orientation="vertical"
                         android:layout_width="wrap_content"
+                        android:layout_height="130dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
                         android:background="@drawable/rounded_preventive"
                         android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
                         tools:targetApi="lollipop">
 
                         <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="90dp"
-                            android:src="@drawable/wash_hand"
-                            android:paddingTop="4dp"
                             android:gravity="center"
-                            android:layout_width="wrap_content" />
+                            android:paddingTop="4dp"
+                            android:src="@drawable/wash_hand"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sering Cuci Tangan"
-                            android:textSize="14sp"
-                            android:textColor="#000000"
-                            android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="@string/home_preventive2"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/home_preventive_3"
+                        android:layout_width="wrap_content"
                         android:layout_height="130dp"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
                         android:background="@drawable/rounded_preventive"
                         android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
                         tools:targetApi="lollipop">
 
                         <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="90dp"
-                            android:src="@drawable/wear_mask"
-                            android:paddingTop="4dp"
                             android:gravity="center"
-                            android:layout_width="wrap_content" />
+                            android:paddingTop="4dp"
+                            android:src="@drawable/wear_mask"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pakailah Masker"
-                            android:textSize="14sp"
-                            android:textColor="#000000"
-                            android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="@string/home_preventive3"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -356,8 +368,8 @@
                 <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp">
 
@@ -365,19 +377,21 @@
                         android:layout_width="fill_parent"
                         android:layout_height="110dp"
                         android:layout_span="3"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        tools:ignore="UselessParent">
 
                         <RelativeLayout
                             android:id="@+id/home_do_test_button"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_marginTop="10dp"
+                            android:background="@drawable/rounded_gradient_test"
                             android:clickable="true"
-                            android:background="@drawable/rounded_gradient_test"/>
+                            android:focusable="true" />
 
                         <TableLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="fill_parent" >
+                            android:layout_height="fill_parent">
 
                             <TableRow
                                 android:layout_width="fill_parent"
@@ -389,31 +403,33 @@
                                     android:layout_width="110dp"
                                     android:layout_height="110dp"
                                     android:layout_marginRight="10dp"
-                                    android:src="@drawable/do_your_test"/>
+                                    android:src="@drawable/do_your_test"
+                                    tools:ignore="ContentDescription" />
 
                                 <LinearLayout
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
                                     android:layout_weight="1"
-                                    android:layout_gravity="center">
+                                    android:orientation="vertical">
 
                                     <TextView
                                         android:layout_width="fill_parent"
                                         android:layout_height="fill_parent"
                                         android:layout_marginTop="10dp"
                                         android:layout_marginBottom="3dp"
-                                        android:text="Tes sekarang!"
+                                        android:text="@string/home_test_header"
+                                        android:textColor="@color/white"
+                                        android:textSize="18sp"
                                         android:textStyle="bold"
-                                        android:textColor="#FFFFFF"
-                                        android:textSize="18sp"/>
+                                        tools:ignore="TooDeepLayout" />
 
                                     <TextView
                                         android:layout_width="fill_parent"
                                         android:layout_height="fill_parent"
-                                        android:text="Ikuti langkah-langkah sesuai dengan instruksi"
-                                        android:textColor="#FFFFFF"
-                                        android:textSize="14sp"/>
+                                        android:text="@string/home_test_desc"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp" />
 
                                 </LinearLayout>
 
@@ -429,6 +445,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

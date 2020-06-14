@@ -1,134 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/prov_list_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/prov_list_layout"
+    android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:paddingRight="10dp">
 
         <TextView
+            android:id="@+id/prov_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Provinsi"
-            android:gravity="left"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:textStyle="bold"
-            android:textColor="#000"
+            android:gravity="start"
+            android:text="@string/null_text"
+            android:textColor="@color/black"
             android:textSize="15sp"
-            android:id="@+id/prov_name"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="5dp"
+            android:orientation="vertical"
             android:paddingLeft="20dp">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kasus:"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
-                    android:textColor="#999999"
+                    android:gravity="start"
+                    android:text="@string/info_window_prov_cases"
+                    android:textColor="@color/gray700"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/prov_case"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="null"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="7dp"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
-                    android:id="@+id/prov_case"/>
+                    android:gravity="start"
+                    android:text="@string/null_text"
+                    android:textColor="@color/gray700"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Meninggal:"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
-                    android:textColor="#999999"
+                    android:gravity="start"
+                    android:text="@string/info_window_prov_death"
+                    android:textColor="@color/gray700"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/prov_death"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="null"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
-                    android:id="@+id/prov_death"/>
+                    android:gravity="start"
+                    android:text="@string/null_text"
+                    android:textColor="@color/gray700"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sembuh:"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
-                    android:textColor="#999999"
+                    android:gravity="start"
+                    android:text="@string/info_window_prov_cured"
+                    android:textColor="@color/gray700"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/prov_cured"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="null"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="7dp"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
-                    android:id="@+id/prov_healed"/>
+                    android:gravity="start"
+                    android:text="@string/null_text"
+                    android:textColor="@color/gray700"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dirawat:"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
-                    android:textColor="#999999"
+                    android:gravity="start"
+                    android:text="@string/info_window_prov_treated"
+                    android:textColor="@color/gray700"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/prov_treated"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="null"
-                    android:gravity="left"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
-                    android:id="@+id/prov_treated"/>
+                    android:gravity="start"
+                    android:text="@string/null_text"
+                    android:textColor="@color/gray700"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -137,8 +137,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_height="1dp"
         android:layout_width="fill_parent"
-        android:background="@drawable/horizontal_divider"/>
+        android:layout_height="1dp"
+        android:background="@drawable/horizontal_divider" />
 
 </LinearLayout>

@@ -114,7 +114,7 @@ public class StatsFragment extends Fragment {
         TextView mAgeUpdate = view.findViewById(R.id.stat_age_update);
         TextView mSexUpdate = view.findViewById(R.id.stat_sex_update);
 
-        ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_codition_graph);
+        ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_condition_graph);
         ShimmerFrameLayout mAgeGraphShimmer = view.findViewById(R.id.stat_shimmer_age_graph);
         ShimmerFrameLayout mSexGraphShimmer = view.findViewById(R.id.stat_shimmer_sex_graph);
         ShimmerFrameLayout mSymptomGraphShimmer = view.findViewById(R.id.stat_shimmer_symptom_graph);

@@ -1,5 +1,78 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Covid-19</string>
+
+<!--    GLOBAL STRING ASSET-->
+    <string name="null_text">null</string>
+    <string name="loading_text" tools:ignore="TypographyEllipsis">Memuat...</string>
+
+<!--    WEB VIEW STRING ASSET-->
+    <string name="web_view_loading_page" tools:ignore="TypographyEllipsis">Laman sedang dimuat...</string>
+
+<!--    BOTTOM SHEET PRIXA REDIRECT ASSET-->
+    <string name="prixa_title">Anda akan dialihkan ke</string>
+    <string name="prixa_desc">Sistem kecerdasan buatan yang Prixa.ai sediakan akan mendeteksi gejala covid-19 yang mungkin kamu alami.</string>
+    <string name="prixa_footer1">Segala hak diserahkan penuh kepada Prixa.ai</string>
+    <string name="prixa_footer2">© prixa.ai</string>
+
+<!--    FRAGMENT HOME STRING ASSET-->
+    <string name="home_country_ina">INA</string>
+    <string name="home_header">Apakah kamu merasa sakit?</string>
+    <string name="home_desc">Jika kamu merasa sakit dengan gejala covid-19, segera hubungi layanan darurat agar segera ditangani.</string>
+    <string name="home_call">Telepon</string>
+    <string name="home_website">Website</string>
+    <string name="home_news_header">Berita</string>
+    <string name="home_preventive_header">Pencegahan</string>
+    <string name="home_preventive1">Jaga Jarak Sosial</string>
+    <string name="home_preventive2">Sering Cuci Tangan</string>
+    <string name="home_preventive3">Pakailah Masker</string>
+    <string name="home_test_header">Tes sekarang!</string>
+    <string name="home_test_desc">Ikuti langkah-langkah sesuai dengan instruksi</string>
+
+<!--    FRAGMENT INFO STRING ASSET-->
+    <string name="info_title">Informasi</string>
+    <string name="info_desc">Versi 1.0 © Covid-19 App 2020</string>
+    <string name="info_desc2">Dikembangkan oleh</string>
+    <string name="info_contact_me">Contact Me</string>
+    <string name="info_ayub_dev">ayub.dev</string>
+    <string name="info_acknowledgement">Ucapan Terima Kasih</string>
+    <string name="info_ack1">Data informasi oleh data.covid19.go.id</string>
+    <string name="info_ack2">Desain UI oleh simantOo untuk Nickelfox (free use)</string>
+    <string name="info_ack3">Desain gambar ilustrasi oleh freepik.com (free use)</string>
+    <string name="info_ack4">Tes kesehatan dengan kecerdasan buatan oleh prixa.ai</string>
+    <string name="info_term">Pengunaan</string>
+
+<!--    FRAGMENT MAPS STRING ASSET-->
+    <string name="maps_title">Kasus Per Provinsi</string>
+
+<!--    FRAGMENT STATS STRING ASSET -->
+    <string name="stat_title">Statistik</string>
+    <string name="stat_subtitle">Total Kasus Hingga Hari Ini</string>
+    <string name="stat_positive">Positif</string>
+    <string name="stat_death">Meninggal</string>
+    <string name="stat_cured">Sembuh</string>
+    <string name="stat_monitoring">ODP</string>
+    <string name="stat_patient">PDP</string>
+    <string name="stat_cumulative_cases">Kasus Kumulatif</string>
+    <string name="stat_updated_cases">Penambahan Kasus</string>
+    <string name="stat_condition_positive_cases">Kondisi Penyerta Positif</string>
+    <string name="stat_positive_symptom_cases">Gejala Positif</string>
+    <string name="stat_age_group_cases">Kelompok Umur</string>
+    <string name="stat_sex_group_cases">Jenis Kelamin</string>
+
+<!--    INFO WINDOW PROV STRING ASSET-->
+    <string name="info_window_prov_cases">Kasus: </string>
+    <string name="info_window_prov_death">Meninggal: </string>
+    <string name="info_window_prov_cured">Sembuh: </string>
+    <string name="info_window_prov_treated">Dirawat: </string>
+    <string name="info_window_prov_subtitle">Dari seluruh kasus di Indonesia</string>
+    <string name="info_window_prov_subtitle2">Data Kasus Berdasarkan:</string>
+    <string name="info_window_prov_sex">Jenis Kelamin:</string>
+    <string name="info_window_prov_age">Umur:</string>
+
+<!--    PROVINCE LAYOUT STRING ASSET-->
+    <string name="prov_layout_search" tools:ignore="TypographyEllipsis">Cari provinsi ...</string>
+
+<!--    PREVENTIVE STRING ASSET-->
     <string name="about">
         Aplikasi ini tidak ditujukan kepada siapapun yang menjadikan aplikasi ini sebagai patokan terhadap
         informasi covid-19 walaupun segala informasi di aplikasi ini diunduh dari situs resmi covid-19 pemerintah
@@ -52,4 +125,8 @@
     <string name="wear_mask_citation">
         Sumber: https://www.kompas.com/tren/read/2020/04/08/073100465/pandemi-virus-corona-dan-alasan-kenapa-kini-kita-semua-harus-pakai-masker-?page=all#page4
     </string>
+    <string name="menu_home">Beranda</string>
+    <string name="menu_stats">Statistik</string>
+    <string name="menu_maps">Peta</string>
+    <string name="menu_info">Informasi</string>
 </resources>

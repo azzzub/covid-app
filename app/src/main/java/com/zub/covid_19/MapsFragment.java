@@ -6,6 +6,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,6 +20,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -70,6 +73,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.zub.covid_19.adapter.ProvAdapter;
 import com.zub.covid_19.api.provData.ProvData;
 import com.zub.covid_19.ui.BottomSheetMapsDialog;
+import com.zub.covid_19.util.LoadLocale;
 import com.zub.covid_19.vm.ProvDataViewModel;
 
 import org.w3c.dom.Text;
@@ -85,8 +89,6 @@ import java.util.Objects;
 public class MapsFragment extends Fragment implements
         OnMapReadyCallback,
         ProvAdapter.ListClickedListener {
-
-    private static final String TAG = "MapsFragment";
 
     private ProvAdapter provAdapter;
 
@@ -255,7 +257,7 @@ public class MapsFragment extends Fragment implements
         });
 
         provDataViewModel.getRegulerData().observe(this, new Observer<ProvData>() {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SetTextI18n", "DefaultLocale"})
             @Override
             public void onChanged(ProvData provData) {
                 List<ProvData.ProvListData> provListData = provData.getProvListDataLists();
@@ -271,12 +273,20 @@ public class MapsFragment extends Fragment implements
                     marker = googleMap.addMarker(new MarkerOptions().position(latLng));
                     markerArrayList.add(marker);
                 }
-                mProvCollectedData.setText("Data dihimpun: " +
-                        String.format("%.1f",provData.getCurrentData()) +
-                        "% pada " + provData.getLastUpdate());
+
+                LoadLocale loadLocale = new LoadLocale(getActivity());
+
+                if (loadLocale.getLocale().equals("en")) {
+                    mProvCollectedData.setText("Data collected: " +
+                            String.format("%.1f",provData.getCurrentData()) +
+                            "% on " + provData.getLastUpdate());
+                } else {
+                    mProvCollectedData.setText("Data dihimpun: " +
+                            String.format("%.1f",provData.getCurrentData()) +
+                            "% pada " + provData.getLastUpdate());
+                }
 
                 googleMap.setInfoWindowAdapter(new ProvInfoWindowAdapter());
-
 
                 setupBottomSheet(mProvDetailedCaseButton, provData);
 

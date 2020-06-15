@@ -1,15 +1,14 @@
 package com.zub.covid_19.repo;
 
-import android.content.res.Resources;
-import android.util.Log;
+import android.app.Activity;
+import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.bumptech.glide.load.engine.Resource;
-import com.zub.covid_19.R;
 import com.zub.covid_19.api.newsData.NewsData;
 import com.zub.covid_19.api.newsData.NewsDataFetch;
 import com.zub.covid_19.api.newsData.NewsDataHolder;
+import com.zub.covid_19.util.LoadLocale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,8 +17,6 @@ import timber.log.Timber;
 
 public class NewsDataRepository {
 
-    private static final String TAG = "NewsDataRepository";
-    
     private static NewsDataRepository newsDataRepository;
 
     public static NewsDataRepository getInstance() {
@@ -41,7 +38,7 @@ public class NewsDataRepository {
         return isLoading;
     }
 
-    public MutableLiveData<NewsData> getProvData() {
+    public MutableLiveData<NewsData> getNewsData() {
         MutableLiveData<NewsData> NewsData = new MutableLiveData<>();
         isLoading.setValue(true);
         newsDataHolder.getNews("699fa5b4ab4d49aab02a36bc88eb6cde")
@@ -58,6 +55,28 @@ public class NewsDataRepository {
                 Timber.e(t);
             }
         });
+
+        return NewsData;
+
+    }
+
+    public MutableLiveData<NewsData> getNewsDataEn() {
+        MutableLiveData<NewsData> NewsData = new MutableLiveData<>();
+        isLoading.setValue(true);
+        newsDataHolder.getNewsEn("699fa5b4ab4d49aab02a36bc88eb6cde")
+                .enqueue(new Callback<NewsData>() {
+                    @Override
+                    public void onResponse(Call<NewsData> call, Response<NewsData> response) {
+                        isLoading.setValue(false);
+                        NewsData.setValue(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewsData> call, Throwable t) {
+                        isLoading.setValue(false);
+                        Timber.e(t);
+                    }
+                });
 
         return NewsData;
 

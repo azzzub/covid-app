@@ -43,7 +43,7 @@
     <string name="info_window_prov_death">"Death: "</string>
     <string name="info_window_prov_cured">"Cured: "</string>
     <string name="info_window_prov_treated">"Treated: "</string>
-    <string name="info_window_prov_subtitle">All Indonesia cases</string>
+    <string name="info_window_prov_subtitle">of all Indonesia cases</string>
     <string name="info_window_prov_subtitle2">"Cases Based on: "</string>
     <string name="info_window_prov_sex">"Sex: "</string>
     <string name="info_window_prov_age">"Age: "</string>

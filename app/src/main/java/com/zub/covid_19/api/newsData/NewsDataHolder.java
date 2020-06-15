@@ -12,7 +12,10 @@ import retrofit2.http.Url;
 
 public interface NewsDataHolder {
 
-    @GET("v2/top-headlines?country=id&q=covid")
+    @GET("v2/top-headlines?country=id&q=covid-19")
     Call<NewsData> getNews(@Query("apiKey") String apiKey);
+
+    @GET("v2/top-headlines?q=covid-19&sortBy=popularity")
+    Call<NewsData> getNewsEn(@Query("apiKey") String apiKey);
 
 }

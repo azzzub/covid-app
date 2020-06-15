@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ import com.zub.covid_19.adapter.NewsAdapter;
 import com.zub.covid_19.api.newsData.NewsData;
 import com.zub.covid_19.ui.BottomSheetPreventionDialog;
 import com.zub.covid_19.ui.BottomSheetPrixaDialog;
+import com.zub.covid_19.util.LoadLocale;
 import com.zub.covid_19.util.SpacesItemDecoration;
 import com.zub.covid_19.vm.NewsDataViewModel;
 
@@ -75,6 +77,8 @@ public class HomeFragment extends Fragment {
         Toast mToast = Toast.makeText(getContext(), "", Toast.LENGTH_LONG);
         ButterKnife.bind(this, view);
 
+        LoadLocale loadLocale = new LoadLocale(getActivity());
+
         mCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,13 +117,13 @@ public class HomeFragment extends Fragment {
 
         mPreventive1.setOnClickListener(new View.OnClickListener() {
             Bundle bundle = new Bundle();
-            String passingTitle = "Jaga Jarak Sosial";
+            Integer passingTitle = string.home_preventive1;
             Integer passingHeader = drawable.social_distancing_header;
             Integer passingContent = string.social_distancing;
             Integer passingCitation = string.social_distancing_citation;
             @Override
             public void onClick(View view) {
-                bundle.putString("passingTitle", passingTitle);
+                bundle.putInt("passingTitle", passingTitle);
                 bundle.putInt("passingHeader", passingHeader);
                 bundle.putInt("passingContent", passingContent);
                 bundle.putInt("passingCitation", passingCitation);
@@ -130,13 +134,13 @@ public class HomeFragment extends Fragment {
 
         mPreventive2.setOnClickListener(new View.OnClickListener() {
             Bundle bundle = new Bundle();
-            String passingTitle = "Sering Cuci Tangan";
+            Integer passingTitle = string.home_preventive2;
             Integer passingHeader = drawable.wash_hand_header;
             Integer passingContent = string.wash_hand;
             Integer passingCitation = string.wash_hand_citation;
             @Override
             public void onClick(View view) {
-                bundle.putString("passingTitle", passingTitle);
+                bundle.putInt("passingTitle", passingTitle);
                 bundle.putInt("passingHeader", passingHeader);
                 bundle.putInt("passingContent", passingContent);
                 bundle.putInt("passingCitation", passingCitation);
@@ -147,13 +151,13 @@ public class HomeFragment extends Fragment {
 
         mPreventive3.setOnClickListener(new View.OnClickListener() {
             Bundle bundle = new Bundle();
-            String passingTitle = "Pakailah Masker";
+            Integer passingTitle = string.home_preventive3;
             Integer passingHeader = drawable.wear_mask_header;
             Integer passingContent = string.wear_mask;
             Integer passingCitation = string.wear_mask_citation;
             @Override
             public void onClick(View view) {
-                bundle.putString("passingTitle", passingTitle);
+                bundle.putInt("passingTitle", passingTitle);
                 bundle.putInt("passingHeader", passingHeader);
                 bundle.putInt("passingContent", passingContent);
                 bundle.putInt("passingCitation", passingCitation);
@@ -178,7 +182,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        newsDataViewModel.getNewsData().observe(this, new Observer<NewsData>() {
+        LiveData<NewsData> newsDataLiveData;
+
+        if (loadLocale.getLocale().equals("en")) {
+            newsDataLiveData = newsDataViewModel.getNewsDataEn();
+        } else {
+            newsDataLiveData = newsDataViewModel.getNewsData();
+        }
+
+        newsDataLiveData.observe(this, new Observer<NewsData>() {
             @Override
             public void onChanged(NewsData newsData) {
                 List<NewsData.Articles> articles = newsData.getArticles();

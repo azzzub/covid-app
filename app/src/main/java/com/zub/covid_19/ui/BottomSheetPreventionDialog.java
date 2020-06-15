@@ -32,9 +32,7 @@ public class BottomSheetPreventionDialog extends BottomSheetDialogFragment {
     @BindView(R.id.bottom_sheet_prevention_citation)
     TextView mCitation;
 
-    String passingTitle;
-    Integer passingHeader, passingContent, passingCitation;
-
+    Integer passingTitle, passingHeader, passingContent, passingCitation;
 
     @NonNull @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -63,7 +61,7 @@ public class BottomSheetPreventionDialog extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.bottom_sheet_prevention, container, false);
         ButterKnife.bind(this, view);
 
-        passingTitle = this.getArguments().getString("passingTitle");
+        passingTitle = this.getArguments().getInt("passingTitle");
         passingHeader = this.getArguments().getInt("passingHeader");
         passingContent = this.getArguments().getInt("passingContent");
         passingCitation = this.getArguments().getInt("passingCitation");

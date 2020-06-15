@@ -19,13 +19,16 @@ public class NewsDataViewModel extends ViewModel {
             return;
         }
         newsDataRepository = NewsDataRepository.getInstance();
-        newsData = newsDataRepository.getProvData();
         isLoading = newsDataRepository.getLoading();
 
     }
 
     public LiveData<NewsData> getNewsData() {
-        return newsData;
+        return newsDataRepository.getNewsData();
+    }
+
+    public LiveData<NewsData> getNewsDataEn() {
+        return newsDataRepository.getNewsDataEn();
     }
 
     public LiveData<Boolean> getLoading() {

@@ -61,10 +61,10 @@
     <string name="stat_sex_group_cases">Jenis Kelamin</string>
 
 <!--    INFO WINDOW PROV STRING ASSET-->
-    <string name="info_window_prov_cases">Kasus: </string>
-    <string name="info_window_prov_death">Meninggal: </string>
-    <string name="info_window_prov_cured">Sembuh: </string>
-    <string name="info_window_prov_treated">Dirawat: </string>
+    <string name="info_window_prov_cases">"Kasus: "</string>
+    <string name="info_window_prov_death">"Meninggal: "</string>
+    <string name="info_window_prov_cured">"Sembuh: "</string>
+    <string name="info_window_prov_treated">"Dirawat: "</string>
     <string name="info_window_prov_subtitle">Dari seluruh kasus di Indonesia</string>
     <string name="info_window_prov_subtitle2">Data Kasus Berdasarkan:</string>
     <string name="info_window_prov_sex">Jenis Kelamin:</string>

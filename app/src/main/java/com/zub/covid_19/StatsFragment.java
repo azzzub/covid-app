@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +34,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.zub.covid_19.api.regulerData.RegulerData;
 import com.zub.covid_19.api.specData.SpecData;
+import com.zub.covid_19.util.LoadLocale;
 import com.zub.covid_19.vm.RegulerDataViewModel;
 import com.zub.covid_19.vm.SpecDataViewModel;
 
@@ -44,39 +44,52 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
 
 public class StatsFragment extends Fragment {
-    private static final String TAG = "StatsFragment";
+
+    private LoadLocale loadLocale;
+
+    @BindView(R.id.stat_kasus_aktif) TextView mStatPositiveCases;
+    @BindView(R.id.stat_kasus_meninggal) TextView mStatDeathCases;
+    @BindView(R.id.stat_kasus_sumbuh) TextView mStatCuredCases;
+    @BindView(R.id.stat_kasus_odp) TextView mStatMonitoringCases;
+    @BindView(R.id.stat_kasus_pdp) TextView mStatPatientCases;
+    @BindView(R.id.stat_added_pos) TextView mStatAddedPositive;
+    @BindView(R.id.stat_added_men) TextView mStatAddedDeath;
+    @BindView(R.id.stat_added_sem) TextView mStatAddedCured;
+    @BindView(R.id.stat_updated_date) TextView mUpdatedDate;
+    @BindView(R.id.stat_box_shimmer) ShimmerFrameLayout mBoxShimmer;
+    @BindView(R.id.stat_shimmer_cumulative_case_graph) ShimmerFrameLayout mCumulativeGraphShimmer;
+    @BindView(R.id.stat_shimmer_new_case_graph) ShimmerFrameLayout mNewCaseGraphShimmer;
+    @BindView(R.id.stat_box_layout) TableLayout mBoxLayout;
+    @BindView(R.id.stat_cumulative_case_graph) LineChart mCumulativeCaseGraph;
+    @BindView(R.id.stat_new_case_graph) LineChart mNewCaseGraph;
+
+    @BindView(R.id.stat_condition_update) TextView mConditionUpdate;
+    @BindView(R.id.stat_symptom_update) TextView mSymptomUpdate;
+    @BindView(R.id.stat_age_update) TextView mAgeUpdate;
+    @BindView(R.id.stat_sex_update) TextView mSexUpdate;
+    @BindView(R.id.stat_shimmer_condition_graph) ShimmerFrameLayout mConditionGraphShimmer;
+    @BindView(R.id.stat_shimmer_age_graph) ShimmerFrameLayout mAgeGraphShimmer;
+    @BindView(R.id.stat_shimmer_sex_graph) ShimmerFrameLayout mSexGraphShimmer;
+    @BindView(R.id.stat_shimmer_symptom_graph) ShimmerFrameLayout mSymptomGraphShimmer;
+    @BindView(R.id.stat_condition_graph) BarChart mConditionGraph;
+    @BindView(R.id.stat_age_graph) BarChart mAgeGraph;
+    @BindView(R.id.stat_sex_graph) BarChart mSexGraph;
+    @BindView(R.id.stat_symptom_graph) BarChart mSymptomGraph;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
+        ButterKnife.bind(this, view);
+        loadLocale = new LoadLocale(getActivity());
 
-        // ========= REGULER DATA WIDGET
-
-        TextView mStatKasusPositif = view.findViewById(R.id.stat_kasus_aktif);
-        TextView mStatKasusMeninggal = view.findViewById(R.id.stat_kasus_meninggal);
-        TextView mStatKasusSembuh = view.findViewById(R.id.stat_kasus_sumbuh);
-        TextView mStatKasusODP = view.findViewById(R.id.stat_kasus_odp);
-        TextView mStatKasusPDP = view.findViewById(R.id.stat_kasus_pdp);
-        TextView mStatAddedPos = view.findViewById(R.id.stat_added_pos);
-        TextView mStatAddedMen = view.findViewById(R.id.stat_added_men);
-        TextView mStatAddedSem = view.findViewById(R.id.stat_added_sem);
-        TextView mUpdatedDate = view.findViewById(R.id.stat_updated_date);
-
-        ShimmerFrameLayout mBoxShimmer = view.findViewById(R.id.stat_box_shimmer);
-        ShimmerFrameLayout mCumulativeGraphShimmer = view.findViewById(R.id.stat_shimmer_cumulative_case_graph);
-        ShimmerFrameLayout mNewCaseGraphShimmer = view.findViewById(R.id.stat_shimmer_new_case_graph);
-
-        TableLayout mBoxLayout = view.findViewById(R.id.stat_box_layout);
-
-        LineChart mCumulativeCaseGraph = view.findViewById(R.id.stat_cumulative_case_graph);
-        LineChart mNewCaseGraph = view.findViewById(R.id.stat_new_case_graph);
-
-        // ========= REGULER DATA FETCHING
+        // ========= REGULAR DATA FETCHING
 
         RegulerDataViewModel regulerDataViewModel;
 
@@ -87,11 +100,9 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    showLoading(mBoxShimmer, mCumulativeGraphShimmer, mNewCaseGraphShimmer,
-                            mCumulativeCaseGraph, mNewCaseGraph, mBoxLayout);
+                    showRegularDataLoading();
                 } else {
-                    hideLoading(mBoxShimmer, mCumulativeGraphShimmer, mNewCaseGraphShimmer,
-                            mCumulativeCaseGraph, mNewCaseGraph, mBoxLayout);
+                    hideRegularDataLoading();
                 }
             }
         });
@@ -99,30 +110,12 @@ public class StatsFragment extends Fragment {
         regulerDataViewModel.getRegulerData().observe(this, new Observer<RegulerData>() {
             @Override
             public void onChanged(RegulerData regulerData) {
-                showRegulerData(mStatKasusPositif, mStatKasusMeninggal, mStatKasusSembuh, mStatKasusODP,
-                        mStatKasusPDP, mStatAddedPos, mStatAddedMen, mStatAddedSem, mUpdatedDate, regulerData);
-                showCumulativeCaseGraph(mCumulativeCaseGraph, regulerData);
-                showNewCaseGraph(mNewCaseGraph, regulerData);
+                showRegulerData(regulerData);
+                showCumulativeCaseGraph(regulerData);
+                showNewCaseGraph(regulerData);
             }
 
         });
-
-        // ========= SPECIFIC DATA WIDGET
-
-        TextView mConditionUpdate = view.findViewById(R.id.stat_condition_update);
-        TextView mSymptomUpdate = view.findViewById(R.id.stat_symptom_update);
-        TextView mAgeUpdate = view.findViewById(R.id.stat_age_update);
-        TextView mSexUpdate = view.findViewById(R.id.stat_sex_update);
-
-        ShimmerFrameLayout mConditionGraphShimmer = view.findViewById(R.id.stat_shimmer_condition_graph);
-        ShimmerFrameLayout mAgeGraphShimmer = view.findViewById(R.id.stat_shimmer_age_graph);
-        ShimmerFrameLayout mSexGraphShimmer = view.findViewById(R.id.stat_shimmer_sex_graph);
-        ShimmerFrameLayout mSymptomGraphShimmer = view.findViewById(R.id.stat_shimmer_symptom_graph);
-
-        BarChart mConditionGraph = view.findViewById(R.id.stat_condition_graph);
-        BarChart mAgeGraph = view.findViewById(R.id.stat_age_graph);
-        BarChart mSexGraph = view.findViewById(R.id.stat_sex_graph);
-        BarChart mSymptomGraph = view.findViewById(R.id.stat_symptom_graph);
 
         // ========= SPECIFIC DATA FETCHING
 
@@ -135,11 +128,9 @@ public class StatsFragment extends Fragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    showLoading1(mConditionGraphShimmer, mSymptomGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer,
-                            mConditionGraph, mSymptomGraph, mAgeGraph, mSexGraph);
+                    showSpecDataLoading();
                 } else {
-                    hideLoading1(mConditionGraphShimmer, mSymptomGraphShimmer, mAgeGraphShimmer, mSexGraphShimmer,
-                            mConditionGraph, mSymptomGraph, mAgeGraph, mSexGraph);
+                    hideSpecDataLoading();
                 }
             }
         });
@@ -147,11 +138,11 @@ public class StatsFragment extends Fragment {
         specDataViewModel.getSpecData().observe(this, new Observer<SpecData>() {
             @Override
             public void onChanged(SpecData specData) {
-                showConditionGraph(mConditionGraph, specData);
-                showSymptomGraph(mSymptomGraph, specData);
-                showAgeGraph(mAgeGraph, specData);
-                showSexGraph(mSexGraph, specData);
-                showUpdatedDate(mConditionUpdate, mSymptomUpdate, mAgeUpdate, mSexUpdate, specData);
+                showConditionGraph(specData);
+                showSymptomGraph(specData);
+                showAgeGraph(specData);
+                showSexGraph(specData);
+                showUpdatedDate(specData);
             }
         });
 
@@ -159,10 +150,16 @@ public class StatsFragment extends Fragment {
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
-    private void showUpdatedDate(TextView mConditionUpdate, TextView mSymptomUpdate, TextView mAgeUpdate,
-                                 TextView mSexUpdate, SpecData specData) {
+    private void showUpdatedDate(SpecData specData) {
 
-        final String TEMPLATE = "Data dihimpun: ";
+        String template;
+
+        if (loadLocale.getLocale().equals("en")) {
+            template = "Data collected: ";
+        } else {
+            template = "Data dihimpun: ";
+        }
+
 
         String date = specData.getmUpdatedDate();
 
@@ -178,18 +175,29 @@ public class StatsFragment extends Fragment {
         int amountSex = specData.getmKasus().getmJenisKelamin().getmTotalData();
         double percSex = 100.0 - specData.getmKasus().getmJenisKelamin().getmMissingData();
 
-        mConditionUpdate.setText(TEMPLATE + amountCond + " (" +
-                String.format("%.1f", percCondition) + "%) pada " + date + isUsable(percCondition));
-        mSymptomUpdate.setText(TEMPLATE + amountSymp + " (" +
-                String.format("%.1f", percSymp) + "%) pada " + date + isUsable(percSymp));
-        mAgeUpdate.setText(TEMPLATE + amountAge + " (" +
-                String.format("%.1f", percAge) + "%) pada " + date + isUsable(percAge));
-        mSexUpdate.setText(TEMPLATE + amountSex + " (" +
-                String.format("%.1f", percSex) + "%) pada " + date + isUsable(percSex));
+        if (loadLocale.getLocale().equals("en")) {
+            mConditionUpdate.setText(template + numberSeparator(amountCond) + " (" +
+                    String.format("%.1f", percCondition) + "%) on " + date + isUsable(percCondition));
+            mSymptomUpdate.setText(template + numberSeparator(amountSymp) + " (" +
+                    String.format("%.1f", percSymp) + "%) on " + date + isUsable(percSymp));
+            mAgeUpdate.setText(template + numberSeparator(amountAge) + " (" +
+                    String.format("%.1f", percAge) + "%) on " + date + isUsable(percAge));
+            mSexUpdate.setText(template + numberSeparator(amountSex) + " (" +
+                    String.format("%.1f", percSex) + "%) on " + date + isUsable(percSex));
+        } else {
+            mConditionUpdate.setText(template + numberSeparator(amountCond) + " (" +
+                    String.format("%.1f", percCondition) + "%) pada " + date + isUsable(percCondition));
+            mSymptomUpdate.setText(template + numberSeparator(amountSymp) + " (" +
+                    String.format("%.1f", percSymp) + "%) pada " + date + isUsable(percSymp));
+            mAgeUpdate.setText(template + numberSeparator(amountAge) + " (" +
+                    String.format("%.1f", percAge) + "%) pada " + date + isUsable(percAge));
+            mSexUpdate.setText(template + numberSeparator(amountSex) + " (" +
+                    String.format("%.1f", percSex) + "%) pada " + date + isUsable(percSex));
+        }
 
     }
 
-    private void showSymptomGraph(BarChart mSymptomGraph, SpecData specData) {
+    private void showSymptomGraph(SpecData specData) {
 
         List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> detailedSpecLists =
                 specData.getmKasus().getmGejala().getmDetailedSpecLists();
@@ -201,6 +209,9 @@ public class StatsFragment extends Fragment {
             key.add(new BarEntry(i, (float) detailedSpecLists.get(i).getValue()));
             // Manipulating first letter to be capitalized
             String theDataSet = detailedSpecLists.get(i).getKey();
+            if (loadLocale.getLocale().equals("en")) {
+                theDataSet = translatedSymptom(theDataSet);
+            }
             BarDataSet barDataSet = new BarDataSet(key, theDataSet.substring(0, 1).toUpperCase() + theDataSet.substring(1).toLowerCase());
             barDataSet.setColor(COLOR_SCHEME[i]);
             iBarDataSets.add(barDataSet);
@@ -231,7 +242,7 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private void showSexGraph(BarChart mSexGraph, SpecData specData) {
+    private void showSexGraph(SpecData specData) {
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
 
@@ -265,17 +276,33 @@ public class StatsFragment extends Fragment {
 
         barDataSet.setColors(COLOR_SCHEME[3], COLOR_SCHEME[0]);
 
-        final String[] dataSet = {"Positif", "Meninggal", "Sembuh", "Perawatan"};
+        String positive, death, cured, treated, men, woman;
 
-        barDataSet.setStackLabels(new String[]{"Laki-laki", "Perempuan"});
+        if (loadLocale.getLocale().equals("en")) {
+            positive = "Positive";
+            death = "Death";
+            cured = "Cured";
+            treated = "Treated";
+            men = "Men";
+            woman = "Woman";
+        } else {
+            positive = "Positif";
+            death = "Meninggal";
+            cured = "Sembuh";
+            treated = "Dirawat";
+            men = "Laki-laki";
+            woman = "Perempuan";
+        }
+
+        String[] dataSet = {positive, death, cured, treated};
+
+        barDataSet.setStackLabels(new String[]{men, woman});
 
         BarData barData = new BarData(barDataSet);
 
         mSexGraph.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                Log.d(TAG, "getFormattedValue: " + value);
-//                return String.valueOf(value);
                 int formated = (int) Math.round(value);
                 if(formated < 0 || formated > 3) {
                     formated = 0;
@@ -297,7 +324,7 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private void showAgeGraph(BarChart mAgeGraph, SpecData specData) {
+    private void showAgeGraph(SpecData specData) {
 
         List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> kelompokUmurPos =
                 specData.getmKasus().getmKelompokUmur().getmDetailedSpecLists();
@@ -322,22 +349,36 @@ public class StatsFragment extends Fragment {
             key4.add(new BarEntry(i, (float) kelompokUmurPer.get(i).getValue()));
         }
 
-        BarDataSet barDataSet = new BarDataSet(key, "Positif");
+        String positive, death, cured, treated;
+
+        if (loadLocale.getLocale().equals("en")) {
+            positive = "Positive";
+            death = "Death";
+            cured = "Cured";
+            treated = "Treated";
+        } else {
+            positive = "Positif";
+            death = "Meninggal";
+            cured = "Sembuh";
+            treated = "Dirawat";
+        }
+
+        BarDataSet barDataSet = new BarDataSet(key, positive);
         barDataSet.setColor(COLOR_SCHEME[0]);
         barDataSet.setValueTextSize(8);
         kelompokUmurDS.add(barDataSet);
 
-        BarDataSet barDataSet2 = new BarDataSet(key2, "Meninggal");
+        BarDataSet barDataSet2 = new BarDataSet(key2, death);
         barDataSet2.setColor(COLOR_SCHEME[1]);
         barDataSet2.setValueTextSize(8);
         kelompokUmurDS.add(barDataSet2);
 
-        BarDataSet barDataSet3 = new BarDataSet(key3, "Sembuh");
+        BarDataSet barDataSet3 = new BarDataSet(key3, cured);
         barDataSet3.setColor(COLOR_SCHEME[2]);
         barDataSet3.setValueTextSize(8);
         kelompokUmurDS.add(barDataSet3);
 
-        BarDataSet barDataSet4 = new BarDataSet(key4, "Perawatan");
+        BarDataSet barDataSet4 = new BarDataSet(key4, treated);
         barDataSet4.setValueTextSize(8);
         barDataSet4.setColor(COLOR_SCHEME[3]);
         kelompokUmurDS.add(barDataSet4);
@@ -382,7 +423,7 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private void showConditionGraph(BarChart mConditionGraph, SpecData specData) {
+    private void showConditionGraph(SpecData specData) {
 
         List<SpecData.DetailedData.DerivativeDetailedData.DetailedSpecList> detailedSpecLists =
                 specData.getmKasus().getmKondisiPenyerta().getmDetailedSpecLists();
@@ -394,6 +435,9 @@ public class StatsFragment extends Fragment {
             key.add(new BarEntry(i, (float) detailedSpecLists.get(i).getValue()));
             // Manipulating first letter to be capitalized
             String theDataSet = detailedSpecLists.get(i).getKey();
+            if (loadLocale.getLocale().equals("en")) {
+                theDataSet = translatedCondition(theDataSet);
+            }
             BarDataSet barDataSet = new BarDataSet(key, theDataSet.substring(0, 1).toUpperCase() + theDataSet.substring(1).toLowerCase());
             barDataSet.setColor(COLOR_SCHEME[i]);
             iBarDataSets.add(barDataSet);
@@ -425,10 +469,7 @@ public class StatsFragment extends Fragment {
         mConditionGraph.invalidate();
     }
 
-    private void hideLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mSymptomGraphShimmer,
-                              ShimmerFrameLayout mAgeGraphShimmer, ShimmerFrameLayout mSexGraphShimmer,
-                              BarChart mConditionGraph, BarChart mSymptomGraph, BarChart mAgeGraph,
-                              BarChart mSexGraph) {
+    private void hideSpecDataLoading() {
 
         mConditionGraphShimmer.setVisibility(View.GONE);
         mAgeGraphShimmer.setVisibility(View.GONE);
@@ -441,10 +482,7 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private void showLoading1(ShimmerFrameLayout mConditionGraphShimmer, ShimmerFrameLayout mSymptomGraphShimmer,
-                              ShimmerFrameLayout mAgeGraphShimmer, ShimmerFrameLayout mSexGraphShimmer,
-                              BarChart mConditionGraph, BarChart mSymptomGraph, BarChart mAgeGraph,
-                              BarChart mSexGraph) {
+    private void showSpecDataLoading() {
 
         mConditionGraphShimmer.setVisibility(View.VISIBLE);
         mAgeGraphShimmer.setVisibility(View.VISIBLE);
@@ -457,7 +495,7 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private void showNewCaseGraph(LineChart mNewCaseGraph, RegulerData regulerData) {
+    private void showNewCaseGraph(RegulerData regulerData) {
 
         ArrayList lineDataPositif = new ArrayList();
         ArrayList lineDataMeninggal = new ArrayList();
@@ -479,10 +517,24 @@ public class StatsFragment extends Fragment {
             lineDataDirawat.add(new Entry(dataTanggal, dataDirawat));
         }
 
-        LineDataSet lineDataSetPositif = new LineDataSet(lineDataPositif,"Positif");
-        LineDataSet lineDataSetMeninggal = new LineDataSet(lineDataMeninggal,"Meninggal");
-        LineDataSet lineDataSetSembuh = new LineDataSet(lineDataSembuh,"Sembuh");
-        LineDataSet lineDataSetDirawat = new LineDataSet(lineDataDirawat,"Dirawat");
+        String positive, death, cured, treated;
+
+        if (loadLocale.getLocale().equals("en")) {
+            positive = "Positive";
+            death = "Death";
+            cured = "Cured";
+            treated = "Treated";
+        } else {
+            positive = "Positif";
+            death = "Meninggal";
+            cured = "Sembuh";
+            treated = "Dirawat";
+        }
+
+        LineDataSet lineDataSetPositif = new LineDataSet(lineDataPositif, positive);
+        LineDataSet lineDataSetMeninggal = new LineDataSet(lineDataMeninggal, death);
+        LineDataSet lineDataSetSembuh = new LineDataSet(lineDataSembuh, cured);
+        LineDataSet lineDataSetDirawat = new LineDataSet(lineDataDirawat, treated);
 
         setupLineChart(lineDataSetPositif, "#ffb259");
         setupLineChart(lineDataSetMeninggal, "ff5959");
@@ -491,7 +543,6 @@ public class StatsFragment extends Fragment {
 
         mNewCaseGraph.animateY(1000);
         mNewCaseGraph.getAxisRight().setEnabled(false);
-//        mNewCaseGraph.getLegend().setTextSize(12);
         mNewCaseGraph.setClickable(false);
         mNewCaseGraph.setDoubleTapToZoomEnabled(false);
         mNewCaseGraph.setScaleEnabled(false);
@@ -522,7 +573,7 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private void showCumulativeCaseGraph(LineChart mLineChart, RegulerData regulerData) {
+    private void showCumulativeCaseGraph(RegulerData regulerData) {
 
         ArrayList lineDataPositif = new ArrayList();
         ArrayList lineDataMeninggal = new ArrayList();
@@ -544,24 +595,38 @@ public class StatsFragment extends Fragment {
             lineDataDirawat.add(new Entry(dataTanggal, dataDirawat));
         }
 
-        LineDataSet lineDataSetPositif = new LineDataSet(lineDataPositif,"Positif");
-        LineDataSet lineDataSetMeninggal = new LineDataSet(lineDataMeninggal,"Meninggal");
-        LineDataSet lineDataSetSembuh = new LineDataSet(lineDataSembuh,"Sembuh");
-        LineDataSet lineDataSetDirawat = new LineDataSet(lineDataDirawat,"Dirawat");
+        String positive, death, cured, treated;
+
+        if (loadLocale.getLocale().equals("en")) {
+            positive = "Positive";
+            death = "Death";
+            cured = "Cured";
+            treated = "Treated";
+        } else {
+            positive = "Positif";
+            death = "Meninggal";
+            cured = "Sembuh";
+            treated = "Dirawat";
+        }
+
+        LineDataSet lineDataSetPositif = new LineDataSet(lineDataPositif, positive);
+        LineDataSet lineDataSetMeninggal = new LineDataSet(lineDataMeninggal, death);
+        LineDataSet lineDataSetSembuh = new LineDataSet(lineDataSembuh, cured);
+        LineDataSet lineDataSetDirawat = new LineDataSet(lineDataDirawat, treated);
 
         setupLineChart(lineDataSetPositif, "#ffb259");
         setupLineChart(lineDataSetMeninggal, "ff5959");
         setupLineChart(lineDataSetSembuh, "4cd97b");
         setupLineChart(lineDataSetDirawat, "9059ff");
 
-        mLineChart.animateY(1000);
-        mLineChart.getAxisRight().setEnabled(false);
+        mCumulativeCaseGraph.animateY(1000);
+        mCumulativeCaseGraph.getAxisRight().setEnabled(false);
 //        mLineChart.getLegend().setTextSize(12);
-        mLineChart.setClickable(false);
-        mLineChart.setDoubleTapToZoomEnabled(false);
-        mLineChart.setScaleEnabled(false);
-        mLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        mLineChart.getXAxis().setValueFormatter(new ValueFormatter() {
+        mCumulativeCaseGraph.setClickable(false);
+        mCumulativeCaseGraph.setDoubleTapToZoomEnabled(false);
+        mCumulativeCaseGraph.setScaleEnabled(false);
+        mCumulativeCaseGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        mCumulativeCaseGraph.getXAxis().setValueFormatter(new ValueFormatter() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public String getFormattedValue(float value) {
@@ -573,7 +638,7 @@ public class StatsFragment extends Fragment {
 
         Description desc = new Description();
         desc.setText("");
-        mLineChart.setDescription(desc);
+        mCumulativeCaseGraph.setDescription(desc);
 
         List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(lineDataSetPositif);
@@ -582,8 +647,8 @@ public class StatsFragment extends Fragment {
         dataSets.add(lineDataSetDirawat);
 
         LineData data = new LineData(dataSets);
-        mLineChart.setData(data);
-        mLineChart.invalidate();
+        mCumulativeCaseGraph.setData(data);
+        mCumulativeCaseGraph.invalidate();
 
     }
 
@@ -596,11 +661,7 @@ public class StatsFragment extends Fragment {
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
     }
 
-    private void showRegulerData(TextView mStatKasusPositif, TextView mStatKasusMeninggal,
-                                 TextView mStatKasusSembuh, TextView mStatKasusODP,
-                                 TextView mStatKasusPDP, TextView mStatAddedPos,
-                                 TextView mStatAddedMen, TextView mStatAddedSem,
-                                 TextView mUpdatedDate, RegulerData regulerData) {
+    private void showRegulerData(RegulerData regulerData) {
 
         int mPositif = regulerData.getUpdatedData().getTotalCases().getmPositif();
         int mMeninggal = regulerData.getUpdatedData().getTotalCases().getmMeninggal();
@@ -612,48 +673,96 @@ public class StatsFragment extends Fragment {
         int mAddedSem = regulerData.getUpdatedData().getNewCases().getmSembuh();
         String mUpdate = regulerData.getUpdatedData().getNewCases().getmWaktuUpdate();
 
-        mStatKasusPositif.setText(numberSeparator(mPositif));
-        mStatKasusMeninggal.setText(numberSeparator(mMeninggal));
-        mStatKasusSembuh.setText(numberSeparator(mSembuh));
-        mStatKasusODP.setText(numberSeparator(mODP));
-        mStatKasusPDP.setText(numberSeparator(mPDP));
-        mStatAddedPos.setText("+" + numberSeparator(mAddedPos));
-        mStatAddedMen.setText("+" + numberSeparator(mAddedMen));
-        mStatAddedSem.setText("+" + numberSeparator(mAddedSem));
-        mUpdatedDate.setText("Diperbarui pada: " + mUpdate);
+        mStatPositiveCases.setText(numberSeparator(mPositif));
+        mStatDeathCases.setText(numberSeparator(mMeninggal));
+        mStatCuredCases.setText(numberSeparator(mSembuh));
+        mStatMonitoringCases.setText(numberSeparator(mODP));
+        mStatPatientCases.setText(numberSeparator(mPDP));
+        mStatAddedPositive.setText("+" + numberSeparator(mAddedPos));
+        mStatAddedDeath.setText("+" + numberSeparator(mAddedMen));
+        mStatAddedCured.setText("+" + numberSeparator(mAddedSem));
+
+        if (loadLocale.getLocale().equals("en")) {
+            mUpdatedDate.setText("Updated on: " + mUpdate);
+        } else {
+            mUpdatedDate.setText("Diperbarui pada: " + mUpdate);
+        }
 
     }
 
-
-    private void hideLoading(ShimmerFrameLayout mBoxShimmer, ShimmerFrameLayout mCummulativeGraphShimmer,
-                             ShimmerFrameLayout mNewCaseGraphSimmer, LineChart mCumulativeCaseGraph,
-                             LineChart mNewCaseGraph, TableLayout mBoxLayout) {
+    private void hideRegularDataLoading() {
         mBoxShimmer.setVisibility(View.GONE);
-        mCummulativeGraphShimmer.setVisibility(View.GONE);
-        mNewCaseGraphSimmer.setVisibility(View.GONE);
+        mCumulativeGraphShimmer.setVisibility(View.GONE);
+        mNewCaseGraphShimmer.setVisibility(View.GONE);
         mBoxLayout.setVisibility(View.VISIBLE);
         mCumulativeCaseGraph.setVisibility(View.VISIBLE);
         mNewCaseGraph.setVisibility(View.VISIBLE);
     }
 
-    private void showLoading(ShimmerFrameLayout mBoxShimmer, ShimmerFrameLayout mCummulativeGraphShimmer,
-                             ShimmerFrameLayout mNewCaseGraphSimmer, LineChart mCumulativeCaseGraph,
-                             LineChart mNewCaseGraph, TableLayout mBoxLayout) {
+    private void showRegularDataLoading() {
         mBoxShimmer.setVisibility(View.VISIBLE);
-        mCummulativeGraphShimmer.setVisibility(View.VISIBLE);
-        mNewCaseGraphSimmer.setVisibility(View.VISIBLE);
+        mCumulativeGraphShimmer.setVisibility(View.VISIBLE);
+        mNewCaseGraphShimmer.setVisibility(View.VISIBLE);
         mBoxLayout.setVisibility(View.GONE);
         mCumulativeCaseGraph.setVisibility(View.GONE);
         mNewCaseGraph.setVisibility(View.GONE);
     }
 
-    private String numberSeparator(int jumlahKumulatif) {
-        return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(jumlahKumulatif));
+    private String numberSeparator(int value) {
+        return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(value));
     }
 
     private String isUsable(double value) {
-        if (value < 50) return "\nDATA TIDAK LENGKAP";
-        return "";
+        if (loadLocale.getLocale().equals("en")) {
+            if (value < 50) {
+                return "\nCAN'T BE USED AS A REFERENCE";
+            }
+            return "";
+        } else {
+            if (value < 50) {
+                return "\nDATA TIDAK LENGKAP";
+            }
+            return "";
+        }
+
+    }
+
+    private String translatedCondition(String condition) {
+        switch (condition.toLowerCase()) {
+            case "hipertensi": return "Hypertension";
+            case "penyakit jantung": return "Heart Disease";
+            case "penyakit paru obstruktif kronis": return "Chronic Obstructive Pulmonary Disease";
+            case "gangguan napas lain": return "Breathing Disorders";
+            case "penyakit ginjal": return "Kidney Illnes";
+            case "hamil": return "Pregnant";
+            case "asma": return "Asthma";
+            case "kanker": return "Cancer";
+            case "tbc": return "TBC";
+            case "penyakit hati": return "Liver Disease";
+            case "gangguan imun": return "Immune Disorders";
+            case "obesitas": return "Obesity";
+            default: return "Unidentified";
+        }
+    }
+
+    private String translatedSymptom(String symptom) {
+        switch (symptom.toLowerCase()) {
+            case "batuk": return "Cough";
+            case "demam": return "Fever";
+            case "sesak napas": return "Hard to breath";
+            case "lemas": return "Limp";
+            case "riwayat demam": return "Had a fever before";
+            case "sakit tenggorokan": return "Sore throat";
+            case "pilek": return "Cold";
+            case "sakit kepala": return "Headache";
+            case "mual": return "Nausea";
+            case "keram otot": return "Muscle cramp";
+            case "menggigil": return "Shivering";
+            case "diare": return "Diarrhea";
+            case "sakit perut": return "Stomach ache";
+            case "lain-lain": return "etc.";
+            default: return "Unidentified";
+        }
     }
 
     private static final int[] COLOR_SCHEME = {

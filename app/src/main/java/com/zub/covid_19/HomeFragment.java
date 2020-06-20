@@ -25,11 +25,13 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.zub.covid_19.adapter.NewsAdapter;
+import com.zub.covid_19.api.globalData.GlobalData;
 import com.zub.covid_19.api.newsData.NewsData;
 import com.zub.covid_19.ui.BottomSheetPreventionDialog;
 import com.zub.covid_19.ui.BottomSheetPrixaDialog;
 import com.zub.covid_19.util.LoadLocale;
 import com.zub.covid_19.util.SpacesItemDecoration;
+import com.zub.covid_19.vm.GlobalDataViewModel;
 import com.zub.covid_19.vm.NewsDataViewModel;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import static com.zub.covid_19.R.drawable;
 import static com.zub.covid_19.R.id;
@@ -165,6 +168,20 @@ public class HomeFragment extends Fragment {
                 bottomSheetPreventionDialog.show(getFragmentManager(), "BottomSheet");
             }
         });
+
+        // GLOBAL DATA FETCHING
+
+        GlobalDataViewModel globalDataViewModel;
+        globalDataViewModel = ViewModelProviders.of(this).get(GlobalDataViewModel.class);
+        globalDataViewModel.init();
+
+        globalDataViewModel.getGlobalData().observe(this, globalData -> {
+            Timber.d(String.valueOf(globalData.getConfirmed().getTheValue()));
+            Timber.d(String.valueOf(globalData.getDeath().getTheValue()));
+            Timber.d(String.valueOf(globalData.getRecovered().getTheValue()));
+            Timber.d(globalData.getLastUpdate());
+        });
+
         // THE DATA FETCHING PROCESS
         NewsDataViewModel newsDataViewModel;
 

@@ -8,6 +8,11 @@
 <!--    WEB VIEW STRING ASSET-->
     <string name="web_view_loading_page" tools:ignore="TypographyEllipsis">Laman sedang dimuat...</string>
 
+<!--    BOTTOM SHEET DONATE REDIRECT ASSET-->
+    <string name="donate_desc">Bantu mereka yang terdampak pandemi COVID-19 dengan berdonasi melalui platform kitabisa.com</string>
+    <string name="donate_footer1">Segala hak diserahkan penuh kepada kitabisa.com</string>
+    <string name="donate_footer2" translatable="false">© kitabisa.com</string>
+
 <!--    BOTTOM SHEET PRIXA REDIRECT ASSET-->
     <string name="prixa_title">Anda akan dialihkan ke</string>
     <string name="prixa_desc">Sistem kecerdasan buatan yang Prixa.ai sediakan akan mendeteksi gejala covid-19 yang mungkin kamu alami.</string>

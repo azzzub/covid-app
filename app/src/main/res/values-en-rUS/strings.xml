@@ -112,5 +112,7 @@
     <string name="home_recovered">Recovered</string>
     <string name="home_donate_header">Donate now!</string>
     <string name="home_donate_desc">We need your help to help those who affected by this pandemic</string>
+    <string name="donate_desc">Help those who affected COVID-19 pandemic with a donation through kitabisa.com platform</string>
+    <string name="donate_footer1">All rights are fully delegated to KitaBisa.com</string>
 
 </resources>

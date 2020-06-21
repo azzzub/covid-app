@@ -36,9 +36,11 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.zub.covid_19.adapter.NewsAdapter;
 import com.zub.covid_19.api.globalData.GlobalData;
 import com.zub.covid_19.api.newsData.NewsData;
+import com.zub.covid_19.ui.BottomSheetDonateDialog;
 import com.zub.covid_19.ui.BottomSheetPreventionDialog;
 import com.zub.covid_19.ui.BottomSheetPrixaDialog;
 import com.zub.covid_19.util.LoadLocale;
@@ -98,6 +100,8 @@ public class HomeFragment extends Fragment {
     LinearLayout mGlobalDataLayout;
     @BindView(id.home_global_data_shimmer)
     ShimmerFrameLayout mGlobalDataShimmer;
+    @BindView(id.home_donate_button)
+    RelativeLayout mDonate;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -129,11 +133,18 @@ public class HomeFragment extends Fragment {
         });
 
         mDoTest.setOnClickListener(new View.OnClickListener() {
-            BottomSheetPrixaDialog bottomSheetPrixaDialog = new BottomSheetPrixaDialog();
-
             @Override
             public void onClick(View view) {
-                bottomSheetPrixaDialog.show(getFragmentManager(), "BottomSheet");
+                BottomSheetPrixaDialog bottomSheetPrixaDialog = new BottomSheetPrixaDialog();
+                bottomSheetPrixaDialog.show(getFragmentManager(), "PrixaBottomSheet");
+            }
+        });
+
+        mDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BottomSheetDonateDialog bottomSheetDonateDialog = new BottomSheetDonateDialog();
+                bottomSheetDonateDialog.show(getFragmentManager(), "DonateBottomSheet");
             }
         });
 

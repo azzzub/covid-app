@@ -74,6 +74,10 @@ dependencies {
     implementation "androidx.core:core-ktx:+"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Lottie
+    def lottieVersion = '3.4.1'
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }
 repositories {
     mavenCentral()

@@ -1,25 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Covid-19</string>
 
-<!--    GLOBAL STRING ASSET-->
+    <!--    GLOBAL STRING ASSET-->
     <string name="null_text" translatable="false">null</string>
     <string name="loading_text" tools:ignore="TypographyEllipsis">Memuat...</string>
 
-<!--    WEB VIEW STRING ASSET-->
+    <!--    WEB VIEW STRING ASSET-->
     <string name="web_view_loading_page" tools:ignore="TypographyEllipsis">Laman sedang dimuat...</string>
 
-<!--    BOTTOM SHEET DONATE REDIRECT ASSET-->
+    <!--    BOTTOM SHEET DONATE REDIRECT ASSET-->
     <string name="donate_desc">Bantu mereka yang terdampak pandemi COVID-19 dengan berdonasi melalui platform kitabisa.com</string>
     <string name="donate_footer1">Segala hak diserahkan penuh kepada kitabisa.com</string>
     <string name="donate_footer2" translatable="false">© kitabisa.com</string>
 
-<!--    BOTTOM SHEET PRIXA REDIRECT ASSET-->
+    <!--    BOTTOM SHEET PRIXA REDIRECT ASSET-->
     <string name="prixa_title">Anda akan dialihkan ke</string>
     <string name="prixa_desc">Sistem kecerdasan buatan yang Prixa.ai sediakan akan mendeteksi gejala covid-19 yang mungkin kamu alami.</string>
     <string name="prixa_footer1">Segala hak diserahkan penuh kepada Prixa.ai</string>
     <string name="prixa_footer2" translatable="false">© prixa.ai</string>
 
-<!--    FRAGMENT HOME STRING ASSET-->
+    <!--    FRAGMENT HOME STRING ASSET-->
     <string name="home_country_ina" translatable="false">INA</string>
     <string name="home_header">Apakah kamu merasa sakit?</string>
     <string name="home_desc">Jika kamu merasa sakit dengan gejala covid-19, segera hubungi layanan darurat agar segera ditangani.</string>
@@ -39,7 +39,7 @@
     <string name="home_test_header">Tes sekarang!</string>
     <string name="home_test_desc">Ikuti langkah-langkah sesuai dengan instruksi</string>
 
-<!--    FRAGMENT INFO STRING ASSET-->
+    <!--    FRAGMENT INFO STRING ASSET-->
     <string name="info_title">Informasi</string>
     <string name="info_desc" translatable="false">Versi 1.1 © Covid-19 App 2020</string>
     <string name="info_desc2">Dikembangkan oleh</string>
@@ -53,13 +53,14 @@
     <string name="info_ack5">Tes kesehatan dengan kecerdasan buatan oleh prixa.ai</string>
     <string name="info_ack6">Penyaluran donasi oleh kitabisa.com</string>
     <string name="info_ack7">Data global COVID-19 oleh covid19.mathdro.id</string>
+    <string name="info_ack8">Animasi petugas medis oleh Paulo Bañas dari lottiefiles.com</string>
     <string name="info_term">Pengunaan</string>
     <string name="info_lang_title">Bahasa</string>
 
-<!--    FRAGMENT MAPS STRING ASSET-->
+    <!--    FRAGMENT MAPS STRING ASSET-->
     <string name="maps_title">Kasus Per Provinsi</string>
 
-<!--    FRAGMENT STATS STRING ASSET -->
+    <!--    FRAGMENT STATS STRING ASSET -->
     <string name="stat_title">Statistik</string>
     <string name="stat_subtitle">Total Kasus Hingga Hari Ini</string>
     <string name="stat_positive">Positif</string>
@@ -74,7 +75,7 @@
     <string name="stat_age_group_cases">Kelompok Umur</string>
     <string name="stat_sex_group_cases">Jenis Kelamin</string>
 
-<!--    INFO WINDOW PROV STRING ASSET-->
+    <!--    INFO WINDOW PROV STRING ASSET-->
     <string name="info_window_prov_cases">"Kasus: "</string>
     <string name="info_window_prov_death">"Meninggal: "</string>
     <string name="info_window_prov_cured">"Sembuh: "</string>
@@ -84,10 +85,10 @@
     <string name="info_window_prov_sex">Jenis Kelamin:</string>
     <string name="info_window_prov_age">Umur:</string>
 
-<!--    PROVINCE LAYOUT STRING ASSET-->
+    <!--    PROVINCE LAYOUT STRING ASSET-->
     <string name="prov_layout_search" tools:ignore="TypographyEllipsis">Cari provinsi ...</string>
 
-<!--    PREVENTIVE STRING ASSET-->
+    <!--    PREVENTIVE STRING ASSET-->
     <string name="about">
         Aplikasi ini tidak ditujukan kepada siapapun yang menjadikan aplikasi ini sebagai patokan terhadap
         informasi covid-19 walaupun segala informasi di aplikasi ini diunduh dari situs resmi covid-19 pemerintah

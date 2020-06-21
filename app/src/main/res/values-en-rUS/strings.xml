@@ -113,8 +113,9 @@
     <string name="donate_desc">Help those who affected COVID-19 pandemic with a donation through kitabisa.com platform</string>
     <string name="donate_footer1">All rights are fully delegated to KitaBisa.com</string>
     <string name="info_ack5">Health test based on Artificial Intelligent by prixa.ai</string>
-    <string name="info_ack4">News data provided form newsapi.org</string>
+    <string name="info_ack4">News data provided by newsapi.org</string>
     <string name="info_ack6">Donation platform from kitabisa.com</string>
-    <string name="info_ack7">Global data COVID-19 provided from covid19.mathdro.id</string>
+    <string name="info_ack7">Global data COVID-19 provided by covid19.mathdro.id</string>
+    <string name="info_ack8">Medical frontliner animation from Paulo Bañas on lottiefiles.com</string>
 
 </resources>

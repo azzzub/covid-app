@@ -1,6 +1,8 @@
 package com.zub.covid_19;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.MPPointF;
 import com.zub.covid_19.adapter.NewsAdapter;
 import com.zub.covid_19.api.globalData.GlobalData;
 import com.zub.covid_19.api.newsData.NewsData;
@@ -34,8 +46,11 @@ import com.zub.covid_19.util.SpacesItemDecoration;
 import com.zub.covid_19.vm.GlobalDataViewModel;
 import com.zub.covid_19.vm.NewsDataViewModel;
 
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,6 +86,18 @@ public class HomeFragment extends Fragment {
     LinearLayout mPreventive2;
     @BindView(id.home_preventive_3)
     LinearLayout mPreventive3;
+    @BindView(id.home_global_data_pie_chart)
+    PieChart mGlobalDataPieChart;
+    @BindView(id.home_confirmed)
+    TextView mConfirmed;
+    @BindView(id.home_death)
+    TextView mDeath;
+    @BindView(id.home_recovered)
+    TextView mRecovered;
+    @BindView(id.home_global_data_layout)
+    LinearLayout mGlobalDataLayout;
+    @BindView(id.home_global_data_shimmer)
+    ShimmerFrameLayout mGlobalDataShimmer;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -169,17 +196,28 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        setPieChartGlobalData();
+
         // GLOBAL DATA FETCHING
 
         GlobalDataViewModel globalDataViewModel;
         globalDataViewModel = ViewModelProviders.of(this).get(GlobalDataViewModel.class);
         globalDataViewModel.init();
 
+        globalDataViewModel.getLoading().observe(this, aBoolean -> {
+            if (aBoolean) {
+                showLoadingGlobalData();
+            } else {
+                hideLoadingGlobalData();
+            }
+        });
+
         globalDataViewModel.getGlobalData().observe(this, globalData -> {
             Timber.d(String.valueOf(globalData.getConfirmed().getTheValue()));
             Timber.d(String.valueOf(globalData.getDeath().getTheValue()));
             Timber.d(String.valueOf(globalData.getRecovered().getTheValue()));
             Timber.d(globalData.getLastUpdate());
+            setDataGlobalDataPieChart(globalData);
         });
 
         // THE DATA FETCHING PROCESS
@@ -232,6 +270,86 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void showLoadingGlobalData() {
+
+        mGlobalDataLayout.setVisibility(View.GONE);
+        mGlobalDataShimmer.setVisibility(View.VISIBLE);
+        mGlobalDataShimmer.startShimmer();
+
+    }
+
+    private void hideLoadingGlobalData() {
+
+        mGlobalDataLayout.setVisibility(View.VISIBLE);
+        mGlobalDataShimmer.setVisibility(View.GONE);
+        mGlobalDataShimmer.stopShimmer();
+
+    }
+
+    private void setPieChartGlobalData() {
+
+        mGlobalDataPieChart.getDescription().setEnabled(false);
+        mGlobalDataPieChart.setDragDecelerationFrictionCoef(0.95f);
+//        mGlobalDataPieChart.setDrawHoleEnabled(true);
+
+        mGlobalDataPieChart.setRotationAngle(0);
+        // enable rotation of the chart by touch
+        mGlobalDataPieChart.setRotationEnabled(true);
+        mGlobalDataPieChart.setHighlightPerTapEnabled(true);
+
+        mGlobalDataPieChart.animateY(1500, Easing.EaseInOutQuad);
+        mGlobalDataPieChart.getLegend().setEnabled(false);
+        // entry label styling
+    }
+
+    @SuppressLint("ResourceType")
+    private void setDataGlobalDataPieChart(GlobalData globalData) {
+
+        int confirmed = globalData.getConfirmed().getTheValue();
+        int death = globalData.getDeath().getTheValue();
+        int recovered = globalData.getRecovered().getTheValue();
+
+        mConfirmed.setText(numberSeparator(confirmed));
+        mDeath.setText(numberSeparator(death));
+        mRecovered.setText(numberSeparator(recovered));
+
+        ArrayList<PieEntry> entries = new ArrayList<>();
+
+        entries.add(new PieEntry(confirmed, 1));
+        entries.add(new PieEntry(death, 2));
+        entries.add(new PieEntry(recovered, 3));
+
+        PieDataSet dataSet = new PieDataSet(entries, "Global Data");
+
+        dataSet.setDrawIcons(false);
+        dataSet.setDrawValues(false);
+        dataSet.setSliceSpace(3f);
+        dataSet.setIconsOffset(new MPPointF(0, 40));
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<>();
+
+        colors.add(Color.parseColor(getResources().getString(R.color.colorAccent)));
+        colors.add(Color.parseColor(getResources().getString(R.color.themeRed)));
+        colors.add(Color.parseColor(getResources().getString(R.color.themeOrange)));
+
+        dataSet.setColors(colors);
+
+        PieData data = new PieData(dataSet);
+        mGlobalDataPieChart.setData(data);
+
+        // undo all highlights
+        mGlobalDataPieChart.highlightValues(null);
+        mGlobalDataPieChart.setCenterText("Update:\n" + globalData.getLastUpdate()
+                .replace("T","\n")
+                .replace(".000Z",""));
+
+        mGlobalDataPieChart.invalidate();
+
+    }
+
     private void hideLoading() {
         mNewsShimmer.stopShimmer();
         mNewsShimmer.setVisibility(View.GONE);
@@ -241,6 +359,10 @@ public class HomeFragment extends Fragment {
     private void showLoading() {
         mNewsShimmer.setVisibility(View.VISIBLE);
         mNewsRecyclerView.setVisibility(View.GONE);
+    }
+
+    private String numberSeparator(int value) {
+        return String.valueOf(NumberFormat.getNumberInstance(Locale.ITALY).format(value));
     }
 
 }

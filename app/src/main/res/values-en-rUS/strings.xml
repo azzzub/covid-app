@@ -106,5 +106,11 @@
         From: https://www.kompas.com/tren/read/2020/04/08/073100465/pandemi-virus-corona-dan-alasan-kenapa-kini-kita-semua-harus-pakai-masker-?page=all#page4
     </string>
     <string name="info_lang_title">Language</string>
+    <string name="home_global_data">Global Cases</string>
+    <string name="home_confirmed">Confirmed</string>
+    <string name="home_death">Death</string>
+    <string name="home_recovered">Recovered</string>
+    <string name="home_donate_header">Donate now!</string>
+    <string name="home_donate_desc">We need your help to help those who affected by this pandemic</string>
 
 </resources>

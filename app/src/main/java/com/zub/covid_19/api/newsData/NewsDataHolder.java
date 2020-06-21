@@ -15,7 +15,7 @@ public interface NewsDataHolder {
     @GET("v2/top-headlines?country=id&q=covid-19")
     Call<NewsData> getNews(@Query("apiKey") String apiKey);
 
-    @GET("v2/top-headlines?q=covid-19&sortBy=popularity")
+    @GET("v2/top-headlines?language=en&q=covid-19&sortBy=popularity")
     Call<NewsData> getNewsEn(@Query("apiKey") String apiKey);
 
 }

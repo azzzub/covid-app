@@ -23,4 +23,8 @@ public class GlobalDataViewModel extends ViewModel {
         return globalDataRepository.getGlobalData();
     }
 
+    public LiveData<Boolean> getLoading() {
+        return globalDataRepository.getLoading();
+    }
+
 }

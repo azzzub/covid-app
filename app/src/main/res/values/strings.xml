@@ -21,10 +21,16 @@
     <string name="home_call">Telepon</string>
     <string name="home_website" translatable="false">Website</string>
     <string name="home_news_header">Berita</string>
+    <string name="home_global_data">Data Global</string>
+    <string name="home_confirmed">Terkonfirmasi</string>
+    <string name="home_death">Meninggal</string>
+    <string name="home_recovered">Sembuh</string>
     <string name="home_preventive_header">Pencegahan</string>
     <string name="home_preventive1">Jaga Jarak Sosial</string>
     <string name="home_preventive2">Sering Cuci Tangan</string>
     <string name="home_preventive3">Pakailah Masker</string>
+    <string name="home_donate_header">Donasi sekarang!</string>
+    <string name="home_donate_desc">Ulurkan tanganmu untuk mereka yang terdampak oleh pandemi ini</string>
     <string name="home_test_header">Tes sekarang!</string>
     <string name="home_test_desc">Ikuti langkah-langkah sesuai dengan instruksi</string>
 

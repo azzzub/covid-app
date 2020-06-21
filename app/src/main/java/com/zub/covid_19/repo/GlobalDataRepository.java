@@ -26,24 +26,33 @@ public class GlobalDataRepository {
 
     private static GlobalDataHolder globalDataHolder;
 
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
     public GlobalDataRepository() {
         globalDataHolder = GlobalDataFetch.createService(GlobalDataHolder.class);
     }
 
     public MutableLiveData<GlobalData> getGlobalData() {
         MutableLiveData<GlobalData> globalDataMutableLiveData = new MutableLiveData<>();
+        isLoading.setValue(true);
         globalDataHolder.getGlobalData().enqueue(new Callback<GlobalData>() {
             @Override
             public void onResponse(@NotNull Call<GlobalData> call, @NotNull Response<GlobalData> response) {
                 globalDataMutableLiveData.setValue(response.body());
+                isLoading.setValue(false);
             }
 
             @Override
             public void onFailure(@NotNull Call<GlobalData> call, @NotNull Throwable t) {
                 Timber.d(t);
+                isLoading.setValue(false);
             }
         });
         return globalDataMutableLiveData;
+    }
+
+    public MutableLiveData<Boolean> getLoading() {
+        return isLoading;
     }
 
 }

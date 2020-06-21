@@ -1,6 +1,8 @@
 package com.zub.covid_19;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -44,6 +46,7 @@ import com.zub.covid_19.ui.BottomSheetDonateDialog;
 import com.zub.covid_19.ui.BottomSheetPreventionDialog;
 import com.zub.covid_19.ui.BottomSheetPrixaDialog;
 import com.zub.covid_19.util.LoadLocale;
+import com.zub.covid_19.util.SetLanguage;
 import com.zub.covid_19.util.SpacesItemDecoration;
 import com.zub.covid_19.vm.GlobalDataViewModel;
 import com.zub.covid_19.vm.NewsDataViewModel;
@@ -112,6 +115,12 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         LoadLocale loadLocale = new LoadLocale(getActivity());
+        Timber.d("LoadLocale%s", loadLocale.getLocale());
+
+        // Give the language option on the fresh install app
+        if (loadLocale.getLocale().equals("-1")) {
+            new SetLanguage(getContext(), getActivity());
+        }
 
         mCallButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
+//            Timber.plant(new Timber.DebugTree());
         }
         super.onCreate(savedInstanceState);
         loadLocale();

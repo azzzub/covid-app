@@ -17,7 +17,7 @@ public class LoadLocale {
     public String getLocale() {
         SharedPreferences sharedPreferences = this.activity.getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String locale = sharedPreferences.getString("language", "");
-        if (locale != null) {
+        if (locale != null && !locale.isEmpty()) {
             return locale;
         }
         return "-1";

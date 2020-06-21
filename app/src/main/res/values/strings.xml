@@ -41,7 +41,7 @@
 
 <!--    FRAGMENT INFO STRING ASSET-->
     <string name="info_title">Informasi</string>
-    <string name="info_desc">Versi 1.0 © Covid-19 App 2020</string>
+    <string name="info_desc" translatable="false">Versi 1.1 © Covid-19 App 2020</string>
     <string name="info_desc2">Dikembangkan oleh</string>
     <string name="info_contact_me" translatable="false">Contact Me</string>
     <string name="info_ayub_dev" translatable="false">ayub.dev</string>
@@ -49,7 +49,10 @@
     <string name="info_ack1">Data informasi oleh data.covid19.go.id</string>
     <string name="info_ack2">Desain UI oleh simantOo untuk Nickelfox (free use)</string>
     <string name="info_ack3">Desain gambar ilustrasi oleh freepik.com (free use)</string>
-    <string name="info_ack4">Tes kesehatan dengan kecerdasan buatan oleh prixa.ai</string>
+    <string name="info_ack4">Data berita oleh newsapi.org</string>
+    <string name="info_ack5">Tes kesehatan dengan kecerdasan buatan oleh prixa.ai</string>
+    <string name="info_ack6">Penyaluran donasi oleh kitabisa.com</string>
+    <string name="info_ack7">Data global COVID-19 oleh covid19.mathdro.id</string>
     <string name="info_term">Pengunaan</string>
     <string name="info_lang_title">Bahasa</string>
 

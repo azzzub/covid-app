@@ -17,13 +17,11 @@
     <string name="home_test_header">Do your own test!</string>
     <string name="home_test_desc">Follow the instruction to do your own test</string>
     <string name="info_title">Information</string>
-    <string name="info_desc">Version 1.0 © Covid-19 App 2020</string>
     <string name="info_desc2">Developed by</string>
     <string name="info_acknowledgement">Acknowledgement</string>
     <string name="info_ack1">Data Information from data.covid19.go.id</string>
     <string name="info_ack2">UI design from simantOo for Nickelfox (free use)</string>
     <string name="info_ack3">Image Illustration from freepik.com (free use)</string>
-    <string name="info_ack4">Health test based on Artificial Intelligent by prixa.ai</string>
     <string name="info_term">Term and Condition</string>
     <string name="maps_title">Case per Province</string>
     <string name="stat_title">Statistic</string>
@@ -114,5 +112,9 @@
     <string name="home_donate_desc">We need your help to help those who affected by this pandemic</string>
     <string name="donate_desc">Help those who affected COVID-19 pandemic with a donation through kitabisa.com platform</string>
     <string name="donate_footer1">All rights are fully delegated to KitaBisa.com</string>
+    <string name="info_ack5">Health test based on Artificial Intelligent by prixa.ai</string>
+    <string name="info_ack4">News data provided form newsapi.org</string>
+    <string name="info_ack6">Donation platform from kitabisa.com</string>
+    <string name="info_ack7">Global data COVID-19 provided from covid19.mathdro.id</string>
 
 </resources>

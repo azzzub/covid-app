@@ -221,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/info_ack1"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -229,7 +229,6 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
                 android:src="@drawable/gugus_tugas"
                 tools:ignore="ContentDescription" />
 
@@ -238,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/info_ack2"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -246,7 +245,6 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
                 android:src="@drawable/dribbble_logo"
                 tools:ignore="ContentDescription" />
 
@@ -255,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="7dp"
                 android:text="@string/info_ack3"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -263,7 +261,6 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
-                android:layout_marginBottom="10dp"
                 android:src="@drawable/freepik_logo"
                 tools:ignore="ContentDescription" />
 
@@ -279,9 +276,62 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/newsapi_logo"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_ack7"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/mathdroid_logo"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_ack5"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="65dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/prixa"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_ack6"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/kitabisa_logo"
                 tools:ignore="ContentDescription" />
 
             <TextView

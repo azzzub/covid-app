@@ -4,8 +4,7 @@
 
 This app based on Java to provide covid-19 information 🌎
 
-The preview of this app *(still on version 1.0)* 🧐
-<img src="https://covid19.ayub.dev/public/covid19_header.png" height="420"/> <img src="https://ayub.dev/assets/portfolio/detail/port4/port4-4.gif" height="420"/> 
+<img src="https://covid19.ayub.dev/public/https://covid19.ayub.dev/public/covid19_header_v1-1.png" />
 
 ## Getting Started  📚
 
@@ -26,15 +25,15 @@ If you like this project, give me some ⭐ and fork this repo 🍴
 
 ## Installing  💻
 
-👇 You can download the version 1.0 application below
+👇 You can download the version 1.1 application below
 
-> [**Download Version 1.0 Here**](https://github.com/azzzub/covid-app/releases/tag/v1.0)
+> [**Download Version 1.1 Here**](https://github.com/azzzub/covid-app/releases/tag/v1.1)
 
 ## TODOs  📝
 
-- Adding donate button,
-- Adding provinces data summary,
-- Adding global data on home page,
-- Support English,
-- Change some code to English,
-- etc... 😷
+- Adding donate button ✔
+- Adding provinces data summary ❌
+- Adding global data on home page ✔
+- Support English ✔
+- Change some code to English ✔
+- etc... 😷 future update postponed 🤦

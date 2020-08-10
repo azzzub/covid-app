@@ -4,7 +4,8 @@
 
 This app based on Java to provide covid-19 information 🌎
 
-<img src="https://covid19.ayub.dev/public/covid19_header_v1-1.png" />
+<img src"https://ayub.dev/assets/portfolio/detail/port4/port4-4.gif" />
+<!-- <img src="https://covid19.ayub.dev/public/covid19_header_v1-1.png" /> -->
 
 ## Getting Started  📚
 
